@@ -1,0 +1,45 @@
+package com.opentransport.rdfmapper.nmbs.containers
+option java_package = "package com.opentransport.rdfmapper.nmbs.containers";
+option java_outer_classname = "GTFSProtos"
+
+message Service{
+    
+    required string destination = 1;
+    required string scheduledDepartureTime = 2;
+    optional string delay = 3;
+    optional string actualDepartureTime = 4;
+    required string trainNumber = 5;
+    optional string platform =6;
+
+        message NextStop{
+
+        required string name = 1;
+        required string scheduledArrivalTime = 2;
+        required string delay = 3;
+        required string actualArrivalTime = 4;
+        required string platform = 5;
+
+
+        }    
+    repeated NextStop nextStop =7;
+
+
+}
+message Departure{
+    required string departureId = 1;
+    required string departureStationId = 2;
+    required string scheduledDepartureTime = 3;
+    optional string departureDelay = 4;
+    optional string actualDepartureTime = 5 ;
+    optional string departurePlatform;
+    required string arrivalStationId;
+    optional string scheduledArrivalTime;
+    optional string arrivalDelay;
+    optional string actualArrivalTime;
+    optional string arrivalPlatform;
+    required string route;
+    private string headsign;
+ls
+
+
+}
