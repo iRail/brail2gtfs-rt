@@ -1,7 +1,10 @@
 package com.opentransport.rdfmapper.nmbs;
 
+import static com.opentransport.rdfmapper.nmbs.AddTripDemoUpdate.PromptForUpdate;
+import com.opentransport.rdfmapper.nmbs.containers.GtfsRealtime;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
@@ -28,6 +31,33 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+       
+        
+        GtfsRealtime.TripUpdate.Builder tripUpdate = null;
+        try {
+            tripUpdate = PromptForUpdate();
+        } catch (IOException ex) {
+            Logger.getLogger(AddTripDemoUpdate.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+       //Write the new TripUpdate back to disk
+        try {
+            
+                  FileOutputStream output = new FileOutputStream("gtfs-rt");
+      
+                  tripUpdate.build().writeTo(output);
+                  output.close();
+                  System.out.println("File writen succesfull");
+            
+        } catch (IOException e) {
+            System.err.println("Error failed to write file");
+        }
+        
+         
+ 
+        
+        
+        
 //        StationFetcher stationFetcher = new StationFetcher();
 //        LiveBoardFetcher liveBoardFetcher = new LiveBoardFetcher();
 //        

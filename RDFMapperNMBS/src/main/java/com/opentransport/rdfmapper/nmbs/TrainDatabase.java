@@ -67,7 +67,7 @@ public class TrainDatabase {
                                
                                   position++;                        
                                 }   
-                                liveRoute = new LiveRoute(routeUrl, agencyId,routeId,longname,serviceInfo);                               
+                               // liveRoute = new LiveRoute(routeUrl, agencyId,routeId,longname,serviceInfo);                               
                                   database.put(routeId,liveRoute);
                                   mapping.put(longname,routeId);
 			}

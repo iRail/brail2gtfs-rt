@@ -14,8 +14,8 @@
 // https://developers.google.com/transit/gtfs-realtime/
 
 syntax = "proto2";
-option java_package = "com.opentransport.rdfmappper.nmbs";
-package com.opentransport.rdfmappper.nmbs.containers;
+option java_package = "com.opentransport.rdfmapper.nmbs";
+package  com.opentransport.rdfmappper.nmbs.containers;
 
 // The contents of a feed message.
 // A feed is a continuous stream of feed messages. Each message in the stream is
@@ -283,7 +283,7 @@ message VehiclePosition {
     optional VehicleDescriptor vehicle = 8;
 
     // Current position of this vehicle.
-    optional Position position = 2;
+    //optional Position position = 2;
 
     // The stop sequence index of the current stop. The meaning of
     // current_stop_sequence (i.e., the stop that it refers to) is determined by
