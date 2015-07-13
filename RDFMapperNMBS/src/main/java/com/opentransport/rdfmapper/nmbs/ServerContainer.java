@@ -177,12 +177,5 @@ public class ServerContainer implements Container {
         }
     }
     
-    public SortedMapper getMapper() {
-        return mapper;
-    }
-
-    public void setMapper(SortedMapper mapper) {
-        this.mapper = mapper;
-    }
-
+    
 }

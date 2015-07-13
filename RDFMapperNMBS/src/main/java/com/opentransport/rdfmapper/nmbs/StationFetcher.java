@@ -1,6 +1,6 @@
 package com.opentransport.rdfmapper.nmbs;
 
-import com.opentransport.rdfmapper.nmbs.containers.StationInfo;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.FileNotFoundException;
