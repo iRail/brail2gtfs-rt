@@ -165,17 +165,13 @@ public class LiveBoardFetcher {
                         
                     }else{
                     System.out.println(trainNumber);
-                    System.out.println(trainDelay);
+                    System.out.println("Current Delay is " + trainDelay + "minutes");
                     trainDelays.put(trainNumber, trainDelay);
                     trainsDelayed ++;
-                    System.out.println(trainsDelayed);
-                    System.out.println(trainDelays.size());
+                               
                     
                     }
 
-                            
-                    
-                    
                 }
                 
                 if (!trainDelay.equals("Afgeschaft")) {
@@ -194,7 +190,8 @@ public class LiveBoardFetcher {
             }
            
         }
-         System.out.println("Finished Reading Trains");
+         System.out.println("Finished Reading Trains ");
+         System.out.println(trainDelays.size());
          ScrapeTrip scrapeDelayedTrains  = new ScrapeTrip();
          scrapeDelayedTrains.startScrape(trainDelays);
          

@@ -44,10 +44,8 @@ public class ScrapeTrip {
     
  
     private void downloadJson(String url) throws MalformedURLException, IOException{
-                String fileName = outputName; //The file that will be saved on your computer
-		 URL link = new URL(url); //The file that you want to download
-		
-                  //Code to download
+                String fileName = outputName; 
+		 URL link = new URL(url);
 		 InputStream in = new BufferedInputStream(link.openStream());
 		 ByteArrayOutputStream out = new ByteArrayOutputStream();
 		 byte[] buf = new byte[1024];
@@ -58,32 +56,23 @@ public class ScrapeTrip {
 		 }
 		 out.close();
 		 in.close();
-		 byte[] response = out.toByteArray();
- 
+		 byte[] response = out.toByteArray(); 
 		 FileOutputStream fos = new FileOutputStream(fileName);
 		 fos.write(response);
 		 fos.close();
-                    //End download code
-		 
-		 System.out.println("Finished writing JSON File");
+                 System.out.println("Finished writing JSON File");
 
 	}
     
     
     
-    private   GtfsRealtime.FeedEntity.Builder  scrapeJson() {
-        
-         
-
-        
-        
-        
+    private   GtfsRealtime.FeedEntity.Builder  scrapeJson(int identifier) {   
         GtfsRealtime.FeedEntity.Builder feedEntity = GtfsRealtime.FeedEntity.newBuilder();
-         
-        feedEntity.setId("1");
+        
+        feedEntity.setId(Integer.toString(identifier));
         feedEntity.setIsDeleted(false);
-        GtfsRealtime.VehiclePosition.Builder vehiclePosition = GtfsRealtime.VehiclePosition.newBuilder();
-        vehiclePosition.setStopId("fff");
+        //GtfsRealtime.VehiclePosition.Builder vehiclePosition = GtfsRealtime.VehiclePosition.newBuilder();
+        //vehiclePosition.setStopId("fff");
          //GtfsRealtime.Alert.Builder  alert = GtfsRealtime.Alert.newBuilder();
         
          // feedEntity.setAlert(alert);
@@ -147,34 +136,22 @@ public class ScrapeTrip {
                
                 //Set Delay at arrival time
                 delay = (String)stop.get("delay");
+                
+               
                 stopTimeArrival.setDelay(Integer.parseInt(delay));
                 String arrivalTime = (String)stop.get("time");
                 stopTimeArrival.setTime(Long.parseLong(arrivalTime));
                 // To Add Departure Time + 3 minutes ? 
                 stopTimeDeparture.setDelay(Integer.parseInt(delay));
                 stopTimeUpdate.setArrival(stopTimeArrival);
-                stopTimeUpdate.setDeparture(stopTimeDeparture);
-              
-  
+                stopTimeUpdate.setDeparture(stopTimeDeparture); 
                 tripUpdate.addStopTimeUpdate(stopTimeUpdate);
-                //Should be improved using addStopTimeUpdate;
-               
                 
-                
-
-
             }
               tripUpdate.setTrip(tripDescription);
               tripUpdate.setVehicle(vehicleDescription);
               tripUpdate.setDelay(Integer.parseInt(delay));
-              
               feedEntity.setTripUpdate(tripUpdate);
-              
-
-              
-
-             
-            
             
             fr.close();
         } catch (FileNotFoundException ex) {
@@ -183,9 +160,6 @@ public class ScrapeTrip {
             
         }
         return feedEntity;
-        
-        
-    
     }
     private String returnDateFormated(){
         
@@ -225,7 +199,7 @@ public class ScrapeTrip {
                         String url ="http://api.irail.be/vehicle/?id=BE.NMBS."+trainName+"&format=json";                 
                         downloadJson(url);
                         //Parse the Json and add it to the Feed 
-                        GtfsRealtime.FeedEntity.Builder feedEntity =scrapeJson();
+                        GtfsRealtime.FeedEntity.Builder feedEntity =scrapeJson(i);
                         feedMessage.addEntity(i, feedEntity);
                         i++;
 
