@@ -665,8 +665,8 @@
       <file leaf-file-name="TripUpdateWrite.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RDFMapperNMBS/src/main/java/com/opentransport/rdfmapper/nmbs/TripUpdateWrite.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.9548872">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.84962404">
+              <caret line="101" column="51" selection-start-line="101" selection-start-column="51" selection-end-line="101" selection-end-column="51" />
               <folding>
                 <element signature="e#0#5374#0" expanded="true" />
               </folding>
@@ -3778,8 +3778,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/RDFMapperNMBS/src/main/java/com/opentransport/rdfmapper/nmbs/TripUpdateWrite.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.9548872">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.84962404">
+          <caret line="101" column="51" selection-start-line="101" selection-start-column="51" selection-end-line="101" selection-end-column="51" />
           <folding>
             <element signature="e#0#5374#0" expanded="true" />
           </folding>

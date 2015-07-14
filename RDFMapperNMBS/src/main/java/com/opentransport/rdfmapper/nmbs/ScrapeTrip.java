@@ -239,12 +239,21 @@ public class ScrapeTrip {
               feedMessage.build().writeTo(output);
               output.close();
               System.out.println("File writen successful");
+              testOutput();
               
             } catch (Exception e) {
                  System.out.println(e);
             }
      
         
+    }
+    public static void testOutput(){
+            try {
+            GtfsRealtimeExample testenData =  new GtfsRealtimeExample();
+        } catch (Exception ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
     }
     
     

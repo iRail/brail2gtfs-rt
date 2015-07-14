@@ -161,12 +161,18 @@ public class LiveBoardFetcher {
                 String trainDelay = train.select(".delay").text().replaceAll("\\+","");
               
                 if (trainDelay.length() > 0) {
+                    if (trainDelay.equals("0")) {
+                        
+                    }else{
                     System.out.println(trainNumber);
                     System.out.println(trainDelay);
                     trainDelays.put(trainNumber, trainDelay);
                     trainsDelayed ++;
                     System.out.println(trainsDelayed);
                     System.out.println(trainDelays.size());
+                    
+                    }
+
                             
                     
                     
