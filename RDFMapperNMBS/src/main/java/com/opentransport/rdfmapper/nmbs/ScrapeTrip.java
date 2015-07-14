@@ -19,6 +19,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,11 +38,14 @@ public class ScrapeTrip {
     private String urlString ="http://api.irail.be/vehicle/?id=BE.NMBS.IC511&format=json";
     private String trainId ="";
     private String outputName="vehicleTrip.json";
+    private GtfsRealtime.FeedMessage.Builder feedMessage =  GtfsRealtime.FeedMessage.newBuilder();        
+    private GtfsRealtime.FeedHeader.Builder feedHeader =GtfsRealtime.FeedHeader.newBuilder();
+
     
  
-    private void downloadJson() throws MalformedURLException, IOException{
+    private void downloadJson(String url) throws MalformedURLException, IOException{
                 String fileName = outputName; //The file that will be saved on your computer
-		 URL link = new URL(urlString); //The file that you want to download
+		 URL link = new URL(url); //The file that you want to download
 		
                   //Code to download
 		 InputStream in = new BufferedInputStream(link.openStream());
@@ -66,15 +71,13 @@ public class ScrapeTrip {
     
     
     
-    private void scrapeJson() {
+    private   GtfsRealtime.FeedEntity.Builder  scrapeJson() {
         
          
-        GtfsRealtime.FeedMessage.Builder feedMessage =  GtfsRealtime.FeedMessage.newBuilder();        
-        GtfsRealtime.FeedHeader.Builder feedHeader =GtfsRealtime.FeedHeader.newBuilder();
-        feedHeader.setGtfsRealtimeVersion("1.0");
-        feedHeader.setIncrementality(GtfsRealtime.FeedHeader.Incrementality.FULL_DATASET);
-         //Unix Style
-        feedHeader.setTimestamp(System.currentTimeMillis() / 1000L);
+
+        
+        
+        
         GtfsRealtime.FeedEntity.Builder feedEntity = GtfsRealtime.FeedEntity.newBuilder();
          
         feedEntity.setId("1");
@@ -137,8 +140,8 @@ public class ScrapeTrip {
                 stopTimeUpdate.setStopSequence(Integer.parseInt(stopSeq));
                 
                 JSONObject station =(JSONObject) stop.get("stationinfo");
-                System.out.println(station.get("@id"));
-                stopTimeUpdate.setStopId((String) station.get("@id"));
+               // System.out.println(station.get("@id"));
+               // stopTimeUpdate.setStopId((String) station.get("@id"));
                 
               
                
@@ -166,19 +169,10 @@ public class ScrapeTrip {
               tripUpdate.setDelay(Integer.parseInt(delay));
               
               feedEntity.setTripUpdate(tripUpdate);
-              feedMessage.setHeader(feedHeader);
-              feedMessage.addEntity(0, feedEntity);
               
+
               
-             try {
-              FileOutputStream output = new FileOutputStream("gtfs-rt");
-              tripUpdate.build().writeTo(output);
-              output.close();
-              System.out.println("File writen successful");
-              
-            } catch (Exception e) {
-                 System.out.println(e);
-            }
+
              
             
             
@@ -188,6 +182,7 @@ public class ScrapeTrip {
        } catch (IOException | ParseException ex) {
             
         }
+        return feedEntity;
         
         
     
@@ -198,16 +193,58 @@ public class ScrapeTrip {
         return null;
     }
     public ScrapeTrip(){
-        try {
-            //scrapeJson();
-            
-                downloadJson();
-            
-            
-            scrapeJson();
-        } catch (IOException ex) {
-            Logger.getLogger(ScrapeTrip.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        feedHeader.setGtfsRealtimeVersion("1.0");
+        feedHeader.setIncrementality(GtfsRealtime.FeedHeader.Incrementality.FULL_DATASET);
+             //Unix Style
+        feedHeader.setTimestamp(System.currentTimeMillis() / 1000L);
+        feedMessage.setHeader(feedHeader);
+
+        
+
+    }
+    private String returnCorrectTrainFormat(String trainName){    
+        String[] splited = trainName.split("\\s+");
+        trainName = splited[0] + splited[1];        
+        return trainName;
+    
+    }
+
+
+    void startScrape(Map trainDelays) {
+        String trainName ;
+       
+        Iterator iterator = trainDelays.entrySet().iterator();
+        int i = 0;
+        while (iterator.hasNext()) {
+		Map.Entry mapEntry = (Map.Entry) iterator.next();           
+		trainName =  returnCorrectTrainFormat((String)mapEntry.getKey());        
+                             
+                System.out.println(trainName);
+                    try {
+                        String url ="http://api.irail.be/vehicle/?id=BE.NMBS."+trainName+"&format=json";                 
+                        downloadJson(url);
+                        //Parse the Json and add it to the Feed 
+                        GtfsRealtime.FeedEntity.Builder feedEntity =scrapeJson();
+                        feedMessage.addEntity(i, feedEntity);
+                        i++;
+
+                    } catch (IOException ex) {
+                        Logger.getLogger(ScrapeTrip.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+	}
+        //Write File  
+            try {
+              FileOutputStream output = new FileOutputStream("gtfs-rt");
+              feedMessage.build().writeTo(output);
+              output.close();
+              System.out.println("File writen successful");
+              
+            } catch (Exception e) {
+                 System.out.println(e);
+            }
+     
+        
     }
     
     

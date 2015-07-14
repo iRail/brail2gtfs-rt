@@ -43,7 +43,7 @@ public class LiveBoardFetcher {
     private static final long POOL_TIMEOUT = 60;
     
     private int trainsDelayed =1;
-    private Map trainDelays = new HashMap();
+    private Map<String,String> trainDelays = new HashMap();
     
     private Map<TrainId,TrainInfo> trainCache;
     private Map<String,String> sources;
@@ -186,8 +186,13 @@ public class LiveBoardFetcher {
                     });
                 }
             }
+           
         }
-        
+         System.out.println("Finished Reading Trains");
+         ScrapeTrip scrapeDelayedTrains  = new ScrapeTrip();
+         scrapeDelayedTrains.startScrape(trainDelays);
+         
+         
         trainCachePool.shutdown();
         try {
             trainCachePool.awaitTermination(POOL_TIMEOUT,TimeUnit.SECONDS);
