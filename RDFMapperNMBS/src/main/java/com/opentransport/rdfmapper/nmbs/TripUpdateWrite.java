@@ -19,17 +19,26 @@ class AddTripDemoUpdate{
     
        //This function fills in the a Update Message
     static GtfsRealtime.TripUpdate.Builder PromptForUpdate()throws IOException{
+        
+         GtfsRealtime.FeedHeader.Builder feedHeader =GtfsRealtime.FeedHeader.newBuilder();
+         feedHeader.setGtfsRealtimeVersion("1.0");
+         feedHeader.setIncrementality(GtfsRealtime.FeedHeader.Incrementality.FULL_DATASET);
+         //Unix Style
+         feedHeader.setTimestamp(System.currentTimeMillis() / 1000L);
+         
+         
+
+        //Data that doesnt Update
+        
         GtfsRealtime.TripUpdate.Builder tripUpdate =  GtfsRealtime.TripUpdate.newBuilder();
         GtfsRealtime.VehicleDescriptor.Builder vehicleDescription = GtfsRealtime.VehicleDescriptor.newBuilder();
         GtfsRealtime.TripDescriptor.Builder tripDescription = GtfsRealtime.TripDescriptor.newBuilder();
-        GtfsRealtime.TripUpdate.StopTimeUpdate.Builder stopTimeUpdate = GtfsRealtime.TripUpdate.StopTimeUpdate.newBuilder();
         
+        //Each Stops created new data
+        GtfsRealtime.TripUpdate.StopTimeUpdate.Builder stopTimeUpdate = GtfsRealtime.TripUpdate.StopTimeUpdate.newBuilder();
         //Each StopTime Update contains StopTimeEvents witht the stop Arrival and Departure Time 
         GtfsRealtime.TripUpdate.StopTimeEvent.Builder stopTimeArrival = GtfsRealtime.TripUpdate.StopTimeEvent.newBuilder();
         GtfsRealtime.TripUpdate.StopTimeEvent.Builder stopTimeDeparture = GtfsRealtime.TripUpdate.StopTimeEvent.newBuilder();
-        
-        
-        
         
         //Setting the demo data
         //Setting the VehicleData
@@ -41,8 +50,29 @@ class AddTripDemoUpdate{
         tripDescription.setStartTime("11:40:00");
         //YYYYMMDD format
         tripDescription.setStartDate("20150710");
+        tripDescription.setDirectionId(2);
+        tripDescription.setRouteId("Direction Eupen");
+        tripDescription.setTripId("1");
         
         //Setting the StopTimeUpdate 
+        //must be the same as in stop_times.txt in the corresponding GTFS Feed        
+        stopTimeUpdate.setStopSequence(0);
+        //must be the same as in stops.txt in the corresponding GTFS Feed
+        stopTimeUpdate.setStopId("0");
+        
+        // Setting the Arrival and Departure 
+        stopTimeArrival.setDelay(0);
+        stopTimeArrival.setTime(1436522359);
+        
+        stopTimeDeparture.setDelay(0);
+        stopTimeDeparture.setTime(1436522359);
+                
+        //Add the stop times to the StopTimeUpdate 
+        stopTimeUpdate.setArrival(stopTimeArrival);
+        stopTimeUpdate.setDeparture(stopTimeDeparture); 
+        tripUpdate.addStopTimeUpdate(stopTimeUpdate);
+        
+               //Setting the StopTimeUpdate 
         //must be the same as in stop_times.txt in the corresponding GTFS Feed
         stopTimeUpdate.setStopSequence(1);
         //must be the same as in stops.txt in the corresponding GTFS Feed
@@ -54,29 +84,29 @@ class AddTripDemoUpdate{
         
         stopTimeDeparture.setDelay(0);
         stopTimeDeparture.setTime(1436522359);
-        
-        
+                
         //Add the stop times to the StopTimeUpdate 
         stopTimeUpdate.setArrival(stopTimeArrival);
-        stopTimeUpdate.setDeparture(stopTimeDeparture);
+        stopTimeUpdate.setDeparture(stopTimeDeparture); 
+        tripUpdate.addStopTimeUpdate(stopTimeUpdate);
+
+        
         //schedule_relationship
-        
-        
-        
         // Set the data for the tripUpdate
         
         tripUpdate.setTrip(tripDescription);
+        
         tripUpdate.setVehicle(vehicleDescription);
         // Set the update for a  certain stop first is the stop id , second is stopTimeUpdate object
         // For example in this case from Oostende to Eupen stop 2 would correspond with Brugge
         
-        tripUpdate.addStopTimeUpdate(stopTimeUpdate);
-        //Should be improved using addStopTimeUpdate;
         
         
         
         
-        tripUpdate.setDelay(2);
+        
+        
+        tripUpdate.setDelay(0);
         
         
         

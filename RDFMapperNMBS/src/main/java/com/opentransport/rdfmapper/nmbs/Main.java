@@ -31,29 +31,14 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        //runDemo();
+        runScraper();
+        testData();
+        
+        
        
-        
-        GtfsRealtime.TripUpdate.Builder tripUpdate = null;
-        ScrapeTrip scraper = new ScrapeTrip();
-        
-        try {
-            tripUpdate = PromptForUpdate();
-        } catch (IOException ex) {
-            Logger.getLogger(AddTripDemoUpdate.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-       //Write the new TripUpdate back to disk
-        try {
-            
-                  FileOutputStream output = new FileOutputStream("gtfs-rt");
-      
-                  tripUpdate.build().writeTo(output);
-                  output.close();
-                  System.out.println("File writen succesfull");
-            
-        } catch (IOException e) {
-            System.err.println("Error failed to write file");
-        }
+
         
          
  
@@ -140,4 +125,37 @@ public class Main {
 //        }
 //    }
          }
+    public static void runDemo(){        
+        GtfsRealtime.TripUpdate.Builder tripUpdate = null;  
+        
+        try {
+            tripUpdate = PromptForUpdate();
+        } catch (IOException ex) {
+            Logger.getLogger(AddTripDemoUpdate.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+       //Write the new TripUpdate back to disk
+        try {
+            
+                 FileOutputStream output = new FileOutputStream("gtfs-rt");
+      
+                  tripUpdate.build().writeTo(output);
+                  output.close();
+                  System.out.println("File writen successful");
+            
+        } catch (IOException e) {
+            System.err.println("Error failed to write file");
+        }    
+    }
+    public static void runScraper(){
+     ScrapeTrip scraper = new ScrapeTrip();
+    
+    }
+    public static void testData(){
+        try {
+            GtfsRealtimeExample testenData =  new GtfsRealtimeExample();
+        } catch (Exception ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    }
 }

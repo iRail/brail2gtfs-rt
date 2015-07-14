@@ -5,6 +5,7 @@
  */
 package com.opentransport.rdfmapper.nmbs;
 
+import com.opentransport.rdfmapper.nmbs.containers.GtfsRealtime;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -16,6 +17,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.simple.JSONArray;
@@ -64,35 +68,110 @@ public class ScrapeTrip {
     
     private void scrapeJson() {
         
+        GtfsRealtime.TripUpdate.Builder tripUpdate =  GtfsRealtime.TripUpdate.newBuilder();
+        GtfsRealtime.VehicleDescriptor.Builder vehicleDescription = GtfsRealtime.VehicleDescriptor.newBuilder();
+        GtfsRealtime.TripDescriptor.Builder tripDescription = GtfsRealtime.TripDescriptor.newBuilder();
+        GtfsRealtime.TripUpdate.StopTimeUpdate.Builder stopTimeUpdate = GtfsRealtime.TripUpdate.StopTimeUpdate.newBuilder();
+        
+        //Each StopTime Update contains StopTimeEvents witht the stop Arrival and Departure Time 
+        GtfsRealtime.TripUpdate.StopTimeEvent.Builder stopTimeArrival = GtfsRealtime.TripUpdate.StopTimeEvent.newBuilder();
+        GtfsRealtime.TripUpdate.StopTimeEvent.Builder stopTimeDeparture = GtfsRealtime.TripUpdate.StopTimeEvent.newBuilder();
+        
         
         JSONParser parser = new JSONParser();
         try {
             FileReader fr = new FileReader(outputName);
             JSONObject json = (JSONObject) parser.parse(fr);
-            JSONObject Teststop = (JSONObject) json.get("stops");
-            System.out.println(Teststop);
-           JSONArray stops = (JSONArray) Teststop.get("stop");
-            System.out.println(stops.get(1));
+            String trainId = (String) json.get("vehicle");
+            //Setting the VehicleData
+            vehicleDescription.setId(trainId);
+            vehicleDescription.setLicensePlate(trainId);
+            System.out.println(trainId);
+            
+            //Handling Departure Date
+            
+            String unixSeconds = (String) json.get("timestamp");
+            Long unixSec = Long.parseLong(unixSeconds);
+            
+            Date date = new Date(unixSec*1000L); // *1000 is to convert seconds to milliseconds
+            SimpleDateFormat sdfStartDate = new SimpleDateFormat("yyyyMMdd"); // the format of your date
+            sdfStartDate.setTimeZone(TimeZone.getTimeZone("GMT+2")); // give a timezone reference for formating
+            SimpleDateFormat sdfStartTimeHour = new SimpleDateFormat("HH:mm:ss");
+            
+            String formattedDepartureDate = sdfStartDate.format(date);
+            String formattedDepartureHour= sdfStartTimeHour.format(date);
+            
+            // Setting the Trip Description
+            tripDescription.setStartTime(formattedDepartureHour.toString());
+            //YYYYMMDD format
+            tripDescription.setStartDate(formattedDepartureDate.toString());
+            
+            //Get Information about stops
+            JSONObject rootStop = (JSONObject) json.get("stops"); 
+            JSONArray stops = (JSONArray) rootStop.get("stop");
+            String delay = null;
            
             for (int i = 0; i < stops.size(); i++) {
+                //Information about the stops
+                JSONObject stop = (JSONObject) stops.get(i);              
+                String stopSeq = (String)stop.get("id");
+               
+                stopTimeUpdate.setStopSequence(Integer.parseInt(stopSeq));
                 
-                JSONObject stop = (JSONObject) stops.get(i);
-                String station = (String) stop.get("station");
-                System.out.println(station);
+                JSONObject station =(JSONObject) stop.get("stationinfo");
+                System.out.println(station.get("@id"));
+                stopTimeUpdate.setStopId((String) station.get("@id"));
+                
+              
+               
+                //Set Delay at arrival time
+                delay = (String)stop.get("delay");
+                stopTimeArrival.setDelay(Integer.parseInt(delay));
+                String arrivalTime = (String)stop.get("time");
+                stopTimeArrival.setTime(Long.parseLong(arrivalTime));
+                // To Add Departure Time + 3 minutes ? 
+                stopTimeDeparture.setDelay(Integer.parseInt(delay));
+                stopTimeUpdate.setArrival(stopTimeArrival);
+                stopTimeUpdate.setDeparture(stopTimeDeparture);
+              
+  
+                tripUpdate.addStopTimeUpdate(stopTimeUpdate);
+                //Should be improved using addStopTimeUpdate;
+               
                 
                 
-                //database.put(id,new StationInfo(name,id,longitude,latitude));
-               // mapping.put(name,id);
+
+
             }
+              tripUpdate.setTrip(tripDescription);
+              tripUpdate.setVehicle(vehicleDescription);
+              tripUpdate.setDelay(Integer.parseInt(delay));
+//             try {
+//              FileOutputStream output = new FileOutputStream("gtfs-rt");
+//              tripUpdate.build().writeTo(output);
+//              output.close();
+//              System.out.println("File writen successful");
+//              
+//            } catch (Exception e) {
+//                 System.out.println(e);
+//            }
+             
+            
+            
             fr.close();
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(StationDatabase.class.getName()).log(Level.SEVERE,null,ex);
-        } catch (IOException | ParseException ex) {
-            Logger.getLogger(StationDatabase.class.getName()).log(Level.SEVERE,null,ex);
+          
+       } catch (IOException | ParseException ex) {
+            
         }
         
         
     
+    }
+    private String returnDateFormated(){
+        
+        
+        return null;
     }
     public ScrapeTrip(){
         try {
