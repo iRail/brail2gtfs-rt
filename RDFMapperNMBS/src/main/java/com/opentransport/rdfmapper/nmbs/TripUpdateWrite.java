@@ -39,16 +39,8 @@ class AddTripDemoUpdate{
          GtfsRealtime.VehiclePosition.Builder vehiclePosition = GtfsRealtime.VehiclePosition.newBuilder();
          vehiclePosition.setStopId("fff");
          //GtfsRealtime.Alert.Builder  alert = GtfsRealtime.Alert.newBuilder();
-         
-         
-         
+        
          // feedEntity.setAlert(alert);
-         
-         
-         
-         
-         
-         
 
         //Data that doesnt Update
         

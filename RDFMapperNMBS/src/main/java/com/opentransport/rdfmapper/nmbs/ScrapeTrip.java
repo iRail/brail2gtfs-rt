@@ -68,6 +68,24 @@ public class ScrapeTrip {
     
     private void scrapeJson() {
         
+         
+        GtfsRealtime.FeedMessage.Builder feedMessage =  GtfsRealtime.FeedMessage.newBuilder();        
+        GtfsRealtime.FeedHeader.Builder feedHeader =GtfsRealtime.FeedHeader.newBuilder();
+        feedHeader.setGtfsRealtimeVersion("1.0");
+        feedHeader.setIncrementality(GtfsRealtime.FeedHeader.Incrementality.FULL_DATASET);
+         //Unix Style
+        feedHeader.setTimestamp(System.currentTimeMillis() / 1000L);
+        GtfsRealtime.FeedEntity.Builder feedEntity = GtfsRealtime.FeedEntity.newBuilder();
+         
+        feedEntity.setId("1");
+        feedEntity.setIsDeleted(false);
+        GtfsRealtime.VehiclePosition.Builder vehiclePosition = GtfsRealtime.VehiclePosition.newBuilder();
+        vehiclePosition.setStopId("fff");
+         //GtfsRealtime.Alert.Builder  alert = GtfsRealtime.Alert.newBuilder();
+        
+         // feedEntity.setAlert(alert);
+
+        //Data that doesnt Update
         GtfsRealtime.TripUpdate.Builder tripUpdate =  GtfsRealtime.TripUpdate.newBuilder();
         GtfsRealtime.VehicleDescriptor.Builder vehicleDescription = GtfsRealtime.VehicleDescriptor.newBuilder();
         GtfsRealtime.TripDescriptor.Builder tripDescription = GtfsRealtime.TripDescriptor.newBuilder();
@@ -146,15 +164,21 @@ public class ScrapeTrip {
               tripUpdate.setTrip(tripDescription);
               tripUpdate.setVehicle(vehicleDescription);
               tripUpdate.setDelay(Integer.parseInt(delay));
-//             try {
-//              FileOutputStream output = new FileOutputStream("gtfs-rt");
-//              tripUpdate.build().writeTo(output);
-//              output.close();
-//              System.out.println("File writen successful");
-//              
-//            } catch (Exception e) {
-//                 System.out.println(e);
-//            }
+              
+              feedEntity.setTripUpdate(tripUpdate);
+              feedMessage.setHeader(feedHeader);
+              feedMessage.addEntity(0, feedEntity);
+              
+              
+             try {
+              FileOutputStream output = new FileOutputStream("gtfs-rt");
+              tripUpdate.build().writeTo(output);
+              output.close();
+              System.out.println("File writen successful");
+              
+            } catch (Exception e) {
+                 System.out.println(e);
+            }
              
             
             
@@ -176,7 +200,10 @@ public class ScrapeTrip {
     public ScrapeTrip(){
         try {
             //scrapeJson();
-            downloadJson();
+            
+                downloadJson();
+            
+            
             scrapeJson();
         } catch (IOException ex) {
             Logger.getLogger(ScrapeTrip.class.getName()).log(Level.SEVERE, null, ex);

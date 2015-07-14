@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -40,6 +41,9 @@ public class LiveBoardFetcher {
     private static final int NUMBER_OF_CONNECTIONS = 50;
     private static final int CONNECTION_TIMEOUT_IN_MILLISECONDS = 3000;
     private static final long POOL_TIMEOUT = 60;
+    
+    private int trainsDelayed =1;
+    private Map trainDelays = new HashMap();
     
     private Map<TrainId,TrainInfo> trainCache;
     private Map<String,String> sources;
@@ -138,12 +142,15 @@ public class LiveBoardFetcher {
             String stationId = stationIds.get(i);
             Document doc = Jsoup.parse(sources.get(stationId));
             Elements trains = doc.select(".journey");
+            
             for (int j = 0; j < trains.size(); j++) {
                 final int numberJ = j + 1;
                 Element train = trains.get(j);
                 Elements trainA = train.select("a");
                 final String trainLink = trainA.attr("href");
                 final String trainNumber = trainA.text();
+                //Train Number is Trip ID
+               ;
                 String stationInfo = train.ownText().replaceAll(">","").trim();
                 String trainTarget = stationInfo;
                 int split = stationInfo.indexOf(" perron ");
@@ -152,6 +159,19 @@ public class LiveBoardFetcher {
                 }
                 final String destination = trainTarget;
                 String trainDelay = train.select(".delay").text().replaceAll("\\+","");
+              
+                if (trainDelay.length() > 0) {
+                    System.out.println(trainNumber);
+                    System.out.println(trainDelay);
+                    trainDelays.put(trainNumber, trainDelay);
+                    trainsDelayed ++;
+                    System.out.println(trainsDelayed);
+                    System.out.println(trainDelays.size());
+                            
+                    
+                    
+                }
+                
                 if (!trainDelay.equals("Afgeschaft")) {
                     trainCachePool.execute(new Runnable() {
                         @Override
