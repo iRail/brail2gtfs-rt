@@ -32,16 +32,11 @@ public class Main {
      */
     public static void main(String[] args) {
         
-        //runDemo();
-        runScraper();
+       runDemo();
+       // runScraper();
         testData();
         
-        
-       
 
-        
-         
- 
         
         
         
@@ -126,10 +121,10 @@ public class Main {
 //    }
          }
     public static void runDemo(){        
-        GtfsRealtime.TripUpdate.Builder tripUpdate = null;  
+        GtfsRealtime.FeedMessage.Builder feedMessage = null;  
         
         try {
-            tripUpdate = PromptForUpdate();
+            feedMessage = PromptForUpdate();
         } catch (IOException ex) {
             Logger.getLogger(AddTripDemoUpdate.class.getName()).log(Level.SEVERE, null, ex);
         }        
@@ -138,7 +133,7 @@ public class Main {
             
                  FileOutputStream output = new FileOutputStream("gtfs-rt");
       
-                  tripUpdate.build().writeTo(output);
+                  feedMessage.build().writeTo(output);
                   output.close();
                   System.out.println("File writen successful");
             

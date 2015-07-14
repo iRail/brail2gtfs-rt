@@ -5,7 +5,9 @@
  */
 package com.opentransport.rdfmapper.nmbs;
 
+
 import com.opentransport.rdfmapper.nmbs.containers.GtfsRealtime;
+import com.opentransport.rdfmapper.nmbs.containers.GtfsRealtime.FeedEntity;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -18,13 +20,33 @@ import java.util.logging.Logger;
 class AddTripDemoUpdate{
     
        //This function fills in the a Update Message
-    static GtfsRealtime.TripUpdate.Builder PromptForUpdate()throws IOException{
+    static GtfsRealtime.FeedMessage.Builder PromptForUpdate()throws IOException{
+        
+        
+        GtfsRealtime.FeedMessage.Builder feedMessage =  GtfsRealtime.FeedMessage.newBuilder();
         
          GtfsRealtime.FeedHeader.Builder feedHeader =GtfsRealtime.FeedHeader.newBuilder();
          feedHeader.setGtfsRealtimeVersion("1.0");
          feedHeader.setIncrementality(GtfsRealtime.FeedHeader.Incrementality.FULL_DATASET);
          //Unix Style
          feedHeader.setTimestamp(System.currentTimeMillis() / 1000L);
+         GtfsRealtime.FeedEntity.Builder feedEntity = GtfsRealtime.FeedEntity.newBuilder();
+         
+         feedEntity.setId("1");
+         feedEntity.setIsDeleted(false);
+        
+                 
+         GtfsRealtime.VehiclePosition.Builder vehiclePosition = GtfsRealtime.VehiclePosition.newBuilder();
+         vehiclePosition.setStopId("fff");
+         //GtfsRealtime.Alert.Builder  alert = GtfsRealtime.Alert.newBuilder();
+         
+         
+         
+         // feedEntity.setAlert(alert);
+         
+         
+         
+         
          
          
 
@@ -97,6 +119,12 @@ class AddTripDemoUpdate{
         tripUpdate.setTrip(tripDescription);
         
         tripUpdate.setVehicle(vehicleDescription);
+        feedEntity.setTripUpdate(tripUpdate);
+        feedMessage.setHeader(feedHeader);
+        
+        //feedMessage.setEntity(1, feedEntity);
+        feedMessage.addEntity(0, feedEntity);
+       
         // Set the update for a  certain stop first is the stop id , second is stopTimeUpdate object
         // For example in this case from Oostende to Eupen stop 2 would correspond with Brugge
         
@@ -110,7 +138,7 @@ class AddTripDemoUpdate{
         
         
         
-        return tripUpdate;
+        return feedMessage;
 
     
     };
