@@ -164,8 +164,8 @@ public class LiveBoardFetcher {
                     if (trainDelay.equals("0")) {
                         
                     }else{
-                    System.out.println(trainNumber);
-                    System.out.println("Current Delay is " + trainDelay + "minutes");
+                    
+                    System.out.println("Current Delay is " + trainDelay + "minutes for train " + trainNumber);
                     trainDelays.put(trainNumber, trainDelay);
                     trainsDelayed ++;
                                
@@ -209,10 +209,10 @@ public class LiveBoardFetcher {
         long start3 = System.currentTimeMillis();
         
         List<LiveBoard> liveBoards = new ArrayList<>();
-        for (int i = 0; i < stationIds.size(); i++) {
-            LiveBoard liveBoard = parseLiveBoard(stationIds.get(i));
-            liveBoards.add(liveBoard);
-        }
+//        for (int i = 0; i < stationIds.size(); i++) {
+//           // LiveBoard liveBoard = parseLiveBoard(stationIds.get(i));
+//           // liveBoards.add(liveBoard);
+//        }
         
         long end3 = System.currentTimeMillis();
         System.out.println("LIVEBOARD PARSING (" + (end3 - start3) + " ms)");

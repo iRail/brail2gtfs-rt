@@ -35,7 +35,7 @@ import org.json.simple.parser.ParseException;
  */
 public class ScrapeTrip {
     
-    private String urlString ="http://api.irail.be/vehicle/?id=BE.NMBS.IC511&format=json";
+    private String url; //"http://api.irail.be/vehicle/?id=BE.NMBS.IC511&format=json";
     private String trainId ="";
     private String outputName="vehicleTrip.json";
     private GtfsRealtime.FeedMessage.Builder feedMessage =  GtfsRealtime.FeedMessage.newBuilder();        
@@ -115,6 +115,7 @@ public class ScrapeTrip {
             tripDescription.setStartTime(formattedDepartureHour.toString());
             //YYYYMMDD format
             tripDescription.setStartDate(formattedDepartureDate.toString());
+           
             
             //Get Information about stops
             JSONObject rootStop = (JSONObject) json.get("stops"); 
@@ -127,11 +128,19 @@ public class ScrapeTrip {
                 String stopSeq = (String)stop.get("id");
                
                 stopTimeUpdate.setStopSequence(Integer.parseInt(stopSeq));
-                
+                try {
+                    
                 JSONObject station =(JSONObject) stop.get("stationinfo");
-               // System.out.println(station.get("@id"));
+                 tripDescription.setRouteId((String) station.get("@id"));
+            
                // stopTimeUpdate.setStopId((String) station.get("@id"));
                 
+                    
+                } catch (Exception e) {
+                    System.out.println(stop);
+                    System.out.println(e);
+                }
+
               
                
                 //Set Delay at arrival time
@@ -179,7 +188,17 @@ public class ScrapeTrip {
     }
     private String returnCorrectTrainFormat(String trainName){    
         String[] splited = trainName.split("\\s+");
-        trainName = splited[0] + splited[1];        
+        if (splited.length <= 1) {
+           
+        }else{
+            trainName ="";
+        }
+        for( int i = 0; i <= splited.length - 1; i++)
+            {
+                trainName += splited[i]; 
+            }
+       
+               
         return trainName;
     
     }
@@ -194,9 +213,9 @@ public class ScrapeTrip {
 		Map.Entry mapEntry = (Map.Entry) iterator.next();           
 		trainName =  returnCorrectTrainFormat((String)mapEntry.getKey());        
                              
-                System.out.println(trainName);
+                
                     try {
-                        String url ="http://api.irail.be/vehicle/?id=BE.NMBS."+trainName+"&format=json";                 
+                        url ="http://api.irail.be/vehicle/?id=BE.NMBS."+trainName+"&format=json";                 
                         downloadJson(url);
                         //Parse the Json and add it to the Feed 
                         GtfsRealtime.FeedEntity.Builder feedEntity =scrapeJson(i);
