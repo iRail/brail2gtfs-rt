@@ -34,9 +34,9 @@ public class Main {
         
        //runDemo();
        //runScraper();
-      scrapeLiveBoards();
-      testData();
-      //  NetworkDisturbanceFetcher ndf = new NetworkDisturbanceFetcher();
+//      scrapeLiveBoards();
+//      testData();
+        NetworkDisturbanceFetcher ndf = new NetworkDisturbanceFetcher();
         
         
 
