@@ -16,9 +16,9 @@ import com.google.transit.realtime.GtfsRealtime.FeedMessage;
  */
 public class GtfsRealtimeExample {
     
-    public GtfsRealtimeExample() throws Exception {
+    public GtfsRealtimeExample(String filename) throws Exception {
         System.out.println("Testing Real Time Example");
-    URL url = new URL("http://localhost:8000/gtfs-rt");
+    URL url = new URL("http://localhost:8000/" +filename);
     FeedMessage feed = FeedMessage.parseFrom(url.openStream());
     for (FeedEntity entity : feed.getEntityList()) {
       if (entity.hasTripUpdate()) {

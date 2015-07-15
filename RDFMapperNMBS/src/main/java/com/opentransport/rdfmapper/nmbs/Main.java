@@ -34,9 +34,10 @@ public class Main {
         
        //runDemo();
        //runScraper();
-//      scrapeLiveBoards();
-//      testData();
-        NetworkDisturbanceFetcher ndf = new NetworkDisturbanceFetcher();
+     scrapeLiveBoards();
+//      testData("gtfs-rt");
+       // NetworkDisturbanceFetcher ndf = new NetworkDisturbanceFetcher();
+       // testData("gtfs-rt-disturbance");
         
         
 
@@ -69,9 +70,9 @@ public class Main {
      ScrapeTrip scraper = new ScrapeTrip();
     
     }
-    public static void testData(){
+    public static void testData(String fileName){
         try {
-            GtfsRealtimeExample testenData =  new GtfsRealtimeExample();
+            GtfsRealtimeExample testenData =  new GtfsRealtimeExample(fileName);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }

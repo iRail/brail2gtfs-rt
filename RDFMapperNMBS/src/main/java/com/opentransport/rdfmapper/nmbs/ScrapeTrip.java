@@ -242,7 +242,7 @@ public class ScrapeTrip {
     }
     public static void testOutput(){
             try {
-            GtfsRealtimeExample testenData =  new GtfsRealtimeExample();
+            GtfsRealtimeExample testenData =  new GtfsRealtimeExample("gtfs-rt");
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
