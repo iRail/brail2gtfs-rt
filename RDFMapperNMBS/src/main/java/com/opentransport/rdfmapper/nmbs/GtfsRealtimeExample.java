@@ -24,6 +24,10 @@ public class GtfsRealtimeExample {
       if (entity.hasTripUpdate()) {
         System.out.println(entity.getTripUpdate());
       }
+        if (entity.hasAlert()) {
+            System.out.println(entity.getAlert());
+            
+        }
     }
   }
     

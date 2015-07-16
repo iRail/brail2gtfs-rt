@@ -29,7 +29,7 @@ public class NetworkDisturbanceFetcher {
     
     public  NetworkDisturbanceFetcher(){
         
-
+    //    demoDisturbance();
     writeDisturbanceFile();
     
     
@@ -67,6 +67,8 @@ public class NetworkDisturbanceFetcher {
                 //Alert -> Time Range
                 //GtfsRealtime.TimeRange.Builder timeRange = GtfsRealtime.TimeRange.newBuilder();             
           
+                //alert.setCause(GtfsRealtime.Alert.Cause.STRIKE);
+                
                 //Setting the Description 
                 GtfsRealtime.TranslatedString.Builder translatedDescriptionString =GtfsRealtime.TranslatedString.newBuilder();
               
@@ -105,8 +107,9 @@ public class NetworkDisturbanceFetcher {
                 String pubDate = el.child(3).html(); 
                
                 feedEntity.setAlert(alert);
+                feedEntity.setId( pubDate +i );
                 
-                
+                System.out.println(i);
                 feedMessage.addEntity(i, feedEntity);
                 i++;
                 
@@ -142,6 +145,27 @@ public class NetworkDisturbanceFetcher {
         } catch (IOException e) {
             System.err.println("Error failed to write file");
         }    
+    
+    }
+    private void demoDisturbance(){
+    GtfsRealtime.FeedMessage.Builder fm = GtfsRealtime.FeedMessage.newBuilder();
+    GtfsRealtime.FeedHeader.Builder fh = GtfsRealtime.FeedHeader.newBuilder();
+    
+    
+    fh.setGtfsRealtimeVersion("1.0");
+    fh.setIncrementality(GtfsRealtime.FeedHeader.Incrementality.FULL_DATASET);
+         //Unix Style
+    fh.setTimestamp(System.currentTimeMillis() / 1000L);
+    fm.setHeader(fh);
+    
+    GtfsRealtime.FeedEntity.Builder fe = GtfsRealtime.FeedEntity.newBuilder();
+    GtfsRealtime.Alert.Builder fa = GtfsRealtime.Alert.newBuilder();
+    
+    fa.setCause(GtfsRealtime.Alert.Cause.STRIKE);
+    fe.setAlert(fa);
+    fe.setId("test");
+    fm.addEntity(0, fe);
+    
     
     }
 
