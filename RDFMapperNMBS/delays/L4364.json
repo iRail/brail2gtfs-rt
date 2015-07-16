@@ -1,8 +1,0 @@
-
-
-
-
-
-
-{"version":"1.1","timestamp":"1437049812","vehicle":"BE.NMBS.L4364","vehicleinfo":{"locationX":"4.234683","locationY":"50.506108","name":"BE.NMBS.L4364"},"stops":{"number":"5","stop":[{"id":"0","station":"Manage","stationinfo":{"id":"BE.NMBS.008882701","locationX":"4.234683","locationY":"50.506108","@id":"http://irail.be/stations/NMBS/008882701","name":"Manage","standardname":"Manage"},"time":"1437049320","delay":"0"},{"id":"1","station":"Familleureux","stationinfo":{"id":"BE.NMBS.008883238","locationX":"4.211581","locationY":"50.519358","@id":"http://irail.be/stations/NMBS/008883238","name":"Familleureux","standardname":"Familleureux"},"time":"1437049620","delay":"0"},{"id":"2","station":"Marche-lez-Écaussinnes","stationinfo":{"id":"BE.NMBS.008883220","locationX":"4.177098","locationY":"50.546173","@id":"http://irail.be/stations/NMBS/008883220","name":"Marche-lez-Écaussinnes","standardname":"Marche-lez-Écaussinnes"},"time":"1437049860","delay":"0"},{"id":"3","station":"Écaussinnes","stationinfo":{"id":"BE.NMBS.008883212","locationX":"4.156639","locationY":"50.56239","@id":"http://irail.be/stations/NMBS/008883212","name":"Écaussinnes","standardname":"Écaussinnes"},"time":"1437050040","delay":"0"},{"id":"4","station":"'s Gravenbrakel","stationinfo":{"id":"BE.NMBS.008883006","locationX":"4.137662","locationY":"50.605079","@id":"http://irail.be/stations/NMBS/008883006","name":"'s Gravenbrakel","standardname":"Braine-le-Comte"},"time":"1437050460","delay":"0"}]}}
-

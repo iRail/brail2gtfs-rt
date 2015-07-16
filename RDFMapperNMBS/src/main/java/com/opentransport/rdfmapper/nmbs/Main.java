@@ -32,39 +32,21 @@ public class Main {
      */
     public static void main(String[] args) {
         
-       //runDemo();
-       //runScraper();
-
-
-        
-        
         Thread thread1 = new Thread () {
          public void run () {
              testData("gtfs-rt");
-                      scrapeLiveBoards();
-                    //  testData("gtfs-rt");
-                     
-                      
-                     
+                    scrapeLiveBoards();
+                    testData("gtfs-rt");              
            }
           };
         Thread thread2 = new Thread () {
             public void run () {
-                      NetworkDisturbanceFetcher ndf = new NetworkDisturbanceFetcher();
-                     testData("gtfs-rt-disturbance");
+                     NetworkDisturbanceFetcher ndf = new NetworkDisturbanceFetcher();
+                      testData("gtfs-rt-disturbance");
             }
           };
         thread1.start();
         thread2.start();
-      
-        
-        
-        
-        
-
-        
-        
-
          }
     public static void runDemo(){        
         GtfsRealtime.FeedMessage.Builder feedMessage = null;  
@@ -117,8 +99,7 @@ public class Main {
         else {
             System.out.println("Could not find config file: \"" + f.getName() + "\"");
             System.exit(-2);
-        }
-        
+        }        
         final int port = Integer.parseInt(prop.getProperty("port"));
         final int updateInterval = Integer.parseInt(prop.getProperty("updateInterval"));
         final boolean stoppable = Boolean.parseBoolean(prop.getProperty("stoppable"));

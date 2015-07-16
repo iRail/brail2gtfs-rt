@@ -19,8 +19,7 @@ import org.jsoup.select.Elements;
  *
  * @author timtijssens
  */
-public class NetworkDisturbanceFetcher {
-    
+public class NetworkDisturbanceFetcher {    
     
     //The url of the website
    private static final String webSiteURL = "http://www.belgianrail.be/jpm/sncb-nmbs-routeplanner/help.exe/en?tpl=rss_feed";    
@@ -151,7 +150,6 @@ public class NetworkDisturbanceFetcher {
     GtfsRealtime.FeedMessage.Builder fm = GtfsRealtime.FeedMessage.newBuilder();
     GtfsRealtime.FeedHeader.Builder fh = GtfsRealtime.FeedHeader.newBuilder();
     
-    
     fh.setGtfsRealtimeVersion("1.0");
     fh.setIncrementality(GtfsRealtime.FeedHeader.Incrementality.FULL_DATASET);
          //Unix Style
@@ -160,6 +158,7 @@ public class NetworkDisturbanceFetcher {
     
     GtfsRealtime.FeedEntity.Builder fe = GtfsRealtime.FeedEntity.newBuilder();
     GtfsRealtime.Alert.Builder fa = GtfsRealtime.Alert.newBuilder();
+    
     
     fa.setCause(GtfsRealtime.Alert.Cause.STRIKE);
     fe.setAlert(fa);

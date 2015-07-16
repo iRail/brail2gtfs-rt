@@ -1,9 +1,0 @@
-
-
-
-
-
-
-
-{"version":"1.1","timestamp":"1437048244","vehicle":"BE.NMBS.IC4234","vehicleinfo":{"locationX":"4.421101","locationY":"51.2172","name":"BE.NMBS.IC4234"},"stops":{"number":"6","stop":[{"id":"0","station":"Antwerpen-Centraal","stationinfo":{"id":"BE.NMBS.008821006","locationX":"4.421101","locationY":"51.2172","@id":"http://irail.be/stations/NMBS/008821006","name":"Antwerpen-Centraal","standardname":"Antwerpen-Centraal"},"time":"1437047280","delay":"0"},{"id":"1","station":"Antwerpen-Berchem","stationinfo":{"id":"BE.NMBS.008821121","locationX":"4.432221","locationY":"51.19923","@id":"http://irail.be/stations/NMBS/008821121","name":"Antwerpen-Berchem","standardname":"Antwerpen-Berchem"},"time":"1437047520","delay":"0"},{"id":"2","station":"Lier","stationinfo":{"id":"BE.NMBS.008821600","locationX":"4.560614","locationY":"51.135758","@id":"http://irail.be/stations/NMBS/008821600","name":"Lier","standardname":"Lier"},"time":"1437048180","delay":"60"},{"id":"3","station":"Herentals","stationinfo":{"id":"BE.NMBS.008821717","locationX":"4.829535","locationY":"51.181513","@id":"http://irail.be/stations/NMBS/008821717","name":"Herentals","standardname":"Herentals"},"time":"1437049140","delay":"0"},{"id":"4","station":"Tielen","stationinfo":{"id":"BE.NMBS.008821964","locationX":"4.893089","locationY":"51.241021","@id":"http://irail.be/stations/NMBS/008821964","name":"Tielen","standardname":"Tielen"},"time":"1437049740","delay":"0"},{"id":"5","station":"Turnhout","stationinfo":{"id":"BE.NMBS.008821907","locationX":"4.937415","locationY":"51.322032","@id":"http://irail.be/stations/NMBS/008821907","name":"Turnhout","standardname":"Turnhout"},"time":"1437050340","delay":"0"}]}}
-

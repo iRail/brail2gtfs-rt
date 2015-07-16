@@ -9,5 +9,5 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 .mvn/timing.properties
-delays/*.json
+/delays
 .DS_Store

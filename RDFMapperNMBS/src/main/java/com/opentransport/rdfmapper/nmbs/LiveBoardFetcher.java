@@ -429,7 +429,7 @@ public class LiveBoardFetcher {
         }
         
         String source = sb.toString();
-        
+         
         if (source.contains("<title>Fout</title>")) {
             return null;
         }

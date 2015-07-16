@@ -20,8 +20,7 @@ import java.net.URL;
  *
  * @author timtijssens
  */
-public class DownloadDelayedTrains implements Runnable{
-    
+public class DownloadDelayedTrains implements Runnable{    
     private String trainName;
     private final String url;
     public DownloadDelayedTrains(String trainName,String url){

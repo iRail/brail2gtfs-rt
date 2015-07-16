@@ -184,9 +184,7 @@ public class ScrapeTrip {
         feedHeader.setIncrementality(GtfsRealtime.FeedHeader.Incrementality.FULL_DATASET);
              //Unix Style
         feedHeader.setTimestamp(System.currentTimeMillis() / 1000L);
-        feedMessage.setHeader(feedHeader);
-
-        
+        feedMessage.setHeader(feedHeader);      
 
     }
     private String returnCorrectTrainFormat(String trainName){    
@@ -206,13 +204,12 @@ public class ScrapeTrip {
     
     }
 
+private void requestJsons(Map trainDelays){
+            String trainName ;       
+        Iterator iterator = trainDelays.entrySet().iterator();
+        int i = 0;
 
-    void startScrape(Map trainDelays) {
-        String trainName ;       
-                    Iterator iterator = trainDelays.entrySet().iterator();
-                    int i = 0;
-
-                     ExecutorService pool = Executors.newFixedThreadPool(60);
+        ExecutorService pool = Executors.newFixedThreadPool(60);
                     while (iterator.hasNext()) {
                        
                         Map.Entry mapEntry = (Map.Entry) iterator.next(); 
@@ -228,11 +225,20 @@ public class ScrapeTrip {
                     } catch (InterruptedException ex) {
                         Logger.getLogger(ScrapeTrip.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    
+
+
+
+}
+ void startScrape(Map trainDelays) {
+        String trainName ;       
+        Iterator iterator = trainDelays.entrySet().iterator();
+        int i = 0;
+        requestJsons(trainDelays);
         
-        
-        while (iterator.hasNext()) {
-		Map.Entry mapEntry = (Map.Entry) iterator.next();           
-		trainName =  returnCorrectTrainFormat((String)mapEntry.getKey());        
+                  while (iterator.hasNext()) {
+                        Map.Entry mapEntry = (Map.Entry) iterator.next();           
+                        trainName =  returnCorrectTrainFormat((String)mapEntry.getKey());        
                              
                 
 //                    try {
@@ -253,11 +259,9 @@ public class ScrapeTrip {
               feedMessage.build().writeTo(output);
               output.close();
               System.out.println("GTFS RT Tripupdate file writen successful");
-              testOutput();
-               System.exit(0);
-               
-              //testOutput();
               
+               System.exit(0);               
+              //testOutput();             
               
             } catch (Exception e) {
                  System.out.println(e);
