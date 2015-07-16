@@ -1,0 +1,11 @@
+
+
+
+
+
+
+
+
+
+{"version":"1.1","timestamp":"1437050550","vehicle":"BE.NMBS.IC3714","vehicleinfo":{"locationX":"3.942542","locationY":"50.453854","name":"BE.NMBS.IC3714"},"stops":{"number":"8","stop":[{"id":"0","station":"Bergen","stationinfo":{"id":"BE.NMBS.008881000","locationX":"3.942542","locationY":"50.453854","@id":"http://irail.be/stations/NMBS/008881000","name":"Bergen","standardname":"Mons"},"time":"1437049320","delay":"0"},{"id":"1","station":"Jurbeke","stationinfo":{"id":"BE.NMBS.008881166","locationX":"3.910694","locationY":"50.530496","@id":"http://irail.be/stations/NMBS/008881166","name":"Jurbeke","standardname":"Jurbeke"},"time":"1437049800","delay":"0"},{"id":"2","station":"Zinnik","stationinfo":{"id":"BE.NMBS.008883113","locationX":"4.067519","locationY":"50.572763","@id":"http://irail.be/stations/NMBS/008883113","name":"Zinnik","standardname":"Soignies"},"time":"1437050340","delay":"120"},{"id":"3","station":"'s Gravenbrakel","stationinfo":{"id":"BE.NMBS.008883006","locationX":"4.137662","locationY":"50.605079","@id":"http://irail.be/stations/NMBS/008883006","name":"'s Gravenbrakel","standardname":"Braine-le-Comte"},"time":"1437050820","delay":"0"},{"id":"4","station":"Brussel-Zuid","stationinfo":{"id":"BE.NMBS.008814001","locationX":"4.336531","locationY":"50.835707","@id":"http://irail.be/stations/NMBS/008814001","name":"Brussel-Zuid","standardname":"Brussel-Zuid/Bruxelles-Midi"},"time":"1437052140","delay":"0"},{"id":"5","station":"Brussel-Centraal","stationinfo":{"id":"BE.NMBS.008813003","locationX":"4.356801","locationY":"50.845658","@id":"http://irail.be/stations/NMBS/008813003","name":"Brussel-Centraal","standardname":"Brussel-Centraal/Bruxelles-Central"},"time":"1437052440","delay":"0"},{"id":"6","station":"Brussel-Noord","stationinfo":{"id":"BE.NMBS.008812005","locationX":"4.360846","locationY":"50.859663","@id":"http://irail.be/stations/NMBS/008812005","name":"Brussel-Noord","standardname":"Brussel-Noord/Bruxelles-Nord"},"time":"1437052740","delay":"0"},{"id":"7","station":"Brussel-Nat-Luchthaven","stationinfo":{"id":"BE.NMBS.008819406","locationX":"4.482075","locationY":"50.896456","@id":"http://irail.be/stations/NMBS/008819406","name":"Brussel-Nat-Luchthaven","standardname":"Brussel-Nat-Luchthaven/Bruxelles-Nat-Aéroport"},"time":"1437053460","delay":"0"}]}}
+

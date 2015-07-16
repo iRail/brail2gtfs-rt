@@ -18,17 +18,17 @@ public class GtfsRealtimeExample {
     
     public GtfsRealtimeExample(String filename) throws Exception {
         System.out.println("Testing Real Time Example");
-    URL url = new URL("http://localhost:8000/" +filename);
-    FeedMessage feed = FeedMessage.parseFrom(url.openStream());
-    for (FeedEntity entity : feed.getEntityList()) {
-      if (entity.hasTripUpdate()) {
-        System.out.println(entity.getTripUpdate());
-      }
-        if (entity.hasAlert()) {
-            System.out.println(entity.getAlert());
-            
+        URL url = new URL("http://localhost:8000/" +filename);
+        FeedMessage feed = FeedMessage.parseFrom(url.openStream());
+        for (FeedEntity entity : feed.getEntityList()) {
+          if (entity.hasTripUpdate()) {
+            System.out.println(entity.getTripUpdate());
+          }
+            if (entity.hasAlert()) {
+                System.out.println(entity.getAlert());
+
+            }
         }
-    }
-  }
+      }
     
 }

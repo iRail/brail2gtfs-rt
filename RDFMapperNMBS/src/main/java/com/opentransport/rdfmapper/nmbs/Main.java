@@ -40,9 +40,10 @@ public class Main {
         
         Thread thread1 = new Thread () {
          public void run () {
+             testData("gtfs-rt");
                       scrapeLiveBoards();
                     //  testData("gtfs-rt");
-                      System.exit(0);
+                     
                       
                      
            }
@@ -50,7 +51,7 @@ public class Main {
         Thread thread2 = new Thread () {
             public void run () {
                       NetworkDisturbanceFetcher ndf = new NetworkDisturbanceFetcher();
-                    //  testData("gtfs-rt-disturbance");
+                     testData("gtfs-rt-disturbance");
             }
           };
         thread1.start();

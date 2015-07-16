@@ -208,32 +208,20 @@ public class ScrapeTrip {
 
 
     void startScrape(Map trainDelays) {
-        String trainName ;
-        
-        
-       
+        String trainName ;       
                     Iterator iterator = trainDelays.entrySet().iterator();
                     int i = 0;
 
-                     ExecutorService pool = Executors.newFixedThreadPool(20);
+                     ExecutorService pool = Executors.newFixedThreadPool(60);
                     while (iterator.hasNext()) {
                        
                         Map.Entry mapEntry = (Map.Entry) iterator.next(); 
-                        trainName =  returnCorrectTrainFormat((String)mapEntry.getKey());
-                         System.out.println(trainName);
+                        trainName =  returnCorrectTrainFormat((String)mapEntry.getKey());                         
                           url ="http://api.irail.be/vehicle/?id=BE.NMBS."+trainName+"&format=json"; 
                             pool.submit(new DownloadDelayedTrains( url,trainName));
-//            try {
-//                Thread.sleep(10);
-//            } catch (InterruptedException ex) {
-//                Logger.getLogger(ScrapeTrip.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-                    }
-                    
-                    pool.shutdown();
-                        
-                        
-                        
+
+                    }                    
+                    pool.shutdown(); 
                     try {
                         pool.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
                         // all tasks have now finished (unless an exception is thrown abo
@@ -250,14 +238,7 @@ public class ScrapeTrip {
 //                    try {
                         url ="http://api.irail.be/vehicle/?id=BE.NMBS."+trainName+"&format=json";                 
                        // downloadJson(url,trainName);
-                        
-                        
-                       
-                        
-                        
-                        
-                        
-                        //Parse the Json and add it to the Feed 
+                       //Parse the Json and add it to the Feed 
                         GtfsRealtime.FeedEntity.Builder feedEntity =scrapeJson(i,"./delays/" +trainName+".json");
                         feedMessage.addEntity(i, feedEntity);
                         i++;
@@ -272,6 +253,9 @@ public class ScrapeTrip {
               feedMessage.build().writeTo(output);
               output.close();
               System.out.println("GTFS RT Tripupdate file writen successful");
+              testOutput();
+               System.exit(0);
+               
               //testOutput();
               
               

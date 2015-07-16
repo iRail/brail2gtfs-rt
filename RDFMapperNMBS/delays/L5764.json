@@ -1,0 +1,10 @@
+
+
+
+
+
+
+
+
+{"version":"1.1","timestamp":"1437050539","vehicle":"BE.NMBS.L5764","vehicleinfo":{"locationX":"4.86222","locationY":"50.468794","name":"BE.NMBS.L5764"},"stops":{"number":"7","stop":[{"id":"0","station":"Namen","stationinfo":{"id":"BE.NMBS.008863008","locationX":"4.86222","locationY":"50.468794","@id":"http://irail.be/stations/NMBS/008863008","name":"Namen","standardname":"Namur"},"time":"1437049380","delay":"0"},{"id":"1","station":"Jambes-Est","stationinfo":{"id":"BE.NMBS.008863354","locationX":"4.880261","locationY":"50.454798","@id":"http://irail.be/stations/NMBS/008863354","name":"Jambes-Est","standardname":"Jambes-Est"},"time":"1437049620","delay":"0"},{"id":"2","station":"Dave-Saint-Martin","stationinfo":{"id":"BE.NMBS.008863362","locationX":"4.884414","locationY":"50.429098","@id":"http://irail.be/stations/NMBS/008863362","name":"Dave-Saint-Martin","standardname":"Dave-Saint-Martin"},"time":"1437049860","delay":"0"},{"id":"3","station":"Naninne","stationinfo":{"id":"BE.NMBS.008864964","locationX":"4.929756","locationY":"50.419695","@id":"http://irail.be/stations/NMBS/008864964","name":"Naninne","standardname":"Naninne"},"time":"1437050100","delay":"0"},{"id":"4","station":"Sart-Bernard","stationinfo":{"id":"BE.NMBS.008864956","locationX":"4.949739","locationY":"50.406373","@id":"http://irail.be/stations/NMBS/008864956","name":"Sart-Bernard","standardname":"Sart-Bernard"},"time":"1437050280","delay":"0"},{"id":"5","station":"Courrière","stationinfo":{"id":"BE.NMBS.008864949","locationX":"4.996051","locationY":"50.387442","@id":"http://irail.be/stations/NMBS/008864949","name":"Courrière","standardname":"Courrière"},"time":"1437050580","delay":"60"},{"id":"6","station":"Assesse","stationinfo":{"id":"BE.NMBS.008864931","locationX":"5.022839","locationY":"50.368133","@id":"http://irail.be/stations/NMBS/008864931","name":"Assesse","standardname":"Assesse"},"time":"1437050880","delay":"0"}]}}
+

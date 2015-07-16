@@ -1,0 +1,10 @@
+
+
+
+
+
+
+
+
+{"version":"1.1","timestamp":"1437050445","vehicle":"BE.NMBS.L5814","vehicleinfo":{"locationX":"5.809971","locationY":"49.68053","name":"BE.NMBS.L5814"},"stops":{"number":"7","stop":[{"id":"0","station":"Aarlen","stationinfo":{"id":"BE.NMBS.008866001","locationX":"5.809971","locationY":"49.68053","@id":"http://irail.be/stations/NMBS/008866001","name":"Aarlen","standardname":"Arlon"},"time":"1437048780","delay":"0"},{"id":"1","station":"Kleinbettingen (l)","stationinfo":{"id":"BE.NMBS.008200520","locationX":"5.916385","locationY":"49.646389","@id":"http://irail.be/stations/NMBS/008200520","name":"Kleinbettingen (l)","standardname":"Klengbetten (l)"},"time":"1437049200","delay":"0"},{"id":"2","station":"Capellen (l)","stationinfo":{"id":"BE.NMBS.008200518","locationX":"5.990833","locationY":"49.644996","@id":"http://irail.be/stations/NMBS/008200518","name":"Capellen (l)","standardname":"Kapellen (l)"},"time":"1437049440","delay":"0"},{"id":"3","station":"Mamer (l)","stationinfo":{"id":"BE.NMBS.008200516","locationX":"6.02333","locationY":"49.627502","@id":"http://irail.be/stations/NMBS/008200516","name":"Mamer (l)","standardname":"Mamer (l)"},"time":"1437049740","delay":"0"},{"id":"4","station":"Mamer (l)","stationinfo":{"id":"BE.NMBS.008200516","locationX":"6.02333","locationY":"49.627502","@id":"http://irail.be/stations/NMBS/008200516","name":"Mamer (l)","standardname":"Mamer (l)"},"time":"1437049920","delay":"0"},{"id":"5","station":"Bertrange Strassen (l)","stationinfo":{"id":"BE.NMBS.008200510","locationX":"6.060601","locationY":"49.613002","@id":"http://irail.be/stations/NMBS/008200510","name":"Bertrange Strassen (l)","standardname":"Bertrange Strassen (l)"},"time":"1437050280","delay":"60"},{"id":"6","station":"Luxemburg (l)","stationinfo":{"id":"BE.NMBS.008200100","locationX":"6.133331","locationY":"49.599996","@id":"http://irail.be/stations/NMBS/008200100","name":"Luxemburg (l)","standardname":"Lëtzebuerg (l)"},"time":"1437050700","delay":"60"}]}}
+

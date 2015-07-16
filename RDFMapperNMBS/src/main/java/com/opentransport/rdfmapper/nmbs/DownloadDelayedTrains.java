@@ -42,11 +42,9 @@ public class DownloadDelayedTrains implements Runnable{
     }
 
     private void downloadDelayedTrains(String url, String trainName)  throws MalformedURLException, IOException{
-        System.out.println("Start req");
+
             String fileName = "./delays/" +trainName +".json"; 
-            System.out.println(fileName);
-             System.out.println(trainName);
-              System.out.println(url);
+
 		 URL link = new URL(url);
 		 InputStream in = new BufferedInputStream(link.openStream());
 		 ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -63,21 +61,6 @@ public class DownloadDelayedTrains implements Runnable{
 		 fos.write(response);
 		 fos.close();
                  //System.out.println("Finished writing JSON File");
-        System.out.println("Downloading file");
-        
-        
-//        System.out.println(trainName);
-//        System.out.println(url);
-//        
-//        String content = "This is the content to write into file";
-//        File file = new File("fff.txt");
-//        
-//        FileWriter fw = new FileWriter(file.getAbsoluteFile());
-//			BufferedWriter bw = new BufferedWriter(fw);
-//			bw.write(content);
-//			bw.close();
-// 
-//			System.out.println("Done");
     }
 
 

@@ -1,0 +1,12 @@
+
+
+
+
+
+
+
+
+
+
+{"version":"1.1","timestamp":"1437049431","vehicle":"BE.NMBS.L4984","vehicleinfo":{"locationX":"5.234211","locationY":"50.527242","name":"BE.NMBS.L4984"},"stops":{"number":"9","stop":[{"id":"0","station":"Hoei","stationinfo":{"id":"BE.NMBS.008843307","locationX":"5.234211","locationY":"50.527242","@id":"http://irail.be/stations/NMBS/008843307","name":"Hoei","standardname":"Huy"},"time":"1437048120","delay":"0"},{"id":"1","station":"Statte","stationinfo":{"id":"BE.NMBS.008843406","locationX":"5.219676","locationY":"50.528276","@id":"http://irail.be/stations/NMBS/008843406","name":"Statte","standardname":"Statte"},"time":"1437048240","delay":"0"},{"id":"2","station":"Bas-Oha","stationinfo":{"id":"BE.NMBS.008843430","locationX":"5.190937","locationY":"50.52263","@id":"http://irail.be/stations/NMBS/008843430","name":"Bas-Oha","standardname":"Bas-Oha"},"time":"1437048480","delay":"0"},{"id":"3","station":"Andenne","stationinfo":{"id":"BE.NMBS.008863404","locationX":"5.094699","locationY":"50.496759","@id":"http://irail.be/stations/NMBS/008863404","name":"Andenne","standardname":"Andenne"},"time":"1437048780","delay":"0"},{"id":"4","station":"Château-de-Seilles","stationinfo":{"id":"BE.NMBS.008863438","locationX":"5.081745","locationY":"50.497209","@id":"http://irail.be/stations/NMBS/008863438","name":"Château-de-Seilles","standardname":"Château-de-Seilles"},"time":"1437048960","delay":"0"},{"id":"5","station":"Sclaigneaux","stationinfo":{"id":"BE.NMBS.008863446","locationX":"5.026363","locationY":"50.492247","@id":"http://irail.be/stations/NMBS/008863446","name":"Sclaigneaux","standardname":"Sclaigneaux"},"time":"1437049200","delay":"0"},{"id":"6","station":"Namêche","stationinfo":{"id":"BE.NMBS.008863453","locationX":"4.997939","locationY":"50.47043","@id":"http://irail.be/stations/NMBS/008863453","name":"Namêche","standardname":"Namêche"},"time":"1437049380","delay":"60"},{"id":"7","station":"Marche-les-Dames","stationinfo":{"id":"BE.NMBS.008863461","locationX":"4.96458","locationY":"50.480741","@id":"http://irail.be/stations/NMBS/008863461","name":"Marche-les-Dames","standardname":"Marche-les-Dames"},"time":"1437049620","delay":"60"},{"id":"8","station":"Namen","stationinfo":{"id":"BE.NMBS.008863008","locationX":"4.86222","locationY":"50.468794","@id":"http://irail.be/stations/NMBS/008863008","name":"Namen","standardname":"Namur"},"time":"1437050160","delay":"60"}]}}
+
