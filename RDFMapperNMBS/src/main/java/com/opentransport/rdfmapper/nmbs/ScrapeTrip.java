@@ -22,6 +22,9 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.simple.JSONArray;
@@ -37,14 +40,14 @@ public class ScrapeTrip {
     
     private String url; //"http://api.irail.be/vehicle/?id=BE.NMBS.IC511&format=json";
     private String trainId ="";
-    private String outputName="vehicleTrip.json";
+    private String outputName="delays/vehicleTrip.json";
     private GtfsRealtime.FeedMessage.Builder feedMessage =  GtfsRealtime.FeedMessage.newBuilder();        
     private GtfsRealtime.FeedHeader.Builder feedHeader =GtfsRealtime.FeedHeader.newBuilder();
 
     
- 
-    private void downloadJson(String url) throws MalformedURLException, IOException{
-                String fileName = outputName; 
+
+    private void downloadJson(String url,String trainName) throws MalformedURLException, IOException{
+                String fileName = "./delays/" +trainName +".json"; 
 		 URL link = new URL(url);
 		 InputStream in = new BufferedInputStream(link.openStream());
 		 ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -60,13 +63,13 @@ public class ScrapeTrip {
 		 FileOutputStream fos = new FileOutputStream(fileName);
 		 fos.write(response);
 		 fos.close();
-                 System.out.println("Finished writing JSON File");
+                 //System.out.println("Finished writing JSON File");
 
 	}
     
     
     
-    private   GtfsRealtime.FeedEntity.Builder  scrapeJson(int identifier) {   
+    private   GtfsRealtime.FeedEntity.Builder  scrapeJson(int identifier, String fileName) {   
         GtfsRealtime.FeedEntity.Builder feedEntity = GtfsRealtime.FeedEntity.newBuilder();
         
         feedEntity.setId(Integer.toString(identifier));
@@ -90,13 +93,13 @@ public class ScrapeTrip {
         
         JSONParser parser = new JSONParser();
         try {
-            FileReader fr = new FileReader(outputName);
+            FileReader fr = new FileReader(fileName);
             JSONObject json = (JSONObject) parser.parse(fr);
             String trainId = (String) json.get("vehicle");
             //Setting the VehicleData
             vehicleDescription.setId(trainId);
             vehicleDescription.setLicensePlate(trainId);
-            System.out.println(trainId);
+            //System.out.println(trainId);
             
             //Handling Departure Date
             
@@ -206,33 +209,71 @@ public class ScrapeTrip {
 
     void startScrape(Map trainDelays) {
         String trainName ;
+        
+        
        
-        Iterator iterator = trainDelays.entrySet().iterator();
-        int i = 0;
+                    Iterator iterator = trainDelays.entrySet().iterator();
+                    int i = 0;
+
+                     ExecutorService pool = Executors.newFixedThreadPool(20);
+                    while (iterator.hasNext()) {
+                       
+                        Map.Entry mapEntry = (Map.Entry) iterator.next(); 
+                        trainName =  returnCorrectTrainFormat((String)mapEntry.getKey());
+                         System.out.println(trainName);
+                          url ="http://api.irail.be/vehicle/?id=BE.NMBS."+trainName+"&format=json"; 
+                            pool.submit(new DownloadDelayedTrains( url,trainName));
+//            try {
+//                Thread.sleep(10);
+//            } catch (InterruptedException ex) {
+//                Logger.getLogger(ScrapeTrip.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+                    }
+                    
+                    pool.shutdown();
+                        
+                        
+                        
+                    try {
+                        pool.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
+                        // all tasks have now finished (unless an exception is thrown abo
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(ScrapeTrip.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+        
+        
         while (iterator.hasNext()) {
 		Map.Entry mapEntry = (Map.Entry) iterator.next();           
 		trainName =  returnCorrectTrainFormat((String)mapEntry.getKey());        
                              
                 
-                    try {
+//                    try {
                         url ="http://api.irail.be/vehicle/?id=BE.NMBS."+trainName+"&format=json";                 
-                        downloadJson(url);
+                       // downloadJson(url,trainName);
+                        
+                        
+                       
+                        
+                        
+                        
+                        
                         //Parse the Json and add it to the Feed 
-                        GtfsRealtime.FeedEntity.Builder feedEntity =scrapeJson(i);
+                        GtfsRealtime.FeedEntity.Builder feedEntity =scrapeJson(i,"./delays/" +trainName+".json");
                         feedMessage.addEntity(i, feedEntity);
                         i++;
 
-                    } catch (IOException ex) {
-                        Logger.getLogger(ScrapeTrip.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+//                    } catch (IOException ex) {
+//                        Logger.getLogger(ScrapeTrip.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
 	}
         //Write File  
             try {
               FileOutputStream output = new FileOutputStream("gtfs-rt");
               feedMessage.build().writeTo(output);
               output.close();
-              System.out.println("File writen successful");
-              testOutput();
+              System.out.println("GTFS RT Tripupdate file writen successful");
+              //testOutput();
+              
               
             } catch (Exception e) {
                  System.out.println(e);

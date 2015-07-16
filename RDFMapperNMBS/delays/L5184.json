@@ -1,0 +1,12 @@
+
+
+
+
+
+
+
+
+
+
+{"version":"1.1","timestamp":"1437048242","vehicle":"BE.NMBS.L5184","vehicleinfo":{"locationX":"5.566695","locationY":"50.62455","name":"BE.NMBS.L5184"},"stops":{"number":"9","stop":[{"id":"0","station":"Luik-Guillemins","stationinfo":{"id":"BE.NMBS.008841004","locationX":"5.566695","locationY":"50.62455","@id":"http://irail.be/stations/NMBS/008841004","name":"Luik-Guillemins","standardname":"Liège-Guillemins"},"time":"1437046440","delay":"0"},{"id":"1","station":"Ans","stationinfo":{"id":"BE.NMBS.008841202","locationX":"5.509704","locationY":"50.661208","@id":"http://irail.be/stations/NMBS/008841202","name":"Ans","standardname":"Ans"},"time":"1437046800","delay":"0"},{"id":"2","station":"Bierset-Awans","stationinfo":{"id":"BE.NMBS.008841319","locationX":"5.460551","locationY":"50.65861","@id":"http://irail.be/stations/NMBS/008841319","name":"Bierset-Awans","standardname":"Bierset-Awans"},"time":"1437047100","delay":"0"},{"id":"3","station":"Voroux","stationinfo":{"id":"BE.NMBS.008841327","locationX":"5.429556","locationY":"50.66181","@id":"http://irail.be/stations/NMBS/008841327","name":"Voroux","standardname":"Voroux"},"time":"1437047280","delay":"0"},{"id":"4","station":"Fexhe-le-Haut-Clocher","stationinfo":{"id":"BE.NMBS.008841467","locationX":"5.398453","locationY":"50.664049","@id":"http://irail.be/stations/NMBS/008841467","name":"Fexhe-le-Haut-Clocher","standardname":"Fexhe-le-Haut-Clocher"},"time":"1437047460","delay":"0"},{"id":"5","station":"Momalle","stationinfo":{"id":"BE.NMBS.008841459","locationX":"5.367602","locationY":"50.66991","@id":"http://irail.be/stations/NMBS/008841459","name":"Momalle","standardname":"Momalle"},"time":"1437047640","delay":"0"},{"id":"6","station":"Remicourt","stationinfo":{"id":"BE.NMBS.008841442","locationX":"5.321407","locationY":"50.678611","@id":"http://irail.be/stations/NMBS/008841442","name":"Remicourt","standardname":"Remicourt"},"time":"1437047880","delay":"0"},{"id":"7","station":"Bleret","stationinfo":{"id":"BE.NMBS.008841434","locationX":"5.286394","locationY":"50.685065","@id":"http://irail.be/stations/NMBS/008841434","name":"Bleret","standardname":"Bleret"},"time":"1437048120","delay":"180"},{"id":"8","station":"Borgworm","stationinfo":{"id":"BE.NMBS.008841400","locationX":"5.249475","locationY":"50.694549","@id":"http://irail.be/stations/NMBS/008841400","name":"Borgworm","standardname":"Waremme"},"time":"1437048360","delay":"120"}]}}
+

@@ -38,7 +38,7 @@ import org.jsoup.select.Elements;
  */
 public class LiveBoardFetcher {
     
-    private static final int NUMBER_OF_CONNECTIONS = 50;
+    private static final int NUMBER_OF_CONNECTIONS = 70;
     private static final int CONNECTION_TIMEOUT_IN_MILLISECONDS = 3000;
     private static final long POOL_TIMEOUT = 60;
     
@@ -165,7 +165,7 @@ public class LiveBoardFetcher {
                         
                     }else{
                     
-                    System.out.println("Current Delay is " + trainDelay + "minutes for train " + trainNumber);
+                  //  System.out.println("Current Delay is " + trainDelay + "minutes for train " + trainNumber);
                     trainDelays.put(trainNumber, trainDelay);
                     trainsDelayed ++;
                                

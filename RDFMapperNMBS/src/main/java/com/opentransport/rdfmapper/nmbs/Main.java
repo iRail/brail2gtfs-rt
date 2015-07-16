@@ -34,10 +34,30 @@ public class Main {
         
        //runDemo();
        //runScraper();
-        scrapeLiveBoards();
-        testData("gtfs-rt");
-        NetworkDisturbanceFetcher ndf = new NetworkDisturbanceFetcher();
-        testData("gtfs-rt-disturbance");
+
+
+        
+        
+        Thread thread1 = new Thread () {
+         public void run () {
+                      scrapeLiveBoards();
+                    //  testData("gtfs-rt");
+                      System.exit(0);
+                      
+                     
+           }
+          };
+        Thread thread2 = new Thread () {
+            public void run () {
+                      NetworkDisturbanceFetcher ndf = new NetworkDisturbanceFetcher();
+                    //  testData("gtfs-rt-disturbance");
+            }
+          };
+        thread1.start();
+        thread2.start();
+      
+        
+        
         
         
 

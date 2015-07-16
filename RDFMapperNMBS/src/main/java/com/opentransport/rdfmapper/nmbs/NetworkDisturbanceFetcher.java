@@ -140,7 +140,7 @@ public class NetworkDisturbanceFetcher {
       
                   feedMessage.build().writeTo(output);
                   output.close();
-                  System.out.println("File writen successful");
+                  System.out.println("Network Disturbance file writen successful");
             
         } catch (IOException e) {
             System.err.println("Error failed to write file");

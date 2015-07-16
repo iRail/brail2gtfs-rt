@@ -1,0 +1,12 @@
+
+
+
+
+
+
+
+
+
+
+{"version":"1.1","timestamp":"1437048228","vehicle":"BE.NMBS.L2484","vehicleinfo":{"locationX":"5.327627","locationY":"50.930822","name":"BE.NMBS.L2484"},"stops":{"number":"9","stop":[{"id":"0","station":"Hasselt","stationinfo":{"id":"BE.NMBS.008831005","locationX":"5.327627","locationY":"50.930822","@id":"http://irail.be/stations/NMBS/008831005","name":"Hasselt","standardname":"Hasselt"},"time":"1437047820","delay":"0"},{"id":"1","station":"Schulen","stationinfo":{"id":"BE.NMBS.008831088","locationX":"5.187405","locationY":"50.963758","@id":"http://irail.be/stations/NMBS/008831088","name":"Schulen","standardname":"Schulen"},"time":"1437048360","delay":"60"},{"id":"2","station":"Diest","stationinfo":{"id":"BE.NMBS.008831401","locationX":"5.050031","locationY":"50.993341","@id":"http://irail.be/stations/NMBS/008831401","name":"Diest","standardname":"Diest"},"time":"1437048780","delay":"0"},{"id":"3","station":"Zichem","stationinfo":{"id":"BE.NMBS.008833274","locationX":"4.987359","locationY":"51.00669","@id":"http://irail.be/stations/NMBS/008833274","name":"Zichem","standardname":"Zichem"},"time":"1437049080","delay":"0"},{"id":"4","station":"Testelt","stationinfo":{"id":"BE.NMBS.008833266","locationX":"4.945829","locationY":"51.009864","@id":"http://irail.be/stations/NMBS/008833266","name":"Testelt","standardname":"Testelt"},"time":"1437049320","delay":"0"},{"id":"5","station":"Langdorp","stationinfo":{"id":"BE.NMBS.008833258","locationX":"4.863541","locationY":"51.002466","@id":"http://irail.be/stations/NMBS/008833258","name":"Langdorp","standardname":"Langdorp"},"time":"1437049620","delay":"0"},{"id":"6","station":"Aarschot","stationinfo":{"id":"BE.NMBS.008833209","locationX":"4.824043","locationY":"50.984406","@id":"http://irail.be/stations/NMBS/008833209","name":"Aarschot","standardname":"Aarschot"},"time":"1437049920","delay":"0"},{"id":"7","station":"Wezemaal","stationinfo":{"id":"BE.NMBS.008833233","locationX":"4.747679","locationY":"50.956261","@id":"http://irail.be/stations/NMBS/008833233","name":"Wezemaal","standardname":"Wezemaal"},"time":"1437050340","delay":"0"},{"id":"8","station":"Leuven","stationinfo":{"id":"BE.NMBS.008833001","locationX":"4.715866","locationY":"50.88228","@id":"http://irail.be/stations/NMBS/008833001","name":"Leuven","standardname":"Leuven"},"time":"1437050760","delay":"0"}]}}
+
