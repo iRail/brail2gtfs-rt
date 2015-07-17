@@ -228,7 +228,7 @@ public class NetworkDisturbanceFetcher {
                 feedEntity.setAlert(alert);
                 feedEntity.setId( pubDate +i );
                              
-                feedMessage.addEntity(i, feedEntity);
+               // feedMessage.addEntity(i, feedEntity);
                 i++;
                 
                // timeRange.setStart();
