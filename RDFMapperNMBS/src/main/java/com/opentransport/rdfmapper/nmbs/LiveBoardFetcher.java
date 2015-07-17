@@ -190,8 +190,8 @@ public class LiveBoardFetcher {
             }
            
         }
-         System.out.println("Finished Reading Trains ");
-         System.out.println(trainDelays.size());
+         System.out.println("Finished Reading Trains. "+ trainDelays.size() +" trains are currently delayed");
+        
          ScrapeTrip scrapeDelayedTrains  = new ScrapeTrip();
          scrapeDelayedTrains.startScrape(trainDelays);
          

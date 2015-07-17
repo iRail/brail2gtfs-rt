@@ -9,6 +9,7 @@ import com.opentransport.rdfmapper.nmbs.containers.GtfsRealtime;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -43,8 +44,7 @@ public class ScrapeTrip {
     private String outputName="delays/vehicleTrip.json";
     private GtfsRealtime.FeedMessage.Builder feedMessage =  GtfsRealtime.FeedMessage.newBuilder();        
     private GtfsRealtime.FeedHeader.Builder feedHeader =GtfsRealtime.FeedHeader.newBuilder();
-
-    
+    private ErrorLogWriter errorWriter =  new  ErrorLogWriter(); 
 
     private void downloadJson(String url,String trainName) throws MalformedURLException, IOException{
                 String fileName = "./delays/" +trainName +".json"; 
@@ -70,15 +70,12 @@ public class ScrapeTrip {
     
     
     private   GtfsRealtime.FeedEntity.Builder  scrapeJson(int identifier, String fileName) {   
-        GtfsRealtime.FeedEntity.Builder feedEntity = GtfsRealtime.FeedEntity.newBuilder();
         
+
+        
+        GtfsRealtime.FeedEntity.Builder feedEntity = GtfsRealtime.FeedEntity.newBuilder();        
         feedEntity.setId(Integer.toString(identifier));
         feedEntity.setIsDeleted(false);
-        //GtfsRealtime.VehiclePosition.Builder vehiclePosition = GtfsRealtime.VehiclePosition.newBuilder();
-        //vehiclePosition.setStopId("fff");
-         //GtfsRealtime.Alert.Builder  alert = GtfsRealtime.Alert.newBuilder();
-        
-         // feedEntity.setAlert(alert);
 
         //Data that doesnt Update
         GtfsRealtime.TripUpdate.Builder tripUpdate =  GtfsRealtime.TripUpdate.newBuilder();
@@ -140,6 +137,9 @@ public class ScrapeTrip {
                 
                     
                 } catch (Exception e) {
+                    errorWriter.writeError(e.toString());
+                    System.out.println(fileName);
+                    System.out.println("Null Pointer ? ");
                     System.out.println(stop);
                     System.out.println(e);
                 }
@@ -167,8 +167,12 @@ public class ScrapeTrip {
             
             fr.close();
         } catch (FileNotFoundException ex) {
+            System.out.println(ex);
+             errorWriter.writeError(ex.toString());
+              
           
        } catch (IOException | ParseException ex) {
+
             
         }
         return feedEntity;
@@ -197,9 +201,23 @@ public class ScrapeTrip {
         for( int i = 0; i <= splited.length - 1; i++)
             {
                 trainName += splited[i]; 
-            }
-       
-               
+            } 
+        trainName =checkTrainDouble(trainName);
+        return trainName;
+    
+    }
+    //This function Checks for if a train name occurs twice in the same tring
+    private String checkTrainDouble(String trainName){
+        try {
+            
+            String trainTypeIdentifier = trainName.substring(0, 3);
+                if (trainName.lastIndexOf(trainTypeIdentifier) >= 4) {                                  
+                trainName=  trainName.substring(0,trainName.lastIndexOf(trainTypeIdentifier) );
+                 }
+            
+        } catch (Exception e) {
+            
+        }    
         return trainName;
     
     }
@@ -207,7 +225,7 @@ public class ScrapeTrip {
 private void requestJsons(Map trainDelays){
             String trainName ;       
         Iterator iterator = trainDelays.entrySet().iterator();
-        int i = 0;
+        
 
         ExecutorService pool = Executors.newFixedThreadPool(60);
                     while (iterator.hasNext()) {
@@ -224,6 +242,9 @@ private void requestJsons(Map trainDelays){
                         // all tasks have now finished (unless an exception is thrown abo
                     } catch (InterruptedException ex) {
                         Logger.getLogger(ScrapeTrip.class.getName()).log(Level.SEVERE, null, ex);
+                         errorWriter.writeError(ex.toString());
+                      
+                        
                     }
                     
 
@@ -240,18 +261,20 @@ private void requestJsons(Map trainDelays){
                         Map.Entry mapEntry = (Map.Entry) iterator.next();           
                         trainName =  returnCorrectTrainFormat((String)mapEntry.getKey());        
                              
-                
-//                    try {
+
                         url ="http://api.irail.be/vehicle/?id=BE.NMBS."+trainName+"&format=json";                 
                        // downloadJson(url,trainName);
                        //Parse the Json and add it to the Feed 
+                        File f = new File("./delays/" +trainName+".json");
+                        if(f.exists() && !f.isDirectory()) {  
                         GtfsRealtime.FeedEntity.Builder feedEntity =scrapeJson(i,"./delays/" +trainName+".json");
-                        feedMessage.addEntity(i, feedEntity);
+                        feedMessage.addEntity(i, feedEntity);  
                         i++;
+                        }else{                         
+                             errorWriter.writeError("File Not Found " + "./delays/" +trainName+".json" );
+                        }
+                 
 
-//                    } catch (IOException ex) {
-//                        Logger.getLogger(ScrapeTrip.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
 	}
         //Write File  
             try {
@@ -259,25 +282,18 @@ private void requestJsons(Map trainDelays){
               feedMessage.build().writeTo(output);
               output.close();
               System.out.println("GTFS RT Tripupdate file writen successful");
-              
-               System.exit(0);               
-              //testOutput();             
-              
+                        
             } catch (Exception e) {
                  System.out.println(e);
-            }
-     
-        
+                  errorWriter.writeError(e.toString());                  
+            }    
     }
-    public static void testOutput(){
+    public void testOutput(){
             try {
             GtfsRealtimeExample testenData =  new GtfsRealtimeExample("gtfs-rt");
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            errorWriter.writeError(ex.toString());
         }
-    
     }
-    
-    
-    
 }

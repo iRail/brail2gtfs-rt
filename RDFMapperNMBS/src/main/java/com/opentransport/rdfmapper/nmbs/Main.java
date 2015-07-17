@@ -34,15 +34,15 @@ public class Main {
         
         Thread thread1 = new Thread () {
          public void run () {
-             testData("gtfs-rt");
+            // testData("gtfs-rt");
                     scrapeLiveBoards();
-                    testData("gtfs-rt");              
+            //        testData("gtfs-rt");              
            }
           };
         Thread thread2 = new Thread () {
             public void run () {
                      NetworkDisturbanceFetcher ndf = new NetworkDisturbanceFetcher();
-                      testData("gtfs-rt-disturbance");
+             //         testData("gtfs-rt-disturbance");
             }
           };
         thread1.start();
@@ -107,46 +107,46 @@ public class Main {
         System.out.println("START OF LIVEBOARD FETCH");
         SortedMapper mapper = new SortedMapper();
         
-        final ServerContainer container = new ServerContainer(mapper,"NMBS");
-        SocketAddress address = new InetSocketAddress(port);
-        try {
-            ContainerSocketProcessor csp = new ContainerSocketProcessor(container);
-            Connection connection = new SocketConnection(csp);
-            connection.connect(address);
-            System.out.println(Calendar.getInstance().getTime() + ": SERVER STARTED AT PORT " + port);
-            
-            ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-            scheduler.scheduleAtFixedRate(new Runnable() {
-                @Override
-                public void run() {
-                    System.out.println(Calendar.getInstance().getTime() + ": START OF UPDATE");
-                    long start = System.currentTimeMillis();
-                    container.setMapper(new SortedMapper());
-                    long end = System.currentTimeMillis();
-                    System.out.println(Calendar.getInstance().getTime() + ": END OF UPDATE (" + (end - start) + " ms)");
-                }
-            },updateInterval,updateInterval,TimeUnit.SECONDS);
-            
-            if (stoppable) {
-                boolean shutdown = false;
-                while(!shutdown) {
-                    System.out.println("Type STOP to shut down the server");
-                    Scanner s = new Scanner(new InputStreamReader(System.in));
-                    if (s.nextLine().toLowerCase().equals("stop")) {
-                        scheduler.shutdown();
-                        connection.close();
-                        s.close();
-                        System.out.println(Calendar.getInstance().getTime() + ": SERVER STOPPED!");
-                        shutdown = true;
-                    }
-                    else {
-                        System.out.print("ERROR! ");
-                    }
-                }
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE,null,ex);
-        }
+        //final ServerContainer container = new ServerContainer(mapper,"NMBS");
+        //SocketAddress address = new InetSocketAddress(port);
+//        try {
+//            ContainerSocketProcessor csp = new ContainerSocketProcessor(container);
+//            Connection connection = new SocketConnection(csp);
+//            connection.connect(address);
+//            System.out.println(Calendar.getInstance().getTime() + ": SERVER STARTED AT PORT " + port);
+//            
+//            ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+//            scheduler.scheduleAtFixedRate(new Runnable() {
+//                @Override
+//                public void run() {
+//                    System.out.println(Calendar.getInstance().getTime() + ": START OF UPDATE");
+//                    long start = System.currentTimeMillis();
+//                    container.setMapper(new SortedMapper());
+//                    long end = System.currentTimeMillis();
+//                    System.out.println(Calendar.getInstance().getTime() + ": END OF UPDATE (" + (end - start) + " ms)");
+//                }
+//            },updateInterval,updateInterval,TimeUnit.SECONDS);
+//            
+//            if (stoppable) {
+//                boolean shutdown = false;
+//                while(!shutdown) {
+//                    System.out.println("Type STOP to shut down the server");
+//                    Scanner s = new Scanner(new InputStreamReader(System.in));
+//                    if (s.nextLine().toLowerCase().equals("stop")) {
+//                        scheduler.shutdown();
+//                        connection.close();
+//                        s.close();
+//                        System.out.println(Calendar.getInstance().getTime() + ": SERVER STOPPED!");
+//                        shutdown = true;
+//                    }
+//                    else {
+//                        System.out.print("ERROR! ");
+//                    }
+//                }
+//            }
+//        } catch (IOException ex) {
+//            Logger.getLogger(Main.class.getName()).log(Level.SEVERE,null,ex);
+//        }
     
     }
 }

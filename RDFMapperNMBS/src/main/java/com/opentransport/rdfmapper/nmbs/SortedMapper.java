@@ -40,8 +40,8 @@ public class SortedMapper {
         departures = new ArrayList<>();
         map();
         
-        mapTurtle();
-        mapLinkedcsv();
+        //mapTurtle();
+        //mapLinkedcsv();
         
         stations.clear();
         departures.clear();

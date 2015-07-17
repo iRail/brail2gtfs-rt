@@ -22,7 +22,8 @@ import org.jsoup.select.Elements;
 public class NetworkDisturbanceFetcher {    
     
     //The url of the website
-   private static final String webSiteURL = "http://www.belgianrail.be/jpm/sncb-nmbs-routeplanner/help.exe/en?tpl=rss_feed";    
+   private static final String webSiteURL = "http://www.belgianrail.be/jpm/sncb-nmbs-routeplanner/help.exe/en?tpl=rss_feed";   
+   private ErrorLogWriter  errorWriter = new  ErrorLogWriter();
            
 
     
@@ -100,15 +101,12 @@ public class NetworkDisturbanceFetcher {
                 alert.setUrl(translatedUrlString);
                 //-----------              
                 
-            
-                
                 String description =  el.child(1).html();   
                 String pubDate = el.child(3).html(); 
                
                 feedEntity.setAlert(alert);
                 feedEntity.setId( pubDate +i );
-                
-                System.out.println(i);
+                             
                 feedMessage.addEntity(i, feedEntity);
                 i++;
                 
@@ -122,16 +120,14 @@ public class NetworkDisturbanceFetcher {
            
         } catch (IOException ex) {
             Logger.getLogger(NetworkDisturbanceFetcher.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
-        
+             errorWriter.writeError(ex.toString());
+        } 
         return feedMessage;
     
     }
     private void writeDisturbanceFile(){ 
         GtfsRealtime.FeedMessage.Builder feedMessage =  scrapeDisturbances();
-        
-      
+
        //Write the new Disturbance back to disk
         try {
             
@@ -143,6 +139,7 @@ public class NetworkDisturbanceFetcher {
             
         } catch (IOException e) {
             System.err.println("Error failed to write file");
+             errorWriter.writeError(e.toString());
         }    
     
     }
@@ -159,13 +156,11 @@ public class NetworkDisturbanceFetcher {
     GtfsRealtime.FeedEntity.Builder fe = GtfsRealtime.FeedEntity.newBuilder();
     GtfsRealtime.Alert.Builder fa = GtfsRealtime.Alert.newBuilder();
     
-    
     fa.setCause(GtfsRealtime.Alert.Cause.STRIKE);
     fe.setAlert(fa);
     fe.setId("test");
     fm.addEntity(0, fe);
-    
-    
+     
     }
 
 

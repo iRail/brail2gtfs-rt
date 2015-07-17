@@ -23,6 +23,7 @@ import java.net.URL;
 public class DownloadDelayedTrains implements Runnable{    
     private String trainName;
     private final String url;
+    private ErrorLogWriter errorWriter = new ErrorLogWriter();
     public DownloadDelayedTrains(String trainName,String url){
         this.trainName = trainName;
         this.url = url;
@@ -35,14 +36,19 @@ public class DownloadDelayedTrains implements Runnable{
             downloadDelayedTrains(trainName,url);
           
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e);           
+            errorWriter.writeError(e.toString());
         }
         
     }
 
-    private void downloadDelayedTrains(String url, String trainName)  throws MalformedURLException, IOException{
 
+    private void downloadDelayedTrains(String url, String trainName)  throws MalformedURLException, IOException{
+        
+        
+            
             String fileName = "./delays/" +trainName +".json"; 
+           
 
 		 URL link = new URL(url);
 		 InputStream in = new BufferedInputStream(link.openStream());
@@ -61,6 +67,7 @@ public class DownloadDelayedTrains implements Runnable{
 		 fos.close();
                  //System.out.println("Finished writing JSON File");
     }
+    
 
 
     
