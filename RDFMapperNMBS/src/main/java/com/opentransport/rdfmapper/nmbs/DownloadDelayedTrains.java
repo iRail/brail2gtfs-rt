@@ -36,7 +36,7 @@ public class DownloadDelayedTrains implements Runnable{
             downloadDelayedTrains(trainName,url);
           
         } catch (Exception e) {
-            System.out.println(e);           
+           // System.out.println(e);           
             errorWriter.writeError(e.toString());
         }
         

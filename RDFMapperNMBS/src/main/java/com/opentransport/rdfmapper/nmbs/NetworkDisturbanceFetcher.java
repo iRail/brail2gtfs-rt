@@ -97,10 +97,10 @@ public class NetworkDisturbanceFetcher {
                 GtfsRealtime.TranslatedString.Builder translatedHeaderString =GtfsRealtime.TranslatedString.newBuilder();              
                 GtfsRealtime.TranslatedString.Translation.Builder translationsHeader = GtfsRealtime.TranslatedString.Translation.newBuilder();                
                 translationsHeader.setText(reformTitle(el.child(0).html()));
-                System.out.println(reformTitle(el.child(0).html()));
+                //System.out.println(reformTitle(el.child(0).html()));
                 
                 
-                alert.setCause(setCause(reformTitle(el.child(0).html())));
+               // alert.setCause(setCause(reformTitle(el.child(0).html())));
                
 
                 

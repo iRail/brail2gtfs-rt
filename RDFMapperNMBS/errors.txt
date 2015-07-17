@@ -13,4 +13,209 @@ File Not Found ./delays/IC4333.json%s
 File Not Found ./delays/IC1514.json%s
 File Not Found ./delays/L761.json%s
 File Not Found ./delays/IC4312.json%s
-File Not Found ./delays/IC4311.json
+File Not Found ./delays/IC4311.json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1540&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1514&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1539&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1519&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1518&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1538&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC716&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1515&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC4317&format=json%s
+File Not Found ./delays/IC1539.json%s
+File Not Found ./delays/IC1538.json%s
+File Not Found ./delays/IC1540.json%s
+File Not Found ./delays/IC1518.json%s
+File Not Found ./delays/IC1519.json%s
+File Not Found ./delays/IC1514.json%s
+File Not Found ./delays/IC1515.json%s
+java.lang.NullPointerException./delays/IC3417.json%s
+java.lang.NullPointerException./delays/IC3415.json%s
+File Not Found ./delays/IC716.json%s
+File Not Found ./delays/IC4317.json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1539&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1538&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1540&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1518&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1519&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC738&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1514&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1515&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC716&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC4317&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1539&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1538&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1540&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1518&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1519&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1514&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1515&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC716&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC4317&format=json%s
+File Not Found ./delays/IC1539.json%s
+File Not Found ./delays/IC1538.json%s
+File Not Found ./delays/IC1540.json%s
+File Not Found ./delays/IC1518.json%s
+File Not Found ./delays/IC1519.json%s
+File Not Found ./delays/IC1514.json%s
+File Not Found ./delays/IC1515.json%s
+File Not Found ./delays/IC716.json%s
+File Not Found ./delays/IC4317.json%s
+java.net.SocketException: Connection reset%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketException: Connection reset%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketException: Connection reset%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.net.SocketTimeoutException: Read timed out%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1539&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1539&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1519&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1538&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1515&format=json%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1538&format=json%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Invalid argument%s
+java.net.SocketException: Invalid argument%s
+java.net.SocketException: Invalid argument%s
+java.net.SocketException: Invalid argument%s
+java.net.SocketException: Invalid argument%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC716&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1538&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1539&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC4317&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1518&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1519&format=json%s
+java.net.SocketException: Connection reset%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC716&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1515&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC4317&format=json%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1539&format=json%s
+java.net.SocketException: Connection reset%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1538&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1519&format=json%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1540&format=json%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.net.SocketException: Connection reset%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1518&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC716&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC4317&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1515&format=json%s
+java.net.SocketException: Connection reset%s
+File Not Found ./delays/IC1539.json%s
+File Not Found ./delays/IC1538.json%s
+File Not Found ./delays/IC1540.json%s
+File Not Found ./delays/IC1518.json%s
+File Not Found ./delays/IC1519.json%s
+File Not Found ./delays/IC1515.json%s
+File Not Found ./delays/IC716.json%s
+File Not Found ./delays/IC4317.json

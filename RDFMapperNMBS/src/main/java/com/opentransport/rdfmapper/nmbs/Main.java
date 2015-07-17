@@ -31,7 +31,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        while (true) { 
+       
             
                     Thread thread1 = new Thread () {
          public void run () {
@@ -51,7 +51,7 @@ public class Main {
             
         }
 
-         }
+        
     public static void runDemo(){        
         GtfsRealtime.FeedMessage.Builder feedMessage = null;  
         
@@ -109,6 +109,7 @@ public class Main {
         final boolean stoppable = Boolean.parseBoolean(prop.getProperty("stoppable"));
         
         System.out.println("START OF LIVEBOARD FETCH");
+      
         SortedMapper mapper = new SortedMapper();
         
         //final ServerContainer container = new ServerContainer(mapper,"NMBS");
