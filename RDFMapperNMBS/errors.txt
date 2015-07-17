@@ -1,0 +1,16 @@
+%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1534&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC4333&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1514&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.L761&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC1509&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC4311&format=json%s
+java.io.IOException: Server returned HTTP response code: 502 for URL: http://api.irail.be/vehicle/?id=BE.NMBS.IC4312&format=json%s
+java.lang.NullPointerException./delays/L4261.json%s
+File Not Found ./delays/IC1534.json%s
+File Not Found ./delays/IC1509.json%s
+File Not Found ./delays/IC4333.json%s
+File Not Found ./delays/IC1514.json%s
+File Not Found ./delays/L761.json%s
+File Not Found ./delays/IC4312.json%s
+File Not Found ./delays/IC4311.json

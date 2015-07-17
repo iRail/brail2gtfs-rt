@@ -31,11 +31,12 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-        Thread thread1 = new Thread () {
+        while (true) { 
+            
+                    Thread thread1 = new Thread () {
          public void run () {
             // testData("gtfs-rt");
-                    scrapeLiveBoards();
+                  scrapeLiveBoards();
             //        testData("gtfs-rt");              
            }
           };
@@ -47,6 +48,9 @@ public class Main {
           };
         thread1.start();
         thread2.start();
+            
+        }
+
          }
     public static void runDemo(){        
         GtfsRealtime.FeedMessage.Builder feedMessage = null;  

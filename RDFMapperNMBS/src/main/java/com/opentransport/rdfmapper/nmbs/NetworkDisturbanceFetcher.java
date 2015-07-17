@@ -43,6 +43,26 @@ public class NetworkDisturbanceFetcher {
         endPosition = title.indexOf(characterDelimiter); 
        return title.substring(startPosition, endPosition);
     }
+   private boolean isPresent(String word, String sentence)
+    {
+        if(sentence.indexOf(word) >= 0){
+            
+            return true;
+        }else{return false;} 
+            
+    }
+   private  GtfsRealtime.Alert.Cause setCause (String title){
+       
+                       if ( isPresent("Strike", title)) {
+                    return GtfsRealtime.Alert.Cause.STRIKE;                   
+                }
+                if ( isPresent("failure", title)) {
+                    return GtfsRealtime.Alert.Cause.TECHNICAL_PROBLEM;                   
+                }
+       
+       
+       return null;
+}
     
     private  GtfsRealtime.FeedMessage.Builder scrapeDisturbances(){
         GtfsRealtime.FeedMessage.Builder feedMessage =  GtfsRealtime.FeedMessage.newBuilder();        
@@ -56,6 +76,7 @@ public class NetworkDisturbanceFetcher {
         System.out.println("Start Scraping");
         Document doc;
         int i =0;
+        //English Version
         try {
             doc = Jsoup.connect(webSiteURL).timeout(10*1000).get(); 
            //Get all elements with img tag ,
@@ -63,29 +84,26 @@ public class NetworkDisturbanceFetcher {
             for (Element el : disturbances) {
                 GtfsRealtime.FeedEntity.Builder feedEntity = GtfsRealtime.FeedEntity.newBuilder();
                 GtfsRealtime.Alert.Builder alert = GtfsRealtime.Alert.newBuilder();
-                //Entity -> Alert $
-                //Alert -> Time Range
-                //GtfsRealtime.TimeRange.Builder timeRange = GtfsRealtime.TimeRange.newBuilder();             
-          
-                //alert.setCause(GtfsRealtime.Alert.Cause.STRIKE);
                 
                 //Setting the Description 
                 GtfsRealtime.TranslatedString.Builder translatedDescriptionString =GtfsRealtime.TranslatedString.newBuilder();
-              
                 GtfsRealtime.TranslatedString.Translation.Builder translationsDescription = GtfsRealtime.TranslatedString.Translation.newBuilder();
-                            
                 translationsDescription.setText( el.child(1).html());
-                translationsDescription.setLanguage("en");
-                
+                translationsDescription.setLanguage("en");                
                 translatedDescriptionString.addTranslation(0, translationsDescription);
                 alert.setDescriptionText(translatedDescriptionString);
                 //----------
                 //Setting the Header text also known as Title
-                GtfsRealtime.TranslatedString.Builder translatedHeaderString =GtfsRealtime.TranslatedString.newBuilder();
-              
-                GtfsRealtime.TranslatedString.Translation.Builder translationsHeader = GtfsRealtime.TranslatedString.Translation.newBuilder();
-                
+                GtfsRealtime.TranslatedString.Builder translatedHeaderString =GtfsRealtime.TranslatedString.newBuilder();              
+                GtfsRealtime.TranslatedString.Translation.Builder translationsHeader = GtfsRealtime.TranslatedString.Translation.newBuilder();                
                 translationsHeader.setText(reformTitle(el.child(0).html()));
+                System.out.println(reformTitle(el.child(0).html()));
+                
+                
+                alert.setCause(setCause(reformTitle(el.child(0).html())));
+               
+
+                
                 translationsHeader.setLanguage("en");
                 translatedHeaderString.addTranslation(0, translationsHeader);
                 alert.setHeaderText(translatedHeaderString);
@@ -115,7 +133,8 @@ public class NetworkDisturbanceFetcher {
                // alert.setActivePeriod(index, timeRange)
                 
              
-           }     
+           }  
+            
             
            
         } catch (IOException ex) {
@@ -123,6 +142,114 @@ public class NetworkDisturbanceFetcher {
              errorWriter.writeError(ex.toString());
         } 
         return feedMessage;
+    
+    }
+    private void multipleLanguage(){
+    String webSiteURLEN = "http://www.belgianrail.be/jpm/sncb-nmbs-routeplanner/help.exe/en?tpl=rss_feed";
+    String webSiteURLNL = "http://www.belgianrail.be/jpm/sncb-nmbs-routeplanner/help.exe/nn?tpl=rss_feed";
+    String webSiteURLFR = "http://www.belgianrail.be/jpm/sncb-nmbs-routeplanner/help.exe/fr?tpl=rss_feed";
+    
+    
+    GtfsRealtime.FeedMessage.Builder feedMessage =  GtfsRealtime.FeedMessage.newBuilder();        
+    GtfsRealtime.FeedHeader.Builder feedHeader = GtfsRealtime.FeedHeader.newBuilder(); 
+    feedHeader.setGtfsRealtimeVersion("1.0");
+    feedHeader.setIncrementality(GtfsRealtime.FeedHeader.Incrementality.FULL_DATASET);
+     //Unix Style
+    feedHeader.setTimestamp(System.currentTimeMillis() / 1000L);
+    feedMessage.setHeader(feedHeader);
+        
+    System.out.println("Start Scraping");
+   
+    int i =0;
+    
+        try {
+            
+        } catch (Exception e) {
+        }
+    
+    
+    }
+    private GtfsRealtime.Alert.Builder returnAlert (String webSiteURLLang, String language){
+       try {
+           Document doc;        
+           int i =0;
+           doc = Jsoup.connect(webSiteURLLang).timeout(10*1000).get();
+           
+           //Get all elements with img tag ,
+           Elements disturbances = doc.getElementsByTag("item");
+            for (Element el : disturbances) {
+                GtfsRealtime.FeedEntity.Builder feedEntity = GtfsRealtime.FeedEntity.newBuilder();
+                GtfsRealtime.Alert.Builder alert = GtfsRealtime.Alert.newBuilder();
+                //Entity -> Alert $
+                //Alert -> Time Range
+                //GtfsRealtime.TimeRange.Builder timeRange = GtfsRealtime.TimeRange.newBuilder();             
+          
+                //alert.setCause(GtfsRealtime.Alert.Cause.STRIKE);
+                
+                //Setting the Description 
+                GtfsRealtime.TranslatedString.Builder translatedDescriptionString =GtfsRealtime.TranslatedString.newBuilder();
+              
+                GtfsRealtime.TranslatedString.Translation.Builder translationsDescription = GtfsRealtime.TranslatedString.Translation.newBuilder();
+                            
+                translationsDescription.setText( el.child(1).html());
+                translationsDescription.setLanguage(language);
+                
+                translatedDescriptionString.addTranslation(0, translationsDescription);
+                alert.setDescriptionText(translatedDescriptionString);
+                //----------
+                //Setting the Header text also known as Title
+                GtfsRealtime.TranslatedString.Builder translatedHeaderString =GtfsRealtime.TranslatedString.newBuilder();
+              
+                GtfsRealtime.TranslatedString.Translation.Builder translationsHeader = GtfsRealtime.TranslatedString.Translation.newBuilder();
+                
+                translationsHeader.setText(reformTitle(el.child(0).html()));
+                System.out.println(reformTitle(el.child(0).html()));
+
+
+                
+                translationsHeader.setLanguage(language);
+                translatedHeaderString.addTranslation(0, translationsHeader);
+                alert.setHeaderText(translatedHeaderString);
+                //-----------
+                //setting the url 
+                GtfsRealtime.TranslatedString.Builder translatedUrlString =GtfsRealtime.TranslatedString.newBuilder();
+              
+                GtfsRealtime.TranslatedString.Translation.Builder translationUrl = GtfsRealtime.TranslatedString.Translation.newBuilder();
+                
+                translationUrl.setText(el.child(2).html());
+                translationUrl.setLanguage(language);
+                translatedUrlString.addTranslation(0, translationsHeader);
+                alert.setUrl(translatedUrlString);
+                //-----------              
+                
+                String description =  el.child(1).html();   
+                String pubDate = el.child(3).html(); 
+               
+                feedEntity.setAlert(alert);
+                feedEntity.setId( pubDate +i );
+                             
+                feedMessage.addEntity(i, feedEntity);
+                i++;
+                
+               // timeRange.setStart();
+                
+               // alert.setActivePeriod(index, timeRange)
+                
+             
+           }     
+           
+           
+           
+           return null;
+       } catch (IOException ex) {
+           Logger.getLogger(NetworkDisturbanceFetcher.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       
+       
+       
+       
+       return null;
+    
     
     }
     private void writeDisturbanceFile(){ 

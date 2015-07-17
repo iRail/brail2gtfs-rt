@@ -137,10 +137,8 @@ public class ScrapeTrip {
                 
                     
                 } catch (Exception e) {
-                    errorWriter.writeError(e.toString());
+                    errorWriter.writeError(e.toString() + fileName);
                     System.out.println(fileName);
-                    System.out.println("Null Pointer ? ");
-                    System.out.println(stop);
                     System.out.println(e);
                 }
 
