@@ -1,0 +1,11 @@
+
+
+
+
+
+
+
+
+
+{"version":"1.1","timestamp":"1437149135","vehicle":"BE.NMBS.IC817","vehicleinfo":{"locationX":"3.216726","locationY":"51.197226","name":"BE.NMBS.IC817"},"stops":{"number":"8","stop":[{"id":"0","station":"Brugge","stationinfo":{"id":"BE.NMBS.008891009","locationX":"3.216726","locationY":"51.197226","@id":"http://irail.be/stations/NMBS/008891009","name":"Brugge","standardname":"Brugge"},"time":"1437147480","delay":"0"},{"id":"1","station":"Zedelgem","stationinfo":{"id":"BE.NMBS.008891264","locationX":"3.16414","locationY":"51.127047","@id":"http://irail.be/stations/NMBS/008891264","name":"Zedelgem","standardname":"Zedelgem"},"time":"1437147960","delay":"0"},{"id":"2","station":"Torhout","stationinfo":{"id":"BE.NMBS.008891314","locationX":"3.105871","locationY":"51.064707","@id":"http://irail.be/stations/NMBS/008891314","name":"Torhout","standardname":"Torhout"},"time":"1437148320","delay":"0"},{"id":"3","station":"Lichtervelde","stationinfo":{"id":"BE.NMBS.008892205","locationX":"3.127212","locationY":"51.025163","@id":"http://irail.be/stations/NMBS/008892205","name":"Lichtervelde","standardname":"Lichtervelde"},"time":"1437148620","delay":"0"},{"id":"4","station":"Roeselare","stationinfo":{"id":"BE.NMBS.008896800","locationX":"3.130412","locationY":"50.949025","@id":"http://irail.be/stations/NMBS/008896800","name":"Roeselare","standardname":"Roeselare"},"time":"1437149040","delay":"180"},{"id":"5","station":"Izegem","stationinfo":{"id":"BE.NMBS.008896909","locationX":"3.212088","locationY":"50.921149","@id":"http://irail.be/stations/NMBS/008896909","name":"Izegem","standardname":"Izegem"},"time":"1437149400","delay":"180"},{"id":"6","station":"Ingelmunster","stationinfo":{"id":"BE.NMBS.008896925","locationX":"3.255416","locationY":"50.914326","@id":"http://irail.be/stations/NMBS/008896925","name":"Ingelmunster","standardname":"Ingelmunster"},"time":"1437149760","delay":"120"},{"id":"7","station":"Kortrijk","stationinfo":{"id":"BE.NMBS.008896008","locationX":"3.264549","locationY":"50.824506","@id":"http://irail.be/stations/NMBS/008896008","name":"Kortrijk","standardname":"Kortrijk"},"time":"1437150300","delay":"60"}]}}
+

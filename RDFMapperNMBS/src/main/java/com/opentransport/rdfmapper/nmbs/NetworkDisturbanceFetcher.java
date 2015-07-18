@@ -258,7 +258,7 @@ public class NetworkDisturbanceFetcher {
        //Write the new Disturbance back to disk
         try {
             
-                 FileOutputStream output = new FileOutputStream("gtfs-rt-disturbance");
+                 FileOutputStream output = new FileOutputStream("service_alerts");
       
                   feedMessage.build().writeTo(output);
                   output.close();

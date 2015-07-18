@@ -1,0 +1,13 @@
+
+
+
+
+
+
+
+
+
+
+
+{"version":"1.1","timestamp":"1437223064","vehicle":"BE.NMBS.L4764","vehicleinfo":{"locationX":"4.438567","locationY":"50.40471","name":"BE.NMBS.L4764"},"stops":{"number":"10","stop":[{"id":"0","station":"Charleroi-Zuid","stationinfo":{"id":"BE.NMBS.008872009","locationX":"4.438567","locationY":"50.40471","@id":"http://irail.be/stations/NMBS/008872009","name":"Charleroi-Zuid","standardname":"Charleroi-Sud"},"time":"1437221640","delay":"0"},{"id":"1","station":"Marchienne-Zone","stationinfo":{"id":"BE.NMBS.008871852","locationX":"4.388767","locationY":"50.397465","@id":"http://irail.be/stations/NMBS/008871852","name":"Marchienne-Zone","standardname":"Marchienne-Zone"},"time":"1437221940","delay":"0"},{"id":"2","station":"Landelies","stationinfo":{"id":"BE.NMBS.008871837","locationX":"4.350976","locationY":"50.377311","@id":"http://irail.be/stations/NMBS/008871837","name":"Landelies","standardname":"Landelies"},"time":"1437222180","delay":"0"},{"id":"3","station":"Thuin","stationinfo":{"id":"BE.NMBS.008871811","locationX":"4.288906","locationY":"50.342738","@id":"http://irail.be/stations/NMBS/008871811","name":"Thuin","standardname":"Thuin"},"time":"1437222540","delay":"0"},{"id":"4","station":"Lobbes","stationinfo":{"id":"BE.NMBS.008871712","locationX":"4.260958","locationY":"50.346469","@id":"http://irail.be/stations/NMBS/008871712","name":"Lobbes","standardname":"Lobbes"},"time":"1437222840","delay":"0"},{"id":"5","station":"Fontaine-Valmont","stationinfo":{"id":"BE.NMBS.008871688","locationX":"4.212785","locationY":"50.321164","@id":"http://irail.be/stations/NMBS/008871688","name":"Fontaine-Valmont","standardname":"Fontaine-Valmont"},"time":"1437223320","delay":"120"},{"id":"6","station":"Labuissière","stationinfo":{"id":"BE.NMBS.008871670","locationX":"4.186833","locationY":"50.316328","@id":"http://irail.be/stations/NMBS/008871670","name":"Labuissière","standardname":"Labuissière"},"time":"1437223500","delay":"120"},{"id":"7","station":"Solre-sur-Sambre","stationinfo":{"id":"BE.NMBS.008871662","locationX":"4.158427","locationY":"50.312642","@id":"http://irail.be/stations/NMBS/008871662","name":"Solre-sur-Sambre","standardname":"Solre-sur-Sambre"},"time":"1437223680","delay":"60"},{"id":"8","station":"Erquelinnes-Village","stationinfo":{"id":"BE.NMBS.008871647","locationX":"4.132314","locationY":"50.310179","@id":"http://irail.be/stations/NMBS/008871647","name":"Erquelinnes-Village","standardname":"Erquelinnes-Village"},"time":"1437223860","delay":"60"},{"id":"9","station":"Erquelinnes","stationinfo":{"id":"BE.NMBS.008871605","locationX":"4.113562","locationY":"50.304192","@id":"http://irail.be/stations/NMBS/008871605","name":"Erquelinnes","standardname":"Erquelinnes"},"time":"1437223980","delay":"60"}]}}
+

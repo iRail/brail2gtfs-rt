@@ -1,0 +1,11 @@
+
+
+
+
+
+
+
+
+
+{"version":"1.1","timestamp":"1437224322","vehicle":"BE.NMBS.L4685","vehicleinfo":{"locationX":"3.942542","locationY":"50.453854","name":"BE.NMBS.L4685"},"stops":{"number":"8","stop":[{"id":"0","station":"Bergen","stationinfo":{"id":"BE.NMBS.008881000","locationX":"3.942542","locationY":"50.453854","@id":"http://irail.be/stations/NMBS/008881000","name":"Bergen","standardname":"Mons"},"time":"1437224040","delay":"0"},{"id":"1","station":"Jemappes","stationinfo":{"id":"BE.NMBS.008884566","locationX":"3.885587","locationY":"50.452577","@id":"http://irail.be/stations/NMBS/008884566","name":"Jemappes","standardname":"Jemappes"},"time":"1437224340","delay":"60"},{"id":"2","station":"Quaregnon","stationinfo":{"id":"BE.NMBS.008884541","locationX":"3.856543","locationY":"50.449827","@id":"http://irail.be/stations/NMBS/008884541","name":"Quaregnon","standardname":"Quaregnon"},"time":"1437224580","delay":"0"},{"id":"3","station":"Saint-Ghislain","stationinfo":{"id":"BE.NMBS.008884004","locationX":"3.820253","locationY":"50.44286","@id":"http://irail.be/stations/NMBS/008884004","name":"Saint-Ghislain","standardname":"Saint-Ghislain"},"time":"1437224880","delay":"0"},{"id":"4","station":"Boussu","stationinfo":{"id":"BE.NMBS.008884319","locationX":"3.797025","locationY":"50.436388","@id":"http://irail.be/stations/NMBS/008884319","name":"Boussu","standardname":"Boussu"},"time":"1437225180","delay":"0"},{"id":"5","station":"Hainin","stationinfo":{"id":"BE.NMBS.008884327","locationX":"3.766893","locationY":"50.428019","@id":"http://irail.be/stations/NMBS/008884327","name":"Hainin","standardname":"Hainin"},"time":"1437225360","delay":"0"},{"id":"6","station":"Thulin","stationinfo":{"id":"BE.NMBS.008884350","locationX":"3.744708","locationY":"50.423335","@id":"http://irail.be/stations/NMBS/008884350","name":"Thulin","standardname":"Thulin"},"time":"1437225540","delay":"0"},{"id":"7","station":"Quievrain","stationinfo":{"id":"BE.NMBS.008884335","locationX":"3.68608","locationY":"50.410103","@id":"http://irail.be/stations/NMBS/008884335","name":"Quievrain","standardname":"Quievrain"},"time":"1437225780","delay":"0"}]}}
+

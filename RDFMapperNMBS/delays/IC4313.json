@@ -1,0 +1,14 @@
+
+
+
+
+
+
+
+
+
+
+
+
+{"version":"1.1","timestamp":"1437222463","vehicle":"BE.NMBS.IC4313","vehicleinfo":{"locationX":"4.421101","locationY":"51.2172","name":"BE.NMBS.IC4313"},"stops":{"number":"11","stop":[{"id":"0","station":"Antwerpen-Centraal","stationinfo":{"id":"BE.NMBS.008821006","locationX":"4.421101","locationY":"51.2172","@id":"http://irail.be/stations/NMBS/008821006","name":"Antwerpen-Centraal","standardname":"Antwerpen-Centraal"},"time":"1437217740","delay":"0"},{"id":"1","station":"Antwerpen-Berchem","stationinfo":{"id":"BE.NMBS.008821121","locationX":"4.432221","locationY":"51.19923","@id":"http://irail.be/stations/NMBS/008821121","name":"Antwerpen-Berchem","standardname":"Antwerpen-Berchem"},"time":"1437217980","delay":"0"},{"id":"2","station":"Lier","stationinfo":{"id":"BE.NMBS.008821600","locationX":"4.560614","locationY":"51.135758","@id":"http://irail.be/stations/NMBS/008821600","name":"Lier","standardname":"Lier"},"time":"1437218700","delay":"0"},{"id":"3","station":"Herentals","stationinfo":{"id":"BE.NMBS.008821717","locationX":"4.829535","locationY":"51.181513","@id":"http://irail.be/stations/NMBS/008821717","name":"Herentals","standardname":"Herentals"},"time":"1437219600","delay":"0"},{"id":"4","station":"Olen","stationinfo":{"id":"BE.NMBS.008832458","locationX":"4.847585","locationY":"51.188057","@id":"http://irail.be/stations/NMBS/008832458","name":"Olen","standardname":"Olen"},"time":"1437220080","delay":"0"},{"id":"5","station":"Geel","stationinfo":{"id":"BE.NMBS.008832433","locationX":"4.988608","locationY":"51.168955","@id":"http://irail.be/stations/NMBS/008832433","name":"Geel","standardname":"Geel"},"time":"1437220380","delay":"0"},{"id":"6","station":"Mol","stationinfo":{"id":"BE.NMBS.008832409","locationX":"5.116336","locationY":"51.19105","@id":"http://irail.be/stations/NMBS/008832409","name":"Mol","standardname":"Mol"},"time":"1437220920","delay":"0"},{"id":"7","station":"Lommel","stationinfo":{"id":"BE.NMBS.008832565","locationX":"5.312031","locationY":"51.211564","@id":"http://irail.be/stations/NMBS/008832565","name":"Lommel","standardname":"Lommel"},"time":"1437222000","delay":"0"},{"id":"8","station":"Overpelt","stationinfo":{"id":"BE.NMBS.008832573","locationX":"5.422751","locationY":"51.215618","@id":"http://irail.be/stations/NMBS/008832573","name":"Overpelt","standardname":"Overpelt"},"time":"1437222360","delay":"60"},{"id":"9","station":"Neerpelt","stationinfo":{"id":"BE.NMBS.008832615","locationX":"5.43717","locationY":"51.222369","@id":"http://irail.be/stations/NMBS/008832615","name":"Neerpelt","standardname":"Neerpelt"},"time":"1437222540","delay":"60"},{"id":"10","station":"Hamont","stationinfo":{"id":"BE.NMBS.008832664","locationX":"5.543279","locationY":"51.246424","@id":"http://irail.be/stations/NMBS/008832664","name":"Hamont","standardname":"Hamont"},"time":"1437223140","delay":"0"}]}}
+

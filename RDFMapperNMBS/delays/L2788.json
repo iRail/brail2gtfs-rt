@@ -1,0 +1,14 @@
+
+
+
+
+
+
+
+
+
+
+
+
+{"version":"1.1","timestamp":"1437149147","vehicle":"BE.NMBS.L2788","vehicleinfo":{"locationX":"4.142966","locationY":"51.171472","name":"BE.NMBS.L2788"},"stops":{"number":"11","stop":[{"id":"0","station":"Sint-Niklaas","stationinfo":{"id":"BE.NMBS.008894508","locationX":"4.142966","locationY":"51.171472","@id":"http://irail.be/stations/NMBS/008894508","name":"Sint-Niklaas","standardname":"Sint-Niklaas"},"time":"1437147720","delay":"0"},{"id":"1","station":"Temse","stationinfo":{"id":"BE.NMBS.008894672","locationX":"4.221352","locationY":"51.126085","@id":"http://irail.be/stations/NMBS/008894672","name":"Temse","standardname":"Temse"},"time":"1437148200","delay":"0"},{"id":"2","station":"Bornem","stationinfo":{"id":"BE.NMBS.008822772","locationX":"4.240526","locationY":"51.099225","@id":"http://irail.be/stations/NMBS/008822772","name":"Bornem","standardname":"Bornem"},"time":"1437148500","delay":"0"},{"id":"3","station":"Puurs","stationinfo":{"id":"BE.NMBS.008822715","locationX":"4.282703","locationY":"51.07722","@id":"http://irail.be/stations/NMBS/008822715","name":"Puurs","standardname":"Puurs"},"time":"1437148800","delay":"0"},{"id":"4","station":"Willebroek","stationinfo":{"id":"BE.NMBS.008822608","locationX":"4.356019","locationY":"51.066343","@id":"http://irail.be/stations/NMBS/008822608","name":"Willebroek","standardname":"Willebroek"},"time":"1437149160","delay":"180"},{"id":"5","station":"Mechelen","stationinfo":{"id":"BE.NMBS.008822004","locationX":"4.482785","locationY":"51.017648","@id":"http://irail.be/stations/NMBS/008822004","name":"Mechelen","standardname":"Mechelen"},"time":"1437149940","delay":"120"},{"id":"6","station":"Boortmeerbeek","stationinfo":{"id":"BE.NMBS.008822475","locationX":"4.5739","locationY":"50.981853","@id":"http://irail.be/stations/NMBS/008822475","name":"Boortmeerbeek","standardname":"Boortmeerbeek"},"time":"1437150540","delay":"0"},{"id":"7","station":"Haacht","stationinfo":{"id":"BE.NMBS.008822517","locationX":"4.613309","locationY":"50.966428","@id":"http://irail.be/stations/NMBS/008822517","name":"Haacht","standardname":"Haacht"},"time":"1437150720","delay":"0"},{"id":"8","station":"Wespelaar-Tildonk","stationinfo":{"id":"BE.NMBS.008822525","locationX":"4.638011","locationY":"50.958544","@id":"http://irail.be/stations/NMBS/008822525","name":"Wespelaar-Tildonk","standardname":"Wespelaar-Tildonk"},"time":"1437150960","delay":"0"},{"id":"9","station":"Wijgmaal","stationinfo":{"id":"BE.NMBS.008833175","locationX":"4.701475","locationY":"50.92274","@id":"http://irail.be/stations/NMBS/008833175","name":"Wijgmaal","standardname":"Wijgmaal"},"time":"1437151260","delay":"0"},{"id":"10","station":"Leuven","stationinfo":{"id":"BE.NMBS.008833001","locationX":"4.715866","locationY":"50.88228","@id":"http://irail.be/stations/NMBS/008833001","name":"Leuven","standardname":"Leuven"},"time":"1437151620","delay":"0"}]}}
+

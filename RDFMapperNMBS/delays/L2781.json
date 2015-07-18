@@ -1,0 +1,9 @@
+
+
+
+
+
+
+
+{"version":"1.1","timestamp":"1437210379","vehicle":"BE.NMBS.L2781","vehicleinfo":{"locationX":"4.142966","locationY":"51.171472","name":"BE.NMBS.L2781"},"stops":{"number":"6","stop":[{"id":"0","station":"Sint-Niklaas","stationinfo":{"id":"BE.NMBS.008894508","locationX":"4.142966","locationY":"51.171472","@id":"http://irail.be/stations/NMBS/008894508","name":"Sint-Niklaas","standardname":"Sint-Niklaas"},"time":"1437208920","delay":"0"},{"id":"1","station":"Temse","stationinfo":{"id":"BE.NMBS.008894672","locationX":"4.221352","locationY":"51.126085","@id":"http://irail.be/stations/NMBS/008894672","name":"Temse","standardname":"Temse"},"time":"1437209340","delay":"0"},{"id":"2","station":"Bornem","stationinfo":{"id":"BE.NMBS.008822772","locationX":"4.240526","locationY":"51.099225","@id":"http://irail.be/stations/NMBS/008822772","name":"Bornem","standardname":"Bornem"},"time":"1437209640","delay":"0"},{"id":"3","station":"Puurs","stationinfo":{"id":"BE.NMBS.008822715","locationX":"4.282703","locationY":"51.07722","@id":"http://irail.be/stations/NMBS/008822715","name":"Puurs","standardname":"Puurs"},"time":"1437209940","delay":"0"},{"id":"4","station":"Willebroek","stationinfo":{"id":"BE.NMBS.008822608","locationX":"4.356019","locationY":"51.066343","@id":"http://irail.be/stations/NMBS/008822608","name":"Willebroek","standardname":"Willebroek"},"time":"1437210360","delay":"60"},{"id":"5","station":"Mechelen","stationinfo":{"id":"BE.NMBS.008822004","locationX":"4.482785","locationY":"51.017648","@id":"http://irail.be/stations/NMBS/008822004","name":"Mechelen","standardname":"Mechelen"},"time":"1437211140","delay":"0"}]}}
+

@@ -69,7 +69,7 @@ public class ScrapeTrip {
     
     
     
-    private   GtfsRealtime.FeedEntity.Builder  scrapeJson(int identifier, String fileName) {   
+    private   GtfsRealtime.FeedEntity.Builder  scrapeJson(int identifier, String fileName,boolean cancelled) {   
         
 
         
@@ -115,6 +115,11 @@ public class ScrapeTrip {
             tripDescription.setStartTime(formattedDepartureHour.toString());
             //YYYYMMDD format
             tripDescription.setStartDate(formattedDepartureDate.toString());
+            if (cancelled) {
+                tripDescription.setScheduleRelationship(GtfsRealtime.TripDescriptor.ScheduleRelationship.CANCELED);
+              
+            }
+       
            
             
             //Get Information about stops
@@ -221,6 +226,7 @@ public class ScrapeTrip {
     }
 
 private void requestJsons(Map trainDelays){
+
             String trainName ;       
         Iterator iterator = trainDelays.entrySet().iterator();
         
@@ -253,29 +259,42 @@ private void requestJsons(Map trainDelays){
         String trainName ;       
         Iterator iterator = trainDelays.entrySet().iterator();
         int i = 0;
+        boolean cancelled = false; 
         requestJsons(trainDelays);
         
                   while (iterator.hasNext()) {
                         Map.Entry mapEntry = (Map.Entry) iterator.next();           
-                        trainName =  returnCorrectTrainFormat((String)mapEntry.getKey());        
+                        trainName =  returnCorrectTrainFormat((String)mapEntry.getKey());    
+                        String delay =(String) mapEntry.getValue();
+                         if (!delay.equals("Afgeschaft")) {
+                             cancelled = false;
+                             
+                         }else if(delay.equals("Afgeschaft")){
+                             cancelled = true; 
+                         }
+                        
+                            
+                            url ="http://api.irail.be/vehicle/?id=BE.NMBS."+trainName+"&format=json";                 
+                           // downloadJson(url,trainName);
+                           //Parse the Json and add it to the Feed 
+                            File f = new File("./delays/" +trainName+".json");
+                            if(f.exists() && !f.isDirectory()) {  
+                            GtfsRealtime.FeedEntity.Builder feedEntity =scrapeJson(i,"./delays/" +trainName+".json",cancelled);
+                            feedMessage.addEntity(i, feedEntity);  
+                            i++;
+                            }else{                         
+                                 errorWriter.writeError("File Not Found " + "./delays/" +trainName+".json" );
+                            }
+                          
+                        
                              
 
-                        url ="http://api.irail.be/vehicle/?id=BE.NMBS."+trainName+"&format=json";                 
-                       // downloadJson(url,trainName);
-                       //Parse the Json and add it to the Feed 
-                        File f = new File("./delays/" +trainName+".json");
-                        if(f.exists() && !f.isDirectory()) {  
-                        GtfsRealtime.FeedEntity.Builder feedEntity =scrapeJson(i,"./delays/" +trainName+".json");
-                        feedMessage.addEntity(i, feedEntity);  
-                        i++;
-                        }else{                         
-                             errorWriter.writeError("File Not Found " + "./delays/" +trainName+".json" );
-                        }
+
                  
 
 	}
         //Write File  
-            try {
+           try {
               FileOutputStream output = new FileOutputStream("gtfs-rt");
               feedMessage.build().writeTo(output);
               output.close();
@@ -288,7 +307,7 @@ private void requestJsons(Map trainDelays){
     }
     public void testOutput(){
             try {
-            GtfsRealtimeExample testenData =  new GtfsRealtimeExample("gtfs-rt");
+            GtfsRealtimeExample testenData =  new GtfsRealtimeExample("trip_updates");
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             errorWriter.writeError(ex.toString());

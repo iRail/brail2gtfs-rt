@@ -1,0 +1,12 @@
+
+
+
+
+
+
+
+
+
+
+{"version":"1.1","timestamp":"1437226151","vehicle":"BE.NMBS.IC4235","vehicleinfo":{"locationX":"4.421101","locationY":"51.2172","name":"BE.NMBS.IC4235"},"stops":{"number":"9","stop":[{"id":"0","station":"Antwerpen-Centraal","stationinfo":{"id":"BE.NMBS.008821006","locationX":"4.421101","locationY":"51.2172","@id":"http://irail.be/stations/NMBS/008821006","name":"Antwerpen-Centraal","standardname":"Antwerpen-Centraal"},"time":"1437223920","delay":"0"},{"id":"1","station":"Antwerpen-Berchem","stationinfo":{"id":"BE.NMBS.008821121","locationX":"4.432221","locationY":"51.19923","@id":"http://irail.be/stations/NMBS/008821121","name":"Antwerpen-Berchem","standardname":"Antwerpen-Berchem"},"time":"1437224160","delay":"0"},{"id":"2","station":"Lier","stationinfo":{"id":"BE.NMBS.008821600","locationX":"4.560614","locationY":"51.135758","@id":"http://irail.be/stations/NMBS/008821600","name":"Lier","standardname":"Lier"},"time":"1437224880","delay":"0"},{"id":"3","station":"Kessel","stationinfo":{"id":"BE.NMBS.008821659","locationX":"4.618459","locationY":"51.151057","@id":"http://irail.be/stations/NMBS/008821659","name":"Kessel","standardname":"Kessel"},"time":"1437225300","delay":"0"},{"id":"4","station":"Nijlen","stationinfo":{"id":"BE.NMBS.008821667","locationX":"4.666588","locationY":"51.15984","@id":"http://irail.be/stations/NMBS/008821667","name":"Nijlen","standardname":"Nijlen"},"time":"1437225480","delay":"0"},{"id":"5","station":"Bouwel","stationinfo":{"id":"BE.NMBS.008821725","locationX":"4.746511","locationY":"51.165764","@id":"http://irail.be/stations/NMBS/008821725","name":"Bouwel","standardname":"Bouwel"},"time":"1437225840","delay":"360"},{"id":"6","station":"Herentals","stationinfo":{"id":"BE.NMBS.008821717","locationX":"4.829535","locationY":"51.181513","@id":"http://irail.be/stations/NMBS/008821717","name":"Herentals","standardname":"Herentals"},"time":"1437226200","delay":"300"},{"id":"7","station":"Tielen","stationinfo":{"id":"BE.NMBS.008821964","locationX":"4.893089","locationY":"51.241021","@id":"http://irail.be/stations/NMBS/008821964","name":"Tielen","standardname":"Tielen"},"time":"1437226800","delay":"120"},{"id":"8","station":"Turnhout","stationinfo":{"id":"BE.NMBS.008821907","locationX":"4.937415","locationY":"51.322032","@id":"http://irail.be/stations/NMBS/008821907","name":"Turnhout","standardname":"Turnhout"},"time":"1437227340","delay":"0"}]}}
+

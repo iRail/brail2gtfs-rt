@@ -35,15 +35,15 @@ public class Main {
             
                     Thread thread1 = new Thread () {
          public void run () {
-            // testData("gtfs-rt");
+            // testData("trip_updates");
                   scrapeLiveBoards();
-            //        testData("gtfs-rt");              
+            //        testData("trip_updates");              
            }
           };
         Thread thread2 = new Thread () {
             public void run () {
                      NetworkDisturbanceFetcher ndf = new NetworkDisturbanceFetcher();
-             //         testData("gtfs-rt-disturbance");
+             //         testData("service_alerts");
             }
           };
         thread1.start();
@@ -63,7 +63,7 @@ public class Main {
        //Write the new TripUpdate back to disk
         try {
             
-                 FileOutputStream output = new FileOutputStream("gtfs-rt");
+                 FileOutputStream output = new FileOutputStream("trip_updates");
       
                   feedMessage.build().writeTo(output);
                   output.close();

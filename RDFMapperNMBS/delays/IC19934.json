@@ -1,0 +1,9 @@
+
+
+
+
+
+
+
+{"version":"1.1","timestamp":"1437217137","vehicle":"BE.NMBS.IC19934","vehicleinfo":{"locationX":"3.396942","locationY":"50.613134","name":"BE.NMBS.IC19934"},"stops":{"number":"6","stop":[{"id":"0","station":"Doornik","stationinfo":{"id":"BE.NMBS.008885001","locationX":"3.396942","locationY":"50.613134","@id":"http://irail.be/stations/NMBS/008885001","name":"Doornik","standardname":"Tournai"},"time":"1437215760","delay":"0"},{"id":"1","station":"Froyennes","stationinfo":{"id":"BE.NMBS.008885068","locationX":"3.354837","locationY":"50.62989","@id":"http://irail.be/stations/NMBS/008885068","name":"Froyennes","standardname":"Froyennes"},"time":"1437216000","delay":"0"},{"id":"2","station":"Baisieux (f)","stationinfo":{"id":"BE.NMBS.008728687","locationX":"3.2378999","locationY":"50.610039","@id":"http://irail.be/stations/NMBS/008728687","name":"Baisieux (f)","standardname":"Baisieux (f)"},"time":"1437216360","delay":"0"},{"id":"3","station":"Ascq (f)","stationinfo":{"id":"BE.NMBS.008728686","locationX":"3.166666","locationY":"50.616666","@id":"http://irail.be/stations/NMBS/008728686","name":"Ascq (f)","standardname":"Ascq (f)"},"time":"1437216780","delay":"0"},{"id":"4","station":"Pont De Bois (f)","stationinfo":{"id":"BE.NMBS.008728683","locationX":"3.1275","locationY":"50.624164","@id":"http://irail.be/stations/NMBS/008728683","name":"Pont De Bois (f)","standardname":"Pont De Bois (f)"},"time":"1437216960","delay":"120"},{"id":"5","station":"Rijsel-Vlaanderen (f)","stationinfo":{"id":"BE.NMBS.008728600","locationX":"3.066669","locationY":"50.633333","@id":"http://irail.be/stations/NMBS/008728600","name":"Rijsel-Vlaanderen (f)","standardname":"Lille Flandres (f)"},"time":"1437217440","delay":"120"}]}}
+

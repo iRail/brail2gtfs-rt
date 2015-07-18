@@ -1,0 +1,14 @@
+
+
+
+
+
+
+
+
+
+
+
+
+{"version":"1.1","timestamp":"1437151528","vehicle":"BE.NMBS.L6288","vehicleinfo":{"locationX":"4.86222","locationY":"50.468794","name":"BE.NMBS.L6288"},"stops":{"number":"11","stop":[{"id":"0","station":"Namen","stationinfo":{"id":"BE.NMBS.008863008","locationX":"4.86222","locationY":"50.468794","@id":"http://irail.be/stations/NMBS/008863008","name":"Namen","standardname":"Namur"},"time":"1437149100","delay":"0"},{"id":"1","station":"Rhisnes","stationinfo":{"id":"BE.NMBS.008861440","locationX":"4.801866","locationY":"50.499348","@id":"http://irail.be/stations/NMBS/008861440","name":"Rhisnes","standardname":"Rhisnes"},"time":"1437149460","delay":"0"},{"id":"2","station":"Saint-Denis-Bovesse","stationinfo":{"id":"BE.NMBS.008861432","locationX":"4.767788","locationY":"50.5213","@id":"http://irail.be/stations/NMBS/008861432","name":"Saint-Denis-Bovesse","standardname":"Saint-Denis-Bovesse"},"time":"1437149640","delay":"0"},{"id":"3","station":"Beuzet","stationinfo":{"id":"BE.NMBS.008861424","locationX":"4.748533","locationY":"50.534208","@id":"http://irail.be/stations/NMBS/008861424","name":"Beuzet","standardname":"Beuzet"},"time":"1437149820","delay":"0"},{"id":"4","station":"Lonzée","stationinfo":{"id":"BE.NMBS.008861416","locationX":"4.7201","locationY":"50.551935","@id":"http://irail.be/stations/NMBS/008861416","name":"Lonzée","standardname":"Lonzée"},"time":"1437150000","delay":"0"},{"id":"5","station":"Gembloux","stationinfo":{"id":"BE.NMBS.008861200","locationX":"4.691497","locationY":"50.570489","@id":"http://irail.be/stations/NMBS/008861200","name":"Gembloux","standardname":"Gembloux"},"time":"1437150180","delay":"0"},{"id":"6","station":"Ernage","stationinfo":{"id":"BE.NMBS.008861515","locationX":"4.668538","locationY":"50.590823","@id":"http://irail.be/stations/NMBS/008861515","name":"Ernage","standardname":"Ernage"},"time":"1437151200","delay":"0"},{"id":"7","station":"Chastre","stationinfo":{"id":"BE.NMBS.008861523","locationX":"4.648888","locationY":"50.608819","@id":"http://irail.be/stations/NMBS/008861523","name":"Chastre","standardname":"Chastre"},"time":"1437151440","delay":"60"},{"id":"8","station":"Blanmont","stationinfo":{"id":"BE.NMBS.008861531","locationX":"4.636393","locationY":"50.619453","@id":"http://irail.be/stations/NMBS/008861531","name":"Blanmont","standardname":"Blanmont"},"time":"1437151560","delay":"60"},{"id":"9","station":"Mont-Saint-Guibert","stationinfo":{"id":"BE.NMBS.008861549","locationX":"4.613884","locationY":"50.637611","@id":"http://irail.be/stations/NMBS/008861549","name":"Mont-Saint-Guibert","standardname":"Mont-Saint-Guibert"},"time":"1437151740","delay":"60"},{"id":"10","station":"Ottignies","stationinfo":{"id":"BE.NMBS.008811601","locationX":"4.56936","locationY":"50.673667","@id":"http://irail.be/stations/NMBS/008811601","name":"Ottignies","standardname":"Ottignies"},"time":"1437152160","delay":"0"}]}}
+

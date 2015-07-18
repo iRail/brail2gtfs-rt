@@ -1,0 +1,11 @@
+
+
+
+
+
+
+
+
+
+{"version":"1.1","timestamp":"1437226151","vehicle":"BE.NMBS.L5185","vehicleinfo":{"locationX":"5.566695","locationY":"50.62455","name":"BE.NMBS.L5185"},"stops":{"number":"8","stop":[{"id":"0","station":"Luik-Guillemins","stationinfo":{"id":"BE.NMBS.008841004","locationX":"5.566695","locationY":"50.62455","@id":"http://irail.be/stations/NMBS/008841004","name":"Luik-Guillemins","standardname":"Liège-Guillemins"},"time":"1437224880","delay":"0"},{"id":"1","station":"Ans","stationinfo":{"id":"BE.NMBS.008841202","locationX":"5.509704","locationY":"50.661208","@id":"http://irail.be/stations/NMBS/008841202","name":"Ans","standardname":"Ans"},"time":"1437225300","delay":"840"},{"id":"2","station":"Bierset-Awans","stationinfo":{"id":"BE.NMBS.008841319","locationX":"5.460551","locationY":"50.65861","@id":"http://irail.be/stations/NMBS/008841319","name":"Bierset-Awans","standardname":"Bierset-Awans"},"time":"1437225600","delay":"840"},{"id":"3","station":"Fexhe-le-Haut-Clocher","stationinfo":{"id":"BE.NMBS.008841467","locationX":"5.398453","locationY":"50.664049","@id":"http://irail.be/stations/NMBS/008841467","name":"Fexhe-le-Haut-Clocher","standardname":"Fexhe-le-Haut-Clocher"},"time":"1437225900","delay":"780"},{"id":"4","station":"Momalle","stationinfo":{"id":"BE.NMBS.008841459","locationX":"5.367602","locationY":"50.66991","@id":"http://irail.be/stations/NMBS/008841459","name":"Momalle","standardname":"Momalle"},"time":"1437226080","delay":"780"},{"id":"5","station":"Remicourt","stationinfo":{"id":"BE.NMBS.008841442","locationX":"5.321407","locationY":"50.678611","@id":"http://irail.be/stations/NMBS/008841442","name":"Remicourt","standardname":"Remicourt"},"time":"1437226320","delay":"780"},{"id":"6","station":"Borgworm","stationinfo":{"id":"BE.NMBS.008841400","locationX":"5.249475","locationY":"50.694549","@id":"http://irail.be/stations/NMBS/008841400","name":"Borgworm","standardname":"Waremme"},"time":"1437226560","delay":"720"},{"id":"7","station":"Landen","stationinfo":{"id":"BE.NMBS.008833605","locationX":"5.07966","locationY":"50.747927","@id":"http://irail.be/stations/NMBS/008833605","name":"Landen","standardname":"Landen"},"time":"1437227280","delay":"600"}]}}
+

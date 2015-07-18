@@ -43,7 +43,11 @@ public class LiveBoardFetcher {
     private static final long POOL_TIMEOUT = 60;
     
     private int trainsDelayed =1;
+    private int trainsCancelled =1;
     private Map<String,String> trainDelays = new HashMap();
+    private Map<String,String> trainCanceled = new HashMap(); 
+    private Map<String,String> totalTrains = new HashMap();
+    private Map<String,String> trainDelayed = new HashMap();
     
     private Map<TrainId,TrainInfo> trainCache;
     private Map<String,String> sources;
@@ -144,6 +148,7 @@ public class LiveBoardFetcher {
             Elements trains = doc.select(".journey");
             
             for (int j = 0; j < trains.size(); j++) {
+                
                 final int numberJ = j + 1;
                 Element train = trains.get(j);
                 Elements trainA = train.select("a");
@@ -159,22 +164,31 @@ public class LiveBoardFetcher {
                 }
                 final String destination = trainTarget;
                 String trainDelay = train.select(".delay").text().replaceAll("\\+","");
-              
+                totalTrains.put(trainNumber, trainDelay);
                 if (trainDelay.length() > 0) {
+                
                     if (trainDelay.equals("0")) {
                         
                     }else{
-                    
-                  //  System.out.println("Current Delay is " + trainDelay + "minutes for train " + trainNumber);
-                    trainDelays.put(trainNumber, trainDelay);
-                    trainsDelayed ++;
-                               
-                    
+                                try{
+                                  int num = Integer.parseInt(trainDelay);
+                                  trainDelayed.put(trainNumber, "Afgeschaft");
+                                } catch (NumberFormatException e) {
+                                  // not an integer!
+                                }
+                           //System.out.println("Current Delay is " + trainDelay + "minutes for train " + trainNumber);
+                          trainDelays.put(trainNumber, trainDelay);                             
                     }
-
                 }
-                
+                 if (trainDelay.equals("Afgeschaft")) {
+                     //  System.out.println("Cancelled Train Found " + trainNumber);                     
+                    trainDelays.put(trainNumber, "Afgeschaft");
+                    trainCanceled.put(trainNumber, "Afgeschaft");                                                       
+                }
                 if (!trainDelay.equals("Afgeschaft")) {
+                   
+                  
+                    
                     trainCachePool.execute(new Runnable() {
                         @Override
                         public void run() {
@@ -190,7 +204,14 @@ public class LiveBoardFetcher {
             }
            
         }
-         System.out.println("Finished Reading Trains. "+ trainDelays.size() +" trains are currently delayed");
+        System.out.println("Trains cancelled " + trainCanceled.size());
+        System.out.println("Trains delayed " + trainDelayed.size());
+        double percentageOfDelays = 0+ trainDelays.size();
+        System.out.println("Total number of trains " + totalTrains.size());
+        percentageOfDelays = (percentageOfDelays / totalTrains.size()) *100 ;
+        
+        System.out.println("Percentage of Trains having issues is " +percentageOfDelays);       
+        System.out.println("Finished Reading Trains number of trains having issues is  "+ trainDelays.size() +" ");
         
          ScrapeTrip scrapeDelayedTrains  = new ScrapeTrip();
          scrapeDelayedTrains.startScrape(trainDelays);
