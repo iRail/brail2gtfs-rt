@@ -1,8 +1,0 @@
-
-
-
-
-
-
-{"version":"1.1","timestamp":"1437151529","vehicle":"BE.NMBS.P8794","vehicleinfo":{"locationX":"4.38412","locationY":"50.505856","name":"BE.NMBS.P8794"},"stops":{"number":"5","stop":[{"id":"0","station":"Luttre","stationinfo":{"id":"BE.NMBS.008871308","locationX":"4.38412","locationY":"50.505856","@id":"http://irail.be/stations/NMBS/008871308","name":"Luttre","standardname":"Luttre"},"time":"1437151260","delay":"0"},{"id":"1","station":"Courcelles-Motte","stationinfo":{"id":"BE.NMBS.008871225","locationX":"4.400534","locationY":"50.462007","@id":"http://irail.be/stations/NMBS/008871225","name":"Courcelles-Motte","standardname":"Courcelles-Motte"},"time":"1437151620","delay":"120"},{"id":"2","station":"Roux","stationinfo":{"id":"BE.NMBS.008871217","locationX":"4.393199","locationY":"50.443112","@id":"http://irail.be/stations/NMBS/008871217","name":"Roux","standardname":"Roux"},"time":"1437151740","delay":"120"},{"id":"3","station":"Marchienne-au-Pont","stationinfo":{"id":"BE.NMBS.008871100","locationX":"4.394223","locationY":"50.412171","@id":"http://irail.be/stations/NMBS/008871100","name":"Marchienne-au-Pont","standardname":"Marchienne-au-Pont"},"time":"1437152040","delay":"120"},{"id":"4","station":"Charleroi-Zuid","stationinfo":{"id":"BE.NMBS.008872009","locationX":"4.438567","locationY":"50.40471","@id":"http://irail.be/stations/NMBS/008872009","name":"Charleroi-Zuid","standardname":"Charleroi-Sud"},"time":"1437152340","delay":"120"}]}}
-

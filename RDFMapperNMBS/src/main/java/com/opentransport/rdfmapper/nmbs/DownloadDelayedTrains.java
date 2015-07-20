@@ -27,6 +27,7 @@ public class DownloadDelayedTrains implements Runnable{
     public DownloadDelayedTrains(String trainName,String url){
         this.trainName = trainName;
         this.url = url;
+        
     }
 
     @Override 

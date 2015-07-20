@@ -1,7 +1,0 @@
-
-
-
-
-
-{"version":"1.1","timestamp":"1437149146","vehicle":"BE.NMBS.TRN17205","vehicleinfo":{"locationX":"3.216726","locationY":"51.197226","name":"BE.NMBS.TRN17205"},"stops":{"number":"4","stop":[{"id":"0","station":"Brugge","stationinfo":{"id":"BE.NMBS.008891009","locationX":"3.216726","locationY":"51.197226","@id":"http://irail.be/stations/NMBS/008891009","name":"Brugge","standardname":"Brugge"},"time":"1437148920","delay":"0"},{"id":"1","station":"Heist","stationinfo":{"id":"BE.NMBS.008891645","locationX":"3.239181","locationY":"51.333979","@id":"http://irail.be/stations/NMBS/008891645","name":"Heist","standardname":"Heist"},"time":"1437149880","delay":"0"},{"id":"2","station":"Duinbergen","stationinfo":{"id":"BE.NMBS.008891652","locationX":"3.263587","locationY":"51.338195","@id":"http://irail.be/stations/NMBS/008891652","name":"Duinbergen","standardname":"Duinbergen"},"time":"1437150060","delay":"0"},{"id":"3","station":"Knokke","stationinfo":{"id":"BE.NMBS.008891660","locationX":"3.285188","locationY":"51.339894","@id":"http://irail.be/stations/NMBS/008891660","name":"Knokke","standardname":"Knokke"},"time":"1437150180","delay":"0"}]}}
-

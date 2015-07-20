@@ -1,6 +1,0 @@
-
-
-
-
-{"version":"1.1","timestamp":"1437214241","vehicle":"BE.NMBS.IC632","vehicleinfo":{"locationX":"4.632204","locationY":"51.356838","name":"BE.NMBS.IC632"},"stops":{"number":"3","stop":[{"id":"0","station":"Noorderkempen","stationinfo":{"id":"BE.NMBS.008821105","locationX":"4.632204","locationY":"51.356838","@id":"http://irail.be/stations/NMBS/008821105","name":"Noorderkempen","standardname":"Noorderkempen"},"time":"1437214020","delay":"0"},{"id":"1","station":"Antwerpen-Luchtbal","stationinfo":{"id":"BE.NMBS.008821063","locationX":"4.425029","locationY":"51.244132","@id":"http://irail.be/stations/NMBS/008821063","name":"Antwerpen-Luchtbal","standardname":"Antwerpen-Luchtbal"},"time":"1437214680","delay":"60"},{"id":"2","station":"Antwerpen-Centraal","stationinfo":{"id":"BE.NMBS.008821006","locationX":"4.421101","locationY":"51.2172","@id":"http://irail.be/stations/NMBS/008821006","name":"Antwerpen-Centraal","standardname":"Antwerpen-Centraal"},"time":"1437214920","delay":"0"}]}}
-

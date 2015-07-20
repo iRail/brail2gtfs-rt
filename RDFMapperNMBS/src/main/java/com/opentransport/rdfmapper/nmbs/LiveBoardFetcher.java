@@ -181,6 +181,7 @@ public class LiveBoardFetcher {
                     }
                 }
                  if (trainDelay.equals("Afgeschaft")) {
+                     
                      //  System.out.println("Cancelled Train Found " + trainNumber);                     
                     trainDelays.put(trainNumber, "Afgeschaft");
                     trainCanceled.put(trainNumber, "Afgeschaft");                                                       

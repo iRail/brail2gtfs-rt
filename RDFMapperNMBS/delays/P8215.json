@@ -1,9 +1,0 @@
-
-
-
-
-
-
-
-{"version":"1.1","timestamp":"1437149135","vehicle":"BE.NMBS.P8215","vehicleinfo":{"locationX":"4.421101","locationY":"51.2172","name":"BE.NMBS.P8215"},"stops":{"number":"6","stop":[{"id":"0","station":"Antwerpen-Centraal","stationinfo":{"id":"BE.NMBS.008821006","locationX":"4.421101","locationY":"51.2172","@id":"http://irail.be/stations/NMBS/008821006","name":"Antwerpen-Centraal","standardname":"Antwerpen-Centraal"},"time":"1437148320","delay":"0"},{"id":"1","station":"Antwerpen-Berchem","stationinfo":{"id":"BE.NMBS.008821121","locationX":"4.432221","locationY":"51.19923","@id":"http://irail.be/stations/NMBS/008821121","name":"Antwerpen-Berchem","standardname":"Antwerpen-Berchem"},"time":"1437148560","delay":"0"},{"id":"2","station":"Lier","stationinfo":{"id":"BE.NMBS.008821600","locationX":"4.560614","locationY":"51.135758","@id":"http://irail.be/stations/NMBS/008821600","name":"Lier","standardname":"Lier"},"time":"1437149220","delay":"60"},{"id":"3","station":"Heist-op-den-Berg","stationinfo":{"id":"BE.NMBS.008821832","locationX":"4.708235","locationY":"51.074146","@id":"http://irail.be/stations/NMBS/008821832","name":"Heist-op-den-Berg","standardname":"Heist-op-den-Berg"},"time":"1437149880","delay":"0"},{"id":"4","station":"Diest","stationinfo":{"id":"BE.NMBS.008831401","locationX":"5.050031","locationY":"50.993341","@id":"http://irail.be/stations/NMBS/008831401","name":"Diest","standardname":"Diest"},"time":"1437151020","delay":"0"},{"id":"5","station":"Hasselt","stationinfo":{"id":"BE.NMBS.008831005","locationX":"5.327627","locationY":"50.930822","@id":"http://irail.be/stations/NMBS/008831005","name":"Hasselt","standardname":"Hasselt"},"time":"1437151920","delay":"0"}]}}
-

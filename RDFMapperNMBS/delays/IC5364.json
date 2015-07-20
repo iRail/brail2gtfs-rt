@@ -1,9 +1,0 @@
-
-
-
-
-
-
-
-{"version":"1.1","timestamp":"1437221850","vehicle":"BE.NMBS.IC5364","vehicleinfo":{"locationX":"5.566695","locationY":"50.62455","name":"BE.NMBS.IC5364"},"stops":{"number":"6","stop":[{"id":"0","station":"Luik-Guillemins","stationinfo":{"id":"BE.NMBS.008841004","locationX":"5.566695","locationY":"50.62455","@id":"http://irail.be/stations/NMBS/008841004","name":"Luik-Guillemins","standardname":"Liège-Guillemins"},"time":"1437221400","delay":"0"},{"id":"1","station":"Bressoux","stationinfo":{"id":"BE.NMBS.008843901","locationX":"5.611057","locationY":"50.643967","@id":"http://irail.be/stations/NMBS/008843901","name":"Bressoux","standardname":"Bressoux"},"time":"1437221820","delay":"60"},{"id":"2","station":"Wezet","stationinfo":{"id":"BE.NMBS.008846201","locationX":"5.692544","locationY":"50.73776","@id":"http://irail.be/stations/NMBS/008846201","name":"Wezet","standardname":"Visé"},"time":"1437222420","delay":"0"},{"id":"3","station":"Eijsden (nl)","stationinfo":{"id":"BE.NMBS.008400219","locationX":"5.709786","locationY":"50.772135","@id":"http://irail.be/stations/NMBS/008400219","name":"Eijsden (nl)","standardname":"Eijsden (nl)"},"time":"1437222660","delay":"0"},{"id":"4","station":"Maastricht Randwyck (nl)","stationinfo":{"id":"BE.NMBS.008400426","locationX":"5.716707","locationY":"50.838502","@id":"http://irail.be/stations/NMBS/008400426","name":"Maastricht Randwyck (nl)","standardname":"Maastricht Randwyck (nl)"},"time":"1437223140","delay":"0"},{"id":"5","station":"Maastricht (nl)","stationinfo":{"id":"BE.NMBS.008400424","locationX":"5.683331","locationY":"50.85","@id":"http://irail.be/stations/NMBS/008400424","name":"Maastricht (nl)","standardname":"Maastricht (nl)"},"time":"1437223380","delay":"0"}]}}
-
