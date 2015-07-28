@@ -45,6 +45,8 @@ public class ScrapeTrip {
     private GtfsRealtime.FeedMessage.Builder feedMessage =  GtfsRealtime.FeedMessage.newBuilder();        
     private GtfsRealtime.FeedHeader.Builder feedHeader =GtfsRealtime.FeedHeader.newBuilder();
     private ErrorLogWriter errorWriter =  new  ErrorLogWriter(); 
+    private RoutesInfoTempReader rit = new  RoutesInfoTempReader();
+    private int numberOfTripUpdates =0;
 
     private void downloadJson(String url,String trainName) throws MalformedURLException, IOException{
                 String fileName = "./delays/" +trainName +".json"; 
@@ -69,9 +71,9 @@ public class ScrapeTrip {
     
     
     
-    private   GtfsRealtime.FeedEntity.Builder  scrapeJson(int identifier, String fileName,boolean cancelled) {   
+    private   GtfsRealtime.FeedEntity.Builder  scrapeJson(int identifier, String fileName,boolean cancelled,String trainName) {   
         
-
+         
         
         GtfsRealtime.FeedEntity.Builder feedEntity = GtfsRealtime.FeedEntity.newBuilder();        
         feedEntity.setId(Integer.toString(identifier));
@@ -115,13 +117,18 @@ public class ScrapeTrip {
             tripDescription.setStartTime(formattedDepartureHour.toString());
             //YYYYMMDD format
             tripDescription.setStartDate(formattedDepartureDate.toString());
+            tripDescription.setRouteId("routes:" + trainName);
+         
+            tripDescription.setTripId(rit.getTrip_id(trainName));
+            numberOfTripUpdates++;
+            
+            
+            
             if (cancelled) {
                 tripDescription.setScheduleRelationship(GtfsRealtime.TripDescriptor.ScheduleRelationship.CANCELED);
               
-            }
-       
-           
-            
+            }    
+                      
             //Get Information about stops
             JSONObject rootStop = (JSONObject) json.get("stops"); 
             JSONArray stops = (JSONArray) rootStop.get("stop");
@@ -137,6 +144,7 @@ public class ScrapeTrip {
                     
                 JSONObject station =(JSONObject) stop.get("stationinfo");
                  tripDescription.setRouteId((String) station.get("@id"));
+                 
             
                // stopTimeUpdate.setStopId((String) station.get("@id"));
                 
@@ -163,6 +171,7 @@ public class ScrapeTrip {
                 tripUpdate.addStopTimeUpdate(stopTimeUpdate);
                 
             }
+
               tripUpdate.setTrip(tripDescription);
               tripUpdate.setVehicle(vehicleDescription);
               tripUpdate.setDelay(Integer.parseInt(delay));
@@ -174,9 +183,13 @@ public class ScrapeTrip {
              errorWriter.writeError(ex.toString());
               
           
-       } catch (IOException | ParseException ex) {
+       } catch (IOException ex ) {
+            System.out.println("IO exception"+ex);
 
             
+        }
+        catch(ParseException ex){
+            System.out.println("Parse exception"+ex);
         }
         return feedEntity;
     }
@@ -228,11 +241,10 @@ public class ScrapeTrip {
 
 private void requestJsons(Map trainDelays){
 
-            String trainName ;       
-        Iterator iterator = trainDelays.entrySet().iterator();
-        
+        String trainName ;       
+        Iterator iterator = trainDelays.entrySet().iterator();       
 
-        ExecutorService pool = Executors.newFixedThreadPool(60);
+        ExecutorService pool = Executors.newFixedThreadPool(10);
                     while (iterator.hasNext()) {
                        
                         Map.Entry mapEntry = (Map.Entry) iterator.next(); 
@@ -280,17 +292,18 @@ private void requestJsons(Map trainDelays){
                            //Parse the Json and add it to the Feed 
                             File f = new File("./delays/" +trainName+".json");
                             if(f.exists() && !f.isDirectory()) {  
-                            GtfsRealtime.FeedEntity.Builder feedEntity =scrapeJson(i,"./delays/" +trainName+".json",cancelled);
+                            GtfsRealtime.FeedEntity.Builder feedEntity =scrapeJson(i,"./delays/" +trainName+".json",cancelled,trainName);
                             feedMessage.addEntity(i, feedEntity);  
+                            
                             i++;
+                            
                             }else{                         
                                  errorWriter.writeError("File Not Found " + "./delays/" +trainName+".json" );
                             }
-                          
-                        
+                                           
                              
 
-
+                         
                  
 
 	}
