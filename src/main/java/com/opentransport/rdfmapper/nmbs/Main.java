@@ -39,13 +39,13 @@ public class Main {
          public void run () {
             // testData("trip_updates");
                   scrapeLiveBoards();
-            //        testData("trip_updates");              
+               //   testData("trip_updates");              
            }
           };
         Thread thread2 = new Thread () {
             public void run () {
                      NetworkDisturbanceFetcher ndf = new NetworkDisturbanceFetcher();
-             //         testData("service_alerts");
+                    // testData("service_alerts");
             }
           };
         thread1.start();

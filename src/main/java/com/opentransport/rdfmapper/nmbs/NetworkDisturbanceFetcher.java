@@ -25,7 +25,7 @@ import org.jsoup.select.Elements;
 public class NetworkDisturbanceFetcher {    
     
     //The url of the website
-   private static final String webSiteURL = "http://www.belgianrail.be/jpm/sncb-nmbs-routeplanner/help.exe/en?tpl=rss_feed";   
+   
    private ErrorLogWriter  errorWriter = new  ErrorLogWriter();
    private ArrayList<NetworkDisturbance> NetWorkDisturbances = new ArrayList<NetworkDisturbance>();
     
@@ -49,7 +49,9 @@ public class NetworkDisturbanceFetcher {
     {
         if(sentence.indexOf(word) >= 0){            
             return true;
-        }else{return false;} 
+        }else{
+            return false;
+        } 
             
     }
    private  GtfsRealtime.Alert.Cause setCause (String title){
@@ -79,7 +81,7 @@ public class NetworkDisturbanceFetcher {
         int i =0;
         //English Version
         try {
-            doc = Jsoup.connect(webSiteURL).timeout(10*1000).get(); 
+            doc = Jsoup.connect("").timeout(10*1000).get(); 
            //Get all elements with img tag ,
            Elements disturbances = doc.getElementsByTag("item");
             for (Element el : disturbances) {
@@ -146,13 +148,14 @@ public class NetworkDisturbanceFetcher {
     
     }
     private void multipleLanguage(){
-    String webSiteURLEN = "http://www.belgianrail.be/jpm/sncb-nmbs-routeplanner/help.exe/en?tpl=rss_feed";
-    String webSiteURLNL = "http://www.belgianrail.be/jpm/sncb-nmbs-routeplanner/help.exe/nn?tpl=rss_feed";
+    String disturbanceURLEN = "http://www.belgianrail.be/jp/sncb-nmbs-routeplanner/help.exe/en?tpl=rss_feed";
+    String webSiteURLNL = "http://www.belgianrail.be/jpm/sncb-nmbs-routeplanner/help.exe/nl?tpl=rss_feed";
     String webSiteURLFR = "http://www.belgianrail.be/jpm/sncb-nmbs-routeplanner/help.exe/fr?tpl=rss_feed";
     
-        downloadFile("en", webSiteURLEN);
+        downloadFile("en", disturbanceURLEN);
         downloadFile("nl", webSiteURLNL);
         downloadFile("fr", webSiteURLFR);
+        
      
     }
     private void downloadFile(String language,String fileUrl){
@@ -162,18 +165,19 @@ public class NetworkDisturbanceFetcher {
         int i =0;
         //English Version
         try {
-            doc = Jsoup.connect(webSiteURL).timeout(10*1000).get(); 
+            doc = Jsoup.connect(fileUrl).timeout(10*1000).get(); 
            //Get all elements with img tag ,
            Elements disturbances = doc.getElementsByTag("item");
             for (Element el : disturbances) {
-                
+
                 NetworkDisturbance disturbance = new NetworkDisturbance(reformTitle(el.child(0).html()), el.child(1).html(), el.child(2).html(), language, el.child(3).html());      
                 NetWorkDisturbances.add(disturbance);  
                 i++;                
                // timeRange.setStart();                
                // alert.setActivePeriod(index, timeRange)            
-             
+               
            }         
+            
             
            
         } catch (IOException ex) {

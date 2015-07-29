@@ -16,7 +16,7 @@ How to run it from CLI
 
 
 ```
-MVN build
+mvn install
 ```
 This will make sure all the depencies are downloaded.
 And then to run the application

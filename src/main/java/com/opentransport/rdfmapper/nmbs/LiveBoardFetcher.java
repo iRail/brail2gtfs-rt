@@ -226,8 +226,7 @@ public class LiveBoardFetcher {
         }
         
         long end2 = System.currentTimeMillis();
-        System.out.println("TRAIN FETCHING (" + (end2 - start2) + " ms)");
-        System.out.println("NUMBER OF TRAINS: " + trainCache.size());
+
         long start3 = System.currentTimeMillis();
         
         List<LiveBoard> liveBoards = new ArrayList<>();
@@ -237,7 +236,7 @@ public class LiveBoardFetcher {
 //        }
         
         long end3 = System.currentTimeMillis();
-        System.out.println("LIVEBOARD PARSING (" + (end3 - start3) + " ms)");
+  
         
         return liveBoards;
     }

@@ -11,6 +11,7 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/timing.properties
 delays/
+.ideas/
 
 
 # OS generated files #
@@ -22,3 +23,4 @@ delays/
 .Trashes
 ehthumbs.db
 Thumbs.db
+

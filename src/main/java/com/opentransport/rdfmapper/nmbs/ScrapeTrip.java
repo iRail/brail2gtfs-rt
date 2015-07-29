@@ -143,7 +143,7 @@ public class ScrapeTrip {
                 try {
                     
                 JSONObject station =(JSONObject) stop.get("stationinfo");
-                 tripDescription.setRouteId((String) station.get("@id"));
+                // tripDescription.setRouteId((String) station.get("@id"));
                  
             
                // stopTimeUpdate.setStopId((String) station.get("@id"));
@@ -155,11 +155,8 @@ public class ScrapeTrip {
                     System.out.println(e);
                 }
 
-              
-               
                 //Set Delay at arrival time
-                delay = (String)stop.get("delay");
-                
+                delay = (String)stop.get("delay");              
                
                 stopTimeArrival.setDelay(Integer.parseInt(delay));
                 String arrivalTime = (String)stop.get("time");
@@ -168,8 +165,7 @@ public class ScrapeTrip {
                 stopTimeDeparture.setDelay(Integer.parseInt(delay));
                 stopTimeUpdate.setArrival(stopTimeArrival);
                 stopTimeUpdate.setDeparture(stopTimeDeparture); 
-                tripUpdate.addStopTimeUpdate(stopTimeUpdate);
-                
+                tripUpdate.addStopTimeUpdate(stopTimeUpdate);                
             }
 
               tripUpdate.setTrip(tripDescription);
@@ -244,7 +240,7 @@ private void requestJsons(Map trainDelays){
         String trainName ;       
         Iterator iterator = trainDelays.entrySet().iterator();       
 
-        ExecutorService pool = Executors.newFixedThreadPool(10);
+        ExecutorService pool = Executors.newFixedThreadPool(15);
                     while (iterator.hasNext()) {
                        
                         Map.Entry mapEntry = (Map.Entry) iterator.next(); 
@@ -309,7 +305,7 @@ private void requestJsons(Map trainDelays){
 	}
         //Write File  
            try {
-              FileOutputStream output = new FileOutputStream("gtfs-rt");
+              FileOutputStream output = new FileOutputStream("trip_updates");
               feedMessage.build().writeTo(output);
               output.close();
               System.out.println("GTFS RT Tripupdate file writen successful");
