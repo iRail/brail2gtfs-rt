@@ -81,7 +81,7 @@ public class RoutesReader {
         lineCounter++;
     }
     in.close(); 
-        System.out.println("Finished reading routes");
+       
        
     
     }

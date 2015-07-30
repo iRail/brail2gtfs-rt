@@ -120,8 +120,8 @@ public class ScrapeTrip {
             //YYYYMMDD format
             tripDescription.setStartDate(formattedDepartureDate.toString());
             tripDescription.setRouteId("routes:" + trainName);
-         
-            tripDescription.setTripId(rit.getTrip_id(trainName));
+            String tripId = rit.getTrip_id(trainName);
+            tripDescription.setTripId(tripId);
             numberOfTripUpdates++;
             
             
@@ -147,8 +147,10 @@ public class ScrapeTrip {
                 JSONObject station =(JSONObject) stop.get("stationinfo");
                 // tripDescription.setRouteId((String) station.get("@id"));
                  
-            
-               // stopTimeUpdate.setStopId((String) station.get("@id"));
+                String stopId = (String) station.get("id");
+                stopId = "stops:" + stopId.replaceFirst("[^0-9]+", "")+":0";
+                //TODO: if stopid is empty than get from gtfs
+                stopTimeUpdate.setStopId(stopId);
                 
                     
                 } catch (Exception e) {
@@ -187,7 +189,7 @@ public class ScrapeTrip {
             
         }
         catch(ParseException ex){
-            System.out.println("Parse exception"+ex);
+            System.out.println("Parse exception "+ex +" "+ fileName);
         }
         return feedEntity;
     }
@@ -242,7 +244,7 @@ private void requestJsons(Map trainDelays){
         String trainName ;       
         Iterator iterator = trainDelays.entrySet().iterator();       
 
-        ExecutorService pool = Executors.newFixedThreadPool(15);
+        ExecutorService pool = Executors.newFixedThreadPool(10);
                     while (iterator.hasNext()) {
                        
                         Map.Entry mapEntry = (Map.Entry) iterator.next(); 
