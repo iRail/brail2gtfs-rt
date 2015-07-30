@@ -38,14 +38,14 @@ public class Main {
                     Thread thread1 = new Thread () {
          public void run () {
             
-               //scrapeLiveBoards();
+               scrapeLiveBoards();
                //   testData("trip_updates.pb");              
            }
           };
         Thread thread2 = new Thread () {
             public void run () {
                NetworkDisturbanceFetcher ndf = new NetworkDisturbanceFetcher();
-               testData("service_alerts.pb");
+              // testData("service_alerts.pb");
             }
           };
         thread1.start();
