@@ -35,15 +35,19 @@ public class Main {
             
   
                
-                    Thread thread1 = new Thread () {
+         Thread thread1 = new Thread () {
          public void run () {
-            
+             
+                
+                
+                
                scrapeLiveBoards();
                //   testData("trip_updates.pb");              
            }
           };
-        Thread thread2 = new Thread () {
-            public void run () {
+         
+          Thread thread2 = new Thread () {
+          public void run () {
                NetworkDisturbanceFetcher ndf = new NetworkDisturbanceFetcher();
               // testData("service_alerts.pb");
             }

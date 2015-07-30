@@ -197,10 +197,8 @@ public class NetworkDisturbanceFetcher {
             for (Element el : disturbances) {
                 
                 
-                String link = handleHtmlEscape(el.childNode(6).toString());
-        
-                String description = handleDescriptionEscape(el.child(1).html());
-             
+                String link = handleHtmlEscape(el.childNode(6).toString());        
+                String description = handleDescriptionEscape(el.child(1).html());           
               
                 
                 NetworkDisturbance disturbance = new NetworkDisturbance(reformTitle(el.child(0).html()),description , link, language, el.child(3).html());   

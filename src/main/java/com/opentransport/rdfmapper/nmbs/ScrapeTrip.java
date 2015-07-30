@@ -96,7 +96,9 @@ public class ScrapeTrip {
             JSONObject json = (JSONObject) parser.parse(fr);
             String trainId = (String) json.get("vehicle");
             //Setting the VehicleData
-            vehicleDescription.setId(trainId);
+            vehicleDescription.setId("routes:" + trainName);
+            RoutesReader rr =new  RoutesReader();            
+            vehicleDescription.setLabel(rr.getRouteLongName("routes:" + trainName));
             vehicleDescription.setLicensePlate(trainId);
             //System.out.println(trainId);
             
