@@ -305,7 +305,7 @@ private void requestJsons(Map trainDelays){
 	}
         //Write File  
            try {
-              FileOutputStream output = new FileOutputStream("trip_updates");
+              FileOutputStream output = new FileOutputStream("trip_updates.pb");
               feedMessage.build().writeTo(output);
               output.close();
               System.out.println("GTFS RT Tripupdate file writen successful");

@@ -16,7 +16,12 @@ import java.util.logging.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.parser.Parser;
 import org.jsoup.select.Elements;
+
+
+
+
 
 /**
  *
@@ -158,8 +163,19 @@ public class NetworkDisturbanceFetcher {
         
      
     }
-    private void downloadFile(String language,String fileUrl){
+    private String handleHtmlEscape(String link){
+    String escaped;
+    
+    escaped = link.replaceAll("&amp;", "&");
+    
+    
+    
+    return escaped;
+    
+    }
 
+    private void downloadFile(String language,String fileUrl){
+       // testXMl(fileUrl);
       
         Document doc;
         int i =0;
@@ -169,8 +185,13 @@ public class NetworkDisturbanceFetcher {
            //Get all elements with img tag ,
            Elements disturbances = doc.getElementsByTag("item");
             for (Element el : disturbances) {
-
-                NetworkDisturbance disturbance = new NetworkDisturbance(reformTitle(el.child(0).html()), el.child(1).html(), el.child(2).html(), language, el.child(3).html());      
+                
+                
+                String link = handleHtmlEscape(el.childNode(6).toString());
+              
+                
+                NetworkDisturbance disturbance = new NetworkDisturbance(reformTitle(el.child(0).html()), el.child(1).html(), link, language, el.child(3).html());   
+                
                 NetWorkDisturbances.add(disturbance);  
                 i++;                
                // timeRange.setStart();                
@@ -236,7 +257,7 @@ public class NetworkDisturbanceFetcher {
                 
                 translationUrl.setText(disturbance.getLink());
                 translationUrl.setLanguage(lang);
-                translatedUrlString.addTranslation(0, translationsHeader);
+                translatedUrlString.addTranslation(0, translationUrl);
                 alert.setUrl(translatedUrlString);
                 //-----------              
                 
@@ -340,7 +361,7 @@ public class NetworkDisturbanceFetcher {
        //Write the new Disturbance back to disk
         try {
             
-                 FileOutputStream output = new FileOutputStream("service_alerts");
+                 FileOutputStream output = new FileOutputStream("service_alerts.pb");
       
                   feedMessage.build().writeTo(output);
                   output.close();
