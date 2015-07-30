@@ -173,6 +173,16 @@ public class NetworkDisturbanceFetcher {
     return escaped;
     
     }
+    private String handleDescriptionEscape(String toEscape){
+    String escaped;    
+    escaped = toEscape.replaceAll("&lt;br /&gt;", "");   
+    escaped = escaped.replaceAll("&eacute;", "é");  
+    escaped = escaped.replaceAll("&acirc;", "â");
+    escaped = escaped.replaceAll("&agrave;", "à");
+        
+    return escaped;
+    
+    }
 
     private void downloadFile(String language,String fileUrl){
        // testXMl(fileUrl);
@@ -188,9 +198,12 @@ public class NetworkDisturbanceFetcher {
                 
                 
                 String link = handleHtmlEscape(el.childNode(6).toString());
+        
+                String description = handleDescriptionEscape(el.child(1).html());
+             
               
                 
-                NetworkDisturbance disturbance = new NetworkDisturbance(reformTitle(el.child(0).html()), el.child(1).html(), link, language, el.child(3).html());   
+                NetworkDisturbance disturbance = new NetworkDisturbance(reformTitle(el.child(0).html()),description , link, language, el.child(3).html());   
                 
                 NetWorkDisturbances.add(disturbance);  
                 i++;                
