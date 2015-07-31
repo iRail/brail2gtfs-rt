@@ -13,11 +13,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -69,10 +71,40 @@ public class ScrapeTrip {
 
 	}
     
+    private void rewriteFile(String filename) throws FileNotFoundException, IOException{
+        
+        FileReader fr = new FileReader(filename); 
+        BufferedReader br = new BufferedReader(fr); 
+        FileWriter fw = new FileWriter("temp.json"); 
+        String line;
+
+        while((line = br.readLine()) != null)
+        { 
+            line = line.trim(); // remove leading and trailing whitespace
+            if (!line.equals("")) // don't write out blank lines
+            {
+                fw.write(line, 0, line.length());
+            }
+        } 
+        fr.close();
+        fw.close();
+    
+    
+    
+    
+    }
     
     
     private   GtfsRealtime.FeedEntity.Builder  scrapeJson(int identifier, String fileName,boolean cancelled,String trainName) {   
-        
+        try {
+            rewriteFile(fileName);
+            File f = new File(fileName);
+            f.delete();
+            f = new File("temp.json");
+            File newFile = new File(f.getParent(), fileName);
+            Files.move(f.toPath(), newFile.toPath());
+        } catch (Exception e) {
+        }
          
         
         GtfsRealtime.FeedEntity.Builder feedEntity = GtfsRealtime.FeedEntity.newBuilder();        
