@@ -13,11 +13,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -69,10 +71,40 @@ public class ScrapeTrip {
 
 	}
     
+    private void rewriteFile(String filename) throws FileNotFoundException, IOException{
+        
+        FileReader fr = new FileReader(filename); 
+        BufferedReader br = new BufferedReader(fr); 
+        FileWriter fw = new FileWriter("temp.json"); 
+        String line;
+
+        while((line = br.readLine()) != null)
+        { 
+            line = line.trim(); // remove leading and trailing whitespace
+            if (!line.equals("")) // don't write out blank lines
+            {
+                fw.write(line, 0, line.length());
+            }
+        } 
+        fr.close();
+        fw.close();
+    
+    
+    
+    
+    }
     
     
     private   GtfsRealtime.FeedEntity.Builder  scrapeJson(int identifier, String fileName,boolean cancelled,String trainName) {   
-        
+        try {
+            rewriteFile(fileName);
+            File f = new File(fileName);
+            f.delete();
+            f = new File("temp.json");
+            File newFile = new File(f.getParent(), fileName);
+            Files.move(f.toPath(), newFile.toPath());
+        } catch (Exception e) {
+        }
          
         
         GtfsRealtime.FeedEntity.Builder feedEntity = GtfsRealtime.FeedEntity.newBuilder();        
@@ -96,7 +128,9 @@ public class ScrapeTrip {
             JSONObject json = (JSONObject) parser.parse(fr);
             String trainId = (String) json.get("vehicle");
             //Setting the VehicleData
-            vehicleDescription.setId(trainId);
+            vehicleDescription.setId("routes:" + trainName);
+            RoutesReader rr =new  RoutesReader();            
+            vehicleDescription.setLabel(rr.getRouteLongName("routes:" + trainName));
             vehicleDescription.setLicensePlate(trainId);
             //System.out.println(trainId);
             
@@ -118,8 +152,8 @@ public class ScrapeTrip {
             //YYYYMMDD format
             tripDescription.setStartDate(formattedDepartureDate.toString());
             tripDescription.setRouteId("routes:" + trainName);
-         
-            tripDescription.setTripId(rit.getTrip_id(trainName));
+            String tripId = rit.getTrip_id(trainName);
+            tripDescription.setTripId(tripId);
             numberOfTripUpdates++;
             
             
@@ -145,8 +179,10 @@ public class ScrapeTrip {
                 JSONObject station =(JSONObject) stop.get("stationinfo");
                 // tripDescription.setRouteId((String) station.get("@id"));
                  
-            
-               // stopTimeUpdate.setStopId((String) station.get("@id"));
+                String stopId = (String) station.get("id");
+                stopId = "stops:" + stopId.replaceFirst("[^0-9]+", "")+":0";
+                //TODO: if stopid is empty than get from gtfs
+                stopTimeUpdate.setStopId(stopId);
                 
                     
                 } catch (Exception e) {
@@ -185,7 +221,7 @@ public class ScrapeTrip {
             
         }
         catch(ParseException ex){
-            System.out.println("Parse exception"+ex);
+            System.out.println("Parse exception "+ex +" "+ fileName);
         }
         return feedEntity;
     }
@@ -240,7 +276,7 @@ private void requestJsons(Map trainDelays){
         String trainName ;       
         Iterator iterator = trainDelays.entrySet().iterator();       
 
-        ExecutorService pool = Executors.newFixedThreadPool(15);
+        ExecutorService pool = Executors.newFixedThreadPool(10);
                     while (iterator.hasNext()) {
                        
                         Map.Entry mapEntry = (Map.Entry) iterator.next(); 
