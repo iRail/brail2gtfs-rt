@@ -155,7 +155,7 @@ public class LiveBoardFetcher {
                 final String trainLink = trainA.attr("href");
                 final String trainNumber = trainA.text();
                 //Train Number is Trip ID
-               ;
+               
                 String stationInfo = train.ownText().replaceAll(">","").trim();
                 String trainTarget = stationInfo;
                 int split = stationInfo.indexOf(" perron ");
@@ -202,15 +202,13 @@ public class LiveBoardFetcher {
                         }
                     });
                 }
-            }
-           
+            }           
         }
         System.out.println("Trains cancelled " + trainCanceled.size());
         System.out.println("Trains delayed " + trainDelayed.size());
         double percentageOfDelays = 0+ trainDelays.size();
         System.out.println("Total number of trains " + totalTrains.size());
-        percentageOfDelays = (percentageOfDelays / totalTrains.size()) *100 ;
-        
+        percentageOfDelays = (percentageOfDelays / totalTrains.size()) *100;        
         System.out.println("Percentage of Trains having issues is " +percentageOfDelays);       
         System.out.println("Finished Reading Trains number of trains having issues is  "+ trainDelays.size() +" ");
         
