@@ -22,7 +22,7 @@ You should have an unzipped gtfs feed of the Belgium railway unzipped in the roo
 ```
 mvn install
 ```
-This will make sure all the dependancies are downloaded.
+This will make sure all the dependencies are downloaded.
 And then to run the application
 
 ```
