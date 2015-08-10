@@ -12,6 +12,7 @@ import java.net.SocketAddress;
 import java.util.Calendar;
 import java.util.Properties;
 import java.util.Scanner;
+import java.util.Timer;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -39,21 +40,42 @@ public class Main {
          public void run () {
              
                 
-                
-                
-               scrapeLiveBoards();
+
+               scrapeLiveBoards(); 
+               System.exit(0);
+               
                //   testData("trip_updates.pb");              
            }
           };
          
           Thread thread2 = new Thread () {
           public void run () {
-               NetworkDisturbanceFetcher ndf = new NetworkDisturbanceFetcher();
+              // NetworkDisturbanceFetcher ndf = new NetworkDisturbanceFetcher();
              // testData("service_alerts.pb");
+            }
+          };
+          Thread thread3 = new Thread () {
+          public void run () {
+              System.out.println("Safety Thread");
+              
+              try {
+                 
+                    Thread.sleep(120000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+               System.out.println("Safety thread aborted the program");
+               System.exit(0);
+              
+                  	
+
+              
             }
           };
         thread1.start();
         thread2.start();
+        //Safety Thread to make sure everything is being quit after 3 Minutes
+        thread3.start();
             
         }
 

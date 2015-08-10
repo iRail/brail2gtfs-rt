@@ -63,7 +63,7 @@ public class SortedMapper {
         
         String stationsNMBS = "http://irail.be/stations/NMBS/";
         
-        List<String> stationIds = StationDatabase.getInstance().getAllStationIds();
+        List<String> stationIds = StationDatabase.getInstance().getAllStationIdsFromGTFSFeed();
         
         LiveBoardFetcher liveBoardFetcher = new LiveBoardFetcher();
         List<LiveBoard> liveBoards = liveBoardFetcher.getLiveBoards(stationIds,"","",10000);

@@ -152,7 +152,9 @@ public class ScrapeTrip {
             //YYYYMMDD format
             tripDescription.setStartDate(formattedDepartureDate.toString());
             tripDescription.setRouteId("routes:" + trainName);
-            String tripId = rit.getTrip_id(trainName);
+            TripReader tr = new TripReader();            
+            String tripId =  tr.getTripId("routes:" + trainName);          
+
             tripDescription.setTripId(tripId);
             numberOfTripUpdates++;
             
@@ -345,6 +347,7 @@ private void requestJsons(Map trainDelays){
               feedMessage.build().writeTo(output);
               output.close();
               System.out.println("GTFS RT Tripupdate file writen successful");
+              System.exit(0);
                         
             } catch (Exception e) {
                  System.out.println(e);

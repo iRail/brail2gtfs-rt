@@ -1,6 +1,8 @@
 package com.opentransport.rdfmapper.nmbs;
 
+import com.opentransport.rdfmapper.nmbs.containers.Station;
 import com.opentransport.rdfmapper.nmbs.containers.StationInfo;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -24,6 +26,7 @@ public class StationDatabase {
     private Map<String,StationInfo> database;
     private Map<String,String> mapping;
     private static volatile StationDatabase stationDB;
+    private HashMap Stations = new HashMap();
     
     private StationDatabase() {
         database = new HashMap<>();
@@ -68,5 +71,39 @@ public class StationDatabase {
     public List<String> getAllStationIds() {
         return new ArrayList<>(database.keySet());
     }
+    
+    public List<String> getAllStationIdsFromGTFSFeed(){
+        try {
+            readTxtGetAllStations();
+            return new ArrayList<>(Stations.keySet());
+        } catch (IOException ex) {
+            Logger.getLogger(StationDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            return new ArrayList<>(database.keySet());
+        }       
+    }
+    
+    private void readTxtGetAllStations()throws FileNotFoundException, IOException{
+        
+    FileCleaner fc = new FileCleaner() ;   
+    fc.cleanUpFile("stops",".txt");
+    BufferedReader in = new BufferedReader(new FileReader("stops.txt"));
+    String line;
+    int lineCounter=0;
+    while((line = in.readLine()) != null)
+    {
+        if (lineCounter > 0) {
+            
+            String[] parts = line.split(",");
+            String[] stationID = parts[0].split(":");            
+            String statId = stationID[1];
+            Station station = new Station(stationID[1], parts[1],parts[2],parts[3]);        
+            Stations.put(station.getId(), station);
+        }
+        
+        lineCounter++;
+    }
+    in.close(); 
+    }
+    
     
 }

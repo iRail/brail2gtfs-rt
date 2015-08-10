@@ -8,17 +8,21 @@ We can’t wait to see what you come up with! Be sure to tell us about your crea
 
 ## How Do I Get Started ?
 
-You will be able to acces all the data  temporly on the web on irail.gent.be
+You will be able to access all the data  temporally on the web on irail.gent.be
 
 To run the application at home you will need to have maven and the java jdk installed. 
 You can either use an IDE as netbeans to run the code, 
 How to run it from CLI 
 
+##Requirements
+
+You should have an unzipped gtfs feed of the Belgium railway unzipped in the root directory. This can be downloaded from http://gtfs.irail.be/nmbs/nmbs-latest.zip
+
 
 ```
 mvn install
 ```
-This will make sure all the depencies are downloaded.
+This will make sure all the dependencies are downloaded.
 And then to run the application
 
 ```

@@ -26,9 +26,7 @@ public class RoutesReader {
     private String getTrip_Id ;
     private int teller = 0;
     String routeLongName="";
-    
-    
-    
+   
     
     public String getRouteLongName(String route_id){
   
@@ -80,10 +78,8 @@ public class RoutesReader {
         
         lineCounter++;
     }
-    in.close(); 
+    in.close();        
        
-       
-    
     }
     
 }
