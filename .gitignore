@@ -12,7 +12,17 @@ buildNumber.properties
 .mvn/timing.properties
 delays/
 .ideas/
-
+routes.txt
+agency.txt
+trip_updates.pb
+service_alerts.pb
+calendar_dates.txt
+calendars.txt
+feed_info.txt
+stop_times.txt
+stops.txt
+trips.txt
+routes.txt
 
 # OS generated files #
 ######################
