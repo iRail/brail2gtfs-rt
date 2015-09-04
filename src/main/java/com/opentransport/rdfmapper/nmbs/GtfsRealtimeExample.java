@@ -9,6 +9,10 @@ import java.net.URL;
 
 import com.google.transit.realtime.GtfsRealtime.FeedEntity;
 import com.google.transit.realtime.GtfsRealtime.FeedMessage;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  *
@@ -18,17 +22,26 @@ public class GtfsRealtimeExample {
     
     public GtfsRealtimeExample(String filename) throws Exception {
         System.out.println("Testing Real Time Example");
-        URL url = new URL("http://localhost:8000/" +filename);
-        FeedMessage feed = FeedMessage.parseFrom(url.openStream());
-        for (FeedEntity entity : feed.getEntityList()) {
-          if (entity.hasTripUpdate()) {
-            System.out.println(entity.getTripUpdate());
-          }
-            if (entity.hasAlert()) {
-                System.out.println(entity.getAlert());
+        
+        InputStream is;
 
+        try {
+            is = new FileInputStream(filename);
+            FeedMessage feed = FeedMessage.parseFrom(is);
+
+            for (FeedEntity entity : feed.getEntityList()) {
+              if (entity.hasTripUpdate()) {
+                System.out.println(entity.getTripUpdate());
+              }
+                if (entity.hasAlert()) {
+                    System.out.println(entity.getAlert());
+                }
             }
+            is.close(); 
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-      }
-    
+      }    
 }
