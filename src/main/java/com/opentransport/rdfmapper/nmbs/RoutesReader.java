@@ -5,8 +5,7 @@
  */
 package com.opentransport.rdfmapper.nmbs;
 
-import com.opentransport.rdfmapper.nmbs.containers.Routes;
-import com.opentransport.rdfmapper.nmbs.containers.RoutesInfoTemp;
+import com.opentransport.rdfmapper.nmbs.containers.Route;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -20,66 +19,47 @@ import java.util.logging.Logger;
  * @author timtijssens
  */
 public class RoutesReader {
-    
-    private HashMap Routes = new HashMap();
-    private ErrorLogWriter errorWriter =  new  ErrorLogWriter();
-    private String getTrip_Id ;
-    private int teller = 0;
-    String routeLongName="";
-   
-    
-    public String getRouteLongName(String route_id){
-  
-    Routes route ;
+
+    private HashMap routes;
+
+    public RoutesReader() {
+        routes = new HashMap();
         
-       route = (Routes) Routes.get(route_id);
-       // RouteInfo = (RoutesInfoTemp) RoutesInfo.get("IC118");
-        teller ++;
-       
+        readTxt();
+    }
+
+    public String getRouteLongName(String route_id) {
+        Route route = (Route) routes.get(route_id);
+
         try {
-            
-          routeLongName= route.getRoute_long_name();
+            return route.getRoute_long_name();
         } catch (Exception e) {
-            System.out.println(route_id);
-            System.out.println(e);
-            
+            System.out.println("Route_id not found in routes.txt: " + route_id);
         }
-       
-       return routeLongName;
-       
-       
-    
-    }   
-    
-    public RoutesReader(){
+
+        return "";
+    }
+
+    private void readTxt() {
         try {
-            Readtxt();
-        } catch (IOException ex) {
-            errorWriter.writeError(ex.toString());
-            Logger.getLogger(RoutesInfoTempReader.class.getName()).log(Level.SEVERE, null, ex);
+            BufferedReader in = new BufferedReader(new FileReader("routes.txt"));
+            String line;
+            int lineCounter = 0;
+            while ((line = in.readLine()) != null) {
+                if (lineCounter > 0) {
+                    String[] parts = line.split(",");
+                    Route route = new Route(parts[0], parts[1], parts[2], parts[3], parts[4]);
+
+                    routes.put(route.getRoute_id(), route);
+                }
+
+                lineCounter++;
+            }
+            in.close();
+        } catch (FileNotFoundException fe) {
+            System.out.println("Failed to open routes.txt");
+        } catch (IOException ioe) {
+            System.out.println("Failed to read routes.txt");
         }
-    
-    
     }
-    
-    private void Readtxt() throws FileNotFoundException, IOException{
-    BufferedReader in = new BufferedReader(new FileReader("routes.txt"));
-    String line;
-    int lineCounter=0;
-    while((line = in.readLine()) != null)
-    {
-        if (lineCounter > 0) {
-            
-            String[] parts = line.split(",");
-            Routes route = new Routes(parts[0], parts[1], parts[2],parts[3],parts[4]);
-            
-            Routes.put(route.getRoute_id(), route);
-        }
-        
-        lineCounter++;
-    }
-    in.close();        
-       
-    }
-    
 }

@@ -18,6 +18,8 @@ How to run it from CLI
 
 You should have an unzipped gtfs feed of the Belgium railway unzipped in the root directory. This can be downloaded from http://gtfs.irail.be/nmbs/nmbs-latest.zip
 
+It is recommended to remove from calendar_dates.txt all lines with dates from the past.
+
 
 ```
 mvn install

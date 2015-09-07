@@ -187,9 +187,6 @@ public class LiveBoardFetcher {
                     trainCanceled.put(trainNumber, "Afgeschaft");                                                       
                 }
                 if (!trainDelay.equals("Afgeschaft")) {
-                   
-                  
-                    
                     trainCachePool.execute(new Runnable() {
                         @Override
                         public void run() {
@@ -211,10 +208,6 @@ public class LiveBoardFetcher {
         percentageOfDelays = (percentageOfDelays / totalTrains.size()) *100;        
         System.out.println("Percentage of Trains having issues is " +percentageOfDelays);       
         System.out.println("Finished Reading Trains number of trains having issues is  "+ trainDelays.size() +" ");
-        
-         ScrapeTrip scrapeDelayedTrains  = new ScrapeTrip();
-         scrapeDelayedTrains.startScrape(trainDelays);
-         
          
         trainCachePool.shutdown();
         try {
@@ -237,6 +230,10 @@ public class LiveBoardFetcher {
   
         
         return liveBoards;
+    }
+    
+    public Map<String,String> getTrainDelays() {
+        return trainDelayed;
     }
     
     public LiveBoard getLiveBoard(String stationId, String date, String time, int numberOfResults) {

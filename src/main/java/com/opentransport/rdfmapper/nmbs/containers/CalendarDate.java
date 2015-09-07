@@ -9,7 +9,7 @@ package com.opentransport.rdfmapper.nmbs.containers;
  *
  * @author timtijssens
  */
-public class CalendarDates {
+public class CalendarDate {
     
     private String service_id;
     private String date;
@@ -19,10 +19,10 @@ public class CalendarDates {
      * @return the service_id
      */
     
-    public CalendarDates(String service_id, String date,String exception_type){
-        this.service_id=service_id;
-        this.date=date;
-        this.exception_type=exception_type;
+    public CalendarDate (String service_id, String date,String exception_type){
+        this.service_id = service_id;
+        this.date = date;
+        this.exception_type = exception_type;
     
     
     }
@@ -42,7 +42,5 @@ public class CalendarDates {
      */
     public String getException_type() {
         return exception_type;
-    }
-    
-    
+    }   
 }

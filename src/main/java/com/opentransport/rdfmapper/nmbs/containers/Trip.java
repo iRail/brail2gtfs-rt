@@ -9,16 +9,16 @@ package com.opentransport.rdfmapper.nmbs.containers;
  *
  * @author timtijssens
  */
-public class Trips {
+public class Trip {
+
     private String route_id;
     private String service_id;
     private String trip_id;
-    
-    public Trips(String route_id,String service_id, String trip_id){
-    this.route_id = route_id;
-    this.service_id=service_id;
-    this.trip_id = trip_id;    
-    
+
+    public Trip(String route_id, String service_id, String trip_id) {
+        this.route_id = route_id;
+        this.service_id = service_id;
+        this.trip_id = trip_id;
     }
 
     /**
@@ -41,7 +41,4 @@ public class Trips {
     public String getTrip_id() {
         return trip_id;
     }
-    
-    
-    
 }

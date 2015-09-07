@@ -2,6 +2,7 @@ package com.opentransport.rdfmapper.nmbs;
 
 import static com.opentransport.rdfmapper.nmbs.AddTripDemoUpdate.PromptForUpdate;
 import com.opentransport.rdfmapper.nmbs.containers.GtfsRealtime;
+import com.opentransport.rdfmapper.nmbs.containers.LiveBoard;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -10,6 +11,7 @@ import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
 import java.util.Timer;
@@ -27,7 +29,15 @@ import org.simpleframework.transport.connect.SocketConnection;
  * @author Tim Tijssens
  */
 public class Main {
-
+    
+    public static int EXIT_AUTOMATICALLY = 4; // minutes
+    
+    protected static RoutesReader rr;
+    protected static TripReader tr;
+    protected static CalendarDateReader cdr;
+    
+    protected static ScrapeTrip scrapeTrip;
+    
     /**
      * @param args the command line arguments
      */
@@ -37,10 +47,12 @@ public class Main {
             public void run() {
                 
                 // Create trip_updates.pb
-                scrapeLiveBoards();
-                System.exit(0);
+                generateTripUpdates();
 
-                // testData("trip_updates.pb");              
+                // Test
+                // testData("trip_updates.pb");
+                
+                System.exit(0);
             }
         };
 
@@ -48,8 +60,10 @@ public class Main {
             public void run() {
                 // Creating this class generates a new service_alerts.pb
                 NetworkDisturbanceFetcher ndf = new NetworkDisturbanceFetcher();
-                // Write output
-                //testData("service_alerts.pb");
+                ndf.writeDisturbanceFile();
+                
+                // Test
+                // testData("service_alerts.pb");
             }
         };
         Thread thread3 = new Thread() {
@@ -57,7 +71,7 @@ public class Main {
                 System.out.println("Safety Thread");
 
                 try {
-                    Thread.sleep(120000);
+                    Thread.sleep(EXIT_AUTOMATICALLY * 400000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -68,111 +82,56 @@ public class Main {
         };
         thread1.start();
         thread2.start();
-        //Safety Thread to make sure everything is being quit after 3 Minutes
+        //Safety Thread to make sure that the program exits
         thread3.start();
     }
 
-    public static void runDemo() {
-        GtfsRealtime.FeedMessage.Builder feedMessage = null;
-
-        try {
-            feedMessage = PromptForUpdate();
-        } catch (IOException ex) {
-            Logger.getLogger(AddTripDemoUpdate.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public static void generateTripUpdates() {
+        scrapeTrip = new ScrapeTrip();
         
-        //Write the new TripUpdate back to disk
-        try {
-
-            FileOutputStream output = new FileOutputStream("trip_updates");
-
-            feedMessage.build().writeTo(output);
-            output.close();
-            System.out.println("File writen successful");
-
-        } catch (IOException e) {
-            System.err.println("Error failed to write file");
-        }
+//        Thread loadRoutes = new Thread() {
+//            @Override
+//            public void run() {
+//                rr = new RoutesReader();
+//                scrapeTrip.setRoutesReader(rr);
+//            }
+//        };
+//        loadRoutes.start();
+        
+        Thread loadCalendarDates = new Thread() {
+            public void run() {
+                cdr =  new CalendarDateReader();
+                scrapeTrip.setCalendarDateReader(cdr);
+            }
+        };                
+        loadCalendarDates.start();
+                        
+        Thread loadTrips = new Thread() {
+            public void run() {
+                tr = new TripReader();
+                scrapeTrip.setTripReader(tr);
+            }
+        };        
+        loadTrips.start();
+        
+        
+        String stationsNMBS = "http://irail.be/stations/NMBS/";
+        
+        List<String> stationIds = StationDatabase.getInstance().getAllStationIdsFromGTFSFeed();
+        
+        LiveBoardFetcher liveBoardFetcher = new LiveBoardFetcher();
+        
+        System.out.println("START OF LIVEBOARD FETCH");
+        liveBoardFetcher.getLiveBoards(stationIds,"","",10000);
+        
+        scrapeTrip.startScrape(liveBoardFetcher.getTrainDelays());
     }
-
-    public static void runScraper() {
-        ScrapeTrip scraper = new ScrapeTrip();
-    }
-
+    
     public static void testData(String fileName) {
         try {
             GtfsRealtimeExample testenData = new GtfsRealtimeExample(fileName);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    public static void scrapeLiveBoards() {
-
-        Properties prop = new Properties();
-        File f = new File("config.properties");
-        if (f.exists() && f.isFile()) {
-            try {
-                FileInputStream fis = new FileInputStream(f);
-                prop.load(fis);
-                fis.close();
-            } catch (IOException ex) {
-                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("Error reading config file: \"" + f.getName() + "\"");
-                System.exit(-1);
-            }
-        } else {
-
-            System.out.println("Could not find config file: \"" + f.getName() + "\"");
-            System.exit(-2);
-        }
-        final int port = Integer.parseInt(prop.getProperty("port"));
-        final int updateInterval = Integer.parseInt(prop.getProperty("updateInterval"));
-        final boolean stoppable = Boolean.parseBoolean(prop.getProperty("stoppable"));
-
-        System.out.println("START OF LIVEBOARD FETCH");
-
-        SortedMapper mapper = new SortedMapper();
-
-        //final ServerContainer container = new ServerContainer(mapper,"NMBS");
-        //SocketAddress address = new InetSocketAddress(port);
-//        try {
-//            ContainerSocketProcessor csp = new ContainerSocketProcessor(container);
-//            Connection connection = new SocketConnection(csp);
-//            connection.connect(address);
-//            System.out.println(Calendar.getInstance().getTime() + ": SERVER STARTED AT PORT " + port);
-//            
-//            ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-//            scheduler.scheduleAtFixedRate(new Runnable() {
-//                @Override
-//                public void run() {
-//                    System.out.println(Calendar.getInstance().getTime() + ": START OF UPDATE");
-//                    long start = System.currentTimeMillis();
-//                    container.setMapper(new SortedMapper());
-//                    long end = System.currentTimeMillis();
-//                    System.out.println(Calendar.getInstance().getTime() + ": END OF UPDATE (" + (end - start) + " ms)");
-//                }
-//            },updateInterval,updateInterval,TimeUnit.SECONDS);
-//            
-//            if (stoppable) {
-//                boolean shutdown = false;
-//                while(!shutdown) {
-//                    System.out.println("Type STOP to shut down the server");
-//                    Scanner s = new Scanner(new InputStreamReader(System.in));
-//                    if (s.nextLine().toLowerCase().equals("stop")) {
-//                        scheduler.shutdown();
-//                        connection.close();
-//                        s.close();
-//                        System.out.println(Calendar.getInstance().getTime() + ": SERVER STOPPED!");
-//                        shutdown = true;
-//                    }
-//                    else {
-//                        System.out.print("ERROR! ");
-//                    }
-//                }
-//            }
-//        } catch (IOException ex) {
-//            Logger.getLogger(Main.class.getName()).log(Level.SEVERE,null,ex);
-//        }
     }
 }

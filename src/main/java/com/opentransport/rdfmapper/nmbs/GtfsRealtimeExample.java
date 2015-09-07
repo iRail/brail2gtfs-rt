@@ -21,7 +21,7 @@ import java.io.InputStream;
 public class GtfsRealtimeExample {
     
     public GtfsRealtimeExample(String filename) throws Exception {
-        System.out.println("Testing Real Time Example");
+        System.out.println("Testing " + filename);
         
         InputStream is;
 
