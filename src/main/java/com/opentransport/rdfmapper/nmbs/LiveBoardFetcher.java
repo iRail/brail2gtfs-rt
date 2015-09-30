@@ -38,7 +38,7 @@ import org.jsoup.select.Elements;
  */
 public class LiveBoardFetcher {
     
-    private static final int NUMBER_OF_CONNECTIONS = 100;
+    private static final int NUMBER_OF_CONNECTIONS = 50;
     private static final int CONNECTION_TIMEOUT_IN_MILLISECONDS = 3000;
     private static final long POOL_TIMEOUT = 60;
     
@@ -52,6 +52,8 @@ public class LiveBoardFetcher {
     private Map<TrainId,TrainInfo> trainCache;
     private Map<String,String> sources;
     private Map<String,String> retries;
+    
+    public static int countConnections = 0;
     
     public LiveBoardFetcher() {
         trainCache = new ConcurrentHashMap<>();
@@ -186,19 +188,19 @@ public class LiveBoardFetcher {
                     trainDelays.put(trainNumber, "Afgeschaft");
                     trainCanceled.put(trainNumber, "Afgeschaft");                                                       
                 }
-                if (!trainDelay.equals("Afgeschaft")) {
-                    trainCachePool.execute(new Runnable() {
-                        @Override
-                        public void run() {
-                            long start = System.currentTimeMillis();
-                            if (!trainCache.containsKey(new TrainId(trainNumber,destination))) {
-                                insertTrain(trainNumber,destination,trainLink);
-                            }
-                            long end = System.currentTimeMillis();
-//                            System.out.println("TRAIN FETCH " + numberI + " - " + numberJ + " (" + (end - start) + " ms)");
-                        }
-                    });
-                }
+//                if (!trainDelay.equals("Afgeschaft")) {
+//                    trainCachePool.execute(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            long start = System.currentTimeMillis();
+//                            if (!trainCache.containsKey(new TrainId(trainNumber,destination))) {
+//                                insertTrain(trainNumber,destination,trainLink);
+//                            }
+//                            long end = System.currentTimeMillis();
+////                            System.out.println("TRAIN FETCH " + numberI + " - " + numberJ + " (" + (end - start) + " ms)");
+//                        }
+//                    });
+//                }
             }           
         }
         System.out.println("Trains cancelled " + trainCanceled.size());
@@ -415,6 +417,7 @@ public class LiveBoardFetcher {
     }
     
     private String getUrlSource(String link) {
+        countConnections++;
         URL url = null;
         try {
             url = new URL(link);

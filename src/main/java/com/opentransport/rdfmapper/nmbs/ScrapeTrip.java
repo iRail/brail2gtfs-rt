@@ -42,6 +42,8 @@ public class ScrapeTrip {
             
     private int NUMBER_OF_CONNECTIONS_TO_IRAIL_API = 10;
     
+    public static int countConnections = 0;
+    
     public ScrapeTrip() {
         feedHeader.setGtfsRealtimeVersion("1.0");
         feedHeader.setIncrementality(GtfsRealtime.FeedHeader.Incrementality.FULL_DATASET);
@@ -114,6 +116,7 @@ public class ScrapeTrip {
             trainName = returnCorrectTrainFormat((String) mapEntry.getKey());
             url = "http://api.irail.be/vehicle/?id=BE.NMBS." + trainName + "&format=json";
             System.out.println("Requesting: " + url);
+            countConnections++;
             pool.submit(new DownloadDelayedTrains(trainName, url));
         }
         pool.shutdown();
@@ -219,7 +222,7 @@ public class ScrapeTrip {
 
                 // arrival time delay
                 delay = (String) stop.get("delay");
-                System.out.println("Delay" + delay);
+
                 int delayInt = Integer.parseInt(delay);
                 if (maxDelay < delayInt) {
                     maxDelay = delayInt;

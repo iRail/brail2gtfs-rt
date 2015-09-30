@@ -1,28 +1,8 @@
 package com.opentransport.rdfmapper.nmbs;
 
-import static com.opentransport.rdfmapper.nmbs.AddTripDemoUpdate.PromptForUpdate;
-import com.opentransport.rdfmapper.nmbs.containers.GtfsRealtime;
-import com.opentransport.rdfmapper.nmbs.containers.LiveBoard;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.InetSocketAddress;
-import java.net.SocketAddress;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Properties;
-import java.util.Scanner;
-import java.util.Timer;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.simpleframework.http.core.ContainerSocketProcessor;
-import org.simpleframework.transport.connect.Connection;
-import org.simpleframework.transport.connect.SocketConnection;
 
 /**
  *
@@ -124,7 +104,11 @@ public class Main {
         System.out.println("START OF LIVEBOARD FETCH");
         liveBoardFetcher.getLiveBoards(stationIds,"","",10000);
         
+        System.out.println("AMOUNT OF CONNECTIONS NMBS: " + liveBoardFetcher.countConnections);
+        
         scrapeTrip.startScrape(liveBoardFetcher.getTrainDelays());
+        
+        System.out.println("AMOUNT OF CONNECTIONS IRAIL: " + scrapeTrip.countConnections);
     }
     
     public static void testData(String fileName) {

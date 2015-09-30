@@ -10,7 +10,7 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 .mvn/timing.properties
-delays/
+delays/*
 .ideas/
 routes.txt
 agency.txt
