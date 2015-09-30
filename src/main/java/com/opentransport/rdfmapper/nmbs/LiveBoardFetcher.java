@@ -38,9 +38,9 @@ import org.jsoup.select.Elements;
  */
 public class LiveBoardFetcher {
     
-    private static final int NUMBER_OF_CONNECTIONS = 50;
+    private static final int NUMBER_OF_CONNECTIONS = 10;
     private static final int CONNECTION_TIMEOUT_IN_MILLISECONDS = 3000;
-    private static final long POOL_TIMEOUT = 60;
+    private static final long POOL_TIMEOUT = 140; // Pool closes after 2 minutes and 20 seconds
     
     private int trainsDelayed =1;
     private int trainsCancelled =1;
@@ -146,62 +146,64 @@ public class LiveBoardFetcher {
         for (int i = 0; i < stationIds.size(); i++) {
             final int numberI = i + 1;
             String stationId = stationIds.get(i);
-            Document doc = Jsoup.parse(sources.get(stationId));
-            Elements trains = doc.select(".journey");
-            
-            for (int j = 0; j < trains.size(); j++) {
-                
-                final int numberJ = j + 1;
-                Element train = trains.get(j);
-                Elements trainA = train.select("a");
-                final String trainLink = trainA.attr("href");
-                final String trainNumber = trainA.text();
-                //Train Number is Trip ID
-               
-                String stationInfo = train.ownText().replaceAll(">","").trim();
-                String trainTarget = stationInfo;
-                int split = stationInfo.indexOf(" perron ");
-                if (split != -1) {
-                    trainTarget = stationInfo.substring(0,split);
-                }
-                final String destination = trainTarget;
-                String trainDelay = train.select(".delay").text().replaceAll("\\+","");
-                totalTrains.put(trainNumber, trainDelay);
-                if (trainDelay.length() > 0) {
-                
-                    if (trainDelay.equals("0")) {
-                        
-                    }else{
-                                try{
-                                  int num = Integer.parseInt(trainDelay);
-                                  trainDelayed.put(trainNumber, "Afgeschaft");
-                                } catch (NumberFormatException e) {
-                                  // not an integer!
-                                }
-                           //System.out.println("Current Delay is " + trainDelay + "minutes for train " + trainNumber);
-                          trainDelays.put(trainNumber, trainDelay);                             
+            if (sources.get(stationId) != null) {
+                Document doc = Jsoup.parse(sources.get(stationId));
+                Elements trains = doc.select(".journey");
+
+                for (int j = 0; j < trains.size(); j++) {
+
+                    final int numberJ = j + 1;
+                    Element train = trains.get(j);
+                    Elements trainA = train.select("a");
+                    final String trainLink = trainA.attr("href");
+                    final String trainNumber = trainA.text();
+                    //Train Number is Trip ID
+
+                    String stationInfo = train.ownText().replaceAll(">","").trim();
+                    String trainTarget = stationInfo;
+                    int split = stationInfo.indexOf(" perron ");
+                    if (split != -1) {
+                        trainTarget = stationInfo.substring(0,split);
                     }
+                    final String destination = trainTarget;
+                    String trainDelay = train.select(".delay").text().replaceAll("\\+","");
+                    totalTrains.put(trainNumber, trainDelay);
+                    if (trainDelay.length() > 0) {
+
+                        if (trainDelay.equals("0")) {
+
+                        }else{
+                                    try{
+                                      int num = Integer.parseInt(trainDelay);
+                                      trainDelayed.put(trainNumber, "Afgeschaft");
+                                    } catch (NumberFormatException e) {
+                                      // not an integer!
+                                    }
+                               //System.out.println("Current Delay is " + trainDelay + "minutes for train " + trainNumber);
+                              trainDelays.put(trainNumber, trainDelay);                             
+                        }
+                    }
+                     if (trainDelay.equals("Afgeschaft")) {
+
+                         //  System.out.println("Cancelled Train Found " + trainNumber);                     
+                        trainDelays.put(trainNumber, "Afgeschaft");
+                        trainCanceled.put(trainNumber, "Afgeschaft");                                                       
+                    }
+    //                if (!trainDelay.equals("Afgeschaft")) {
+    //                    trainCachePool.execute(new Runnable() {
+    //                        @Override
+    //                        public void run() {
+    //                            long start = System.currentTimeMillis();
+    //                            if (!trainCache.containsKey(new TrainId(trainNumber,destination))) {
+    //                                insertTrain(trainNumber,destination,trainLink);
+    //                            }
+    //                            long end = System.currentTimeMillis();
+    ////                            System.out.println("TRAIN FETCH " + numberI + " - " + numberJ + " (" + (end - start) + " ms)");
+    //                        }
+    //                    });
+    //                }
                 }
-                 if (trainDelay.equals("Afgeschaft")) {
-                     
-                     //  System.out.println("Cancelled Train Found " + trainNumber);                     
-                    trainDelays.put(trainNumber, "Afgeschaft");
-                    trainCanceled.put(trainNumber, "Afgeschaft");                                                       
-                }
-//                if (!trainDelay.equals("Afgeschaft")) {
-//                    trainCachePool.execute(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            long start = System.currentTimeMillis();
-//                            if (!trainCache.containsKey(new TrainId(trainNumber,destination))) {
-//                                insertTrain(trainNumber,destination,trainLink);
-//                            }
-//                            long end = System.currentTimeMillis();
-////                            System.out.println("TRAIN FETCH " + numberI + " - " + numberJ + " (" + (end - start) + " ms)");
-//                        }
-//                    });
-//                }
-            }           
+            }
         }
         System.out.println("Trains cancelled " + trainCanceled.size());
         System.out.println("Trains delayed " + trainDelayed.size());
@@ -417,6 +419,14 @@ public class LiveBoardFetcher {
     }
     
     private String getUrlSource(String link) {
+        // Set latency so NMBS server doesn't get overwelmed
+        try {
+            // Sleep random few seconds
+            Thread.sleep((int)(Math.random() * 3000));
+        } catch (InterruptedException e) {
+        }
+        // System.out.println(countConnections);
+        
         countConnections++;
         URL url = null;
         try {

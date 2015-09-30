@@ -47,7 +47,7 @@ public class DownloadDelayedTrains implements Runnable {
     }
 
     private void downloadDelayedTrains(String url, String fileName) throws MalformedURLException, IOException {
-        System.out.println("Writing " + fileName);
+        // System.out.println("Writing " + fileName);
         URL link = new URL(url);
         InputStream in = new BufferedInputStream(link.openStream());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -67,7 +67,7 @@ public class DownloadDelayedTrains implements Runnable {
     
     // Removes whitespaces before the data begins
     private void removeEmptyLines(String fileName) throws FileNotFoundException, IOException {
-        System.out.println("Removing empty lines from " + fileName);
+        // System.out.println("Removing empty lines from " + fileName);
         String fileNameTemp = fileName + ".temp";
         
         FileReader fr = new FileReader(fileName);
@@ -96,7 +96,7 @@ public class DownloadDelayedTrains implements Runnable {
         boolean success = f.renameTo(new File(fileName));
         
         if (success) {
-            System.out.println("File " + fileName + " successfully rewritten");
+            // System.out.println("File " + fileName + " successfully rewritten");
         } else {
             System.out.println("Something went wrong with rewriting " + fileName);
         }

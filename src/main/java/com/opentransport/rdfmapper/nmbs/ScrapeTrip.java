@@ -40,7 +40,7 @@ public class ScrapeTrip {
     private TripReader tr;
     private CalendarDateReader cdr;
             
-    private int NUMBER_OF_CONNECTIONS_TO_IRAIL_API = 10;
+    private int NUMBER_OF_CONNECTIONS_TO_IRAIL_API = 5;
     
     public static int countConnections = 0;
     
@@ -75,7 +75,7 @@ public class ScrapeTrip {
             if (f.exists() && !f.isDirectory()) {
                 GtfsRealtime.FeedEntity.Builder feedEntity = parseJson(i, "./delays/" + trainName + ".json", cancelled, trainName);
                 feedMessage.addEntity(i, feedEntity);
-                System.out.println(trainName + " has been processed");
+                // System.out.println(trainName + " has been processed");
                 i++;
             } else {
                 errorWriter.writeError("File Not Found " + "./delays/" + trainName + ".json");
@@ -115,7 +115,7 @@ public class ScrapeTrip {
             Map.Entry mapEntry = (Map.Entry) iterator.next();
             trainName = returnCorrectTrainFormat((String) mapEntry.getKey());
             url = "http://api.irail.be/vehicle/?id=BE.NMBS." + trainName + "&format=json";
-            System.out.println("Requesting: " + url);
+            // System.out.println("Requesting: " + url);
             countConnections++;
             pool.submit(new DownloadDelayedTrains(trainName, url));
         }
@@ -176,7 +176,7 @@ public class ScrapeTrip {
             tripDescription.setRouteId(routeId);
 
             String tripId = tr.getTripIdFromRouteId(routeId, cdr);
-            System.out.println("Trip id set: " + tripId);
+            // System.out.println("Trip id set: " + tripId);
             
             if (cancelled) {
                 tripDescription.setScheduleRelationship(GtfsRealtime.TripDescriptor.ScheduleRelationship.CANCELED);
