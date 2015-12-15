@@ -22,12 +22,12 @@ import org.json.simple.parser.ParseException;
  * @author Nicola De Clercq
  */
 public class StationDatabase {
-    
+
     private Map<String,StationInfo> database;
     private Map<String,String> mapping;
     private static volatile StationDatabase stationDB;
     private HashMap Stations = new HashMap();
-    
+
     private StationDatabase() {
         database = new HashMap<>();
         mapping = new HashMap<>();
@@ -52,26 +52,26 @@ public class StationDatabase {
             Logger.getLogger(StationDatabase.class.getName()).log(Level.SEVERE,null,ex);
         }
     }
-    
+
     public static StationDatabase getInstance() {
         if (stationDB == null) {
             stationDB = new StationDatabase();
         }
         return stationDB;
     }
-    
+
     public StationInfo getStationInfo(String stationId) {
         return database.get(stationId);
     }
-    
+
     public String getStationId(String stationName) {
         return mapping.get(stationName);
     }
-    
+
     public List<String> getAllStationIds() {
         return new ArrayList<>(database.keySet());
     }
-    
+
     public List<String> getAllStationIdsFromGTFSFeed(){
         try {
             readTxtGetAllStations();
@@ -79,31 +79,31 @@ public class StationDatabase {
         } catch (IOException ex) {
             Logger.getLogger(StationDatabase.class.getName()).log(Level.SEVERE, null, ex);
             return new ArrayList<>(database.keySet());
-        }       
+        }
     }
-    
+
     private void readTxtGetAllStations()throws FileNotFoundException, IOException{
-        
-    FileCleaner fc = new FileCleaner() ;   
+
+    FileCleaner fc = new FileCleaner() ;
     fc.cleanUpFile("stops",".txt");
     BufferedReader in = new BufferedReader(new FileReader("stops.txt"));
     String line;
-    int lineCounter=0;
+    in.readLine(); // header
     while((line = in.readLine()) != null)
     {
-        if (lineCounter > 0) {
-            
+        if (!line.equals("")) {
             String[] parts = line.split(",");
-            String[] stationID = parts[0].split(":");            
-            String statId = stationID[1];
-            Station station = new Station(stationID[1], parts[1],parts[2],parts[3]);        
-            Stations.put(station.getId(), station);
+            String[] stationID = parts[0].split(":");
+            // Don't add platforms
+            if (stationID.length == 1) {
+                String statId = stationID[0];
+                Station station = new Station(stationID[0], parts[1],parts[2],parts[3]);
+                Stations.put(station.getId(), station);
+            }
         }
-        
-        lineCounter++;
     }
-    in.close(); 
+    in.close();
     }
-    
-    
+
+
 }
