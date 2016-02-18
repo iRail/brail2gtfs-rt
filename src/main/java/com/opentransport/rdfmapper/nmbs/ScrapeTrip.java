@@ -39,6 +39,7 @@ public class ScrapeTrip {
     //private RoutesReader rr;
     private TripReader tr;
     private CalendarDateReader cdr;
+    private int i = 0;
             
     private int NUMBER_OF_CONNECTIONS_TO_IRAIL_API = 5;
     
@@ -55,7 +56,6 @@ public class ScrapeTrip {
     void startScrape(Map trainDelays, boolean canceled) {
         String trainName;
         Iterator iterator = trainDelays.entrySet().iterator();
-        int i = 0;
         
         // Download vehicleinformation from iRail API
         requestJsons(trainDelays);
@@ -76,7 +76,9 @@ public class ScrapeTrip {
                 errorWriter.writeError("File Not Found " + "./delays/" + trainName + ".json");
             }
         }
-        
+    }
+    
+    public void writeToFile() {
         //Write File  
         try {
             FileOutputStream output = new FileOutputStream("trip_updates.pb");

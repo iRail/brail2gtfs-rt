@@ -111,7 +111,10 @@ public class Main {
         
         // Canceled trains
         scrapeTrip.startScrape(liveBoardFetcher.getTrainCanceled(), true);
-
+        
+        // Write to file
+        scrapeTrip.writeToFile();
+        
         System.out.println("AMOUNT OF CONNECTIONS IRAIL: " + scrapeTrip.countConnections);
     }
     
