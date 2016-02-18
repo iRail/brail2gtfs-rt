@@ -52,11 +52,10 @@ public class ScrapeTrip {
         feedMessage.setHeader(feedHeader);
     }
     
-    void startScrape(Map trainDelays) {
+    void startScrape(Map trainDelays, boolean canceled) {
         String trainName;
         Iterator iterator = trainDelays.entrySet().iterator();
         int i = 0;
-        boolean cancelled = false;
         
         // Download vehicleinformation from iRail API
         requestJsons(trainDelays);
@@ -66,14 +65,10 @@ public class ScrapeTrip {
 
             trainName = returnCorrectTrainFormat((String) mapEntry.getKey());
             
-            // All entries say that the route is cancelled. This is not correct
-            //String delay = (String) mapEntry.getValue();
-            //cancelled = delay.equals("Afgeschaft");
-
             //Parse the Json and add it to the Feed 
             File f = new File("./delays/" + trainName + ".json");
             if (f.exists() && !f.isDirectory()) {
-                GtfsRealtime.FeedEntity.Builder feedEntity = parseJson(i, "./delays/" + trainName + ".json", cancelled, trainName);
+                GtfsRealtime.FeedEntity.Builder feedEntity = parseJson(i, "./delays/" + trainName + ".json", canceled, trainName);
                 feedMessage.addEntity(i, feedEntity);
                 // System.out.println(trainName + " has been processed");
                 i++;
@@ -130,7 +125,7 @@ public class ScrapeTrip {
         }
     }
     
-    private GtfsRealtime.FeedEntity.Builder parseJson(int identifier, String fileName, boolean cancelled, String trainName) {
+    private GtfsRealtime.FeedEntity.Builder parseJson(int identifier, String fileName, boolean canceled, String trainName) {
         GtfsRealtime.FeedEntity.Builder feedEntity = GtfsRealtime.FeedEntity.newBuilder();
         feedEntity.setId(Integer.toString(identifier));
         feedEntity.setIsDeleted(false);
@@ -151,10 +146,8 @@ public class ScrapeTrip {
             JSONObject json = (JSONObject) parser.parse(fr);
             String trainId = (String) json.get("vehicle");
             //Setting the VehicleData
-            String routeId = "routes:" + trainName;
+            String routeId = trainName;
             vehicleDescription.setId(routeId);
-            // label is set after processing stops, because routes.txt can be incomplete
-            //vehicleDescription.setLabel(rr.getRouteLongName("routes:" + trainName));
             vehicleDescription.setLicensePlate(trainId);
 
             //Handling Departure Date
@@ -167,20 +160,22 @@ public class ScrapeTrip {
             SimpleDateFormat sdfStartTimeHour = new SimpleDateFormat("HH:mm:ss");
 
             String formattedDepartureDate = sdfStartDate.format(date);
-            String formattedDepartureHour = sdfStartTimeHour.format(date);
+            // String formattedDepartureHour = sdfStartTimeHour.format(date);
 
             // Setting the Trip Description
-            tripDescription.setStartTime(formattedDepartureHour);
+            // tripDescription.setStartTime(formattedDepartureHour);
             //YYYYMMDD format
             tripDescription.setStartDate(formattedDepartureDate);
             tripDescription.setRouteId(routeId);
 
             String tripId = tr.getTripIdFromRouteId(routeId, cdr);
-            // System.out.println("Trip id set: " + tripId);
+            tripDescription.setTripId(tripId);
             
-            if (cancelled) {
-                tripDescription.setScheduleRelationship(GtfsRealtime.TripDescriptor.ScheduleRelationship.CANCELED);
-            }
+            // tripDescription.setScheduleRelationship(GtfsRealtime.TripDescriptor.ScheduleRelationship.SCHEDULED);
+            // if (canceled) {
+                // Can be partially canceled
+                // tripDescription.setScheduleRelationship(GtfsRealtime.TripDescriptor.ScheduleRelationship.CANCELED);
+            // }
 
             //Get Information about stops
             JSONObject rootStop = (JSONObject) json.get("stops");
@@ -203,8 +198,14 @@ public class ScrapeTrip {
                     // tripDescription.setRouteId((String) station.get("@id"));
 
                     String stopId = (String) station.get("id");
-                    stopId = "stops:" + stopId.replaceFirst("[^0-9]+", "") + ":0";
-                    //TODO: if stopid is empty than get from gtfs
+                    stopId = stopId.replaceFirst("[^0-9]+", "") + ":";
+                    stopId = stopId.substring(2); // remove first '00'
+                    if (stop.get("platform") != "") {
+                        stopId += stop.get("platform");
+                    } else {
+                        stopId += "0";
+                    }
+                    
                     stopTimeUpdate.setStopId(stopId);
                     
                     // Constructing route long name from first and last stop
@@ -226,6 +227,12 @@ public class ScrapeTrip {
                 int delayInt = Integer.parseInt(delay);
                 if (maxDelay < delayInt) {
                     maxDelay = delayInt;
+                }
+                
+                // If canceled
+                String isCanceled = (String) stop.get("canceled");
+                if (!isCanceled.equals("0")) {
+                    delayInt = 9999;
                 }
                 
                 stopTimeArrival.setDelay(delayInt);

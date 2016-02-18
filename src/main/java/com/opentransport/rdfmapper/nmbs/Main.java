@@ -30,7 +30,7 @@ public class Main {
                 generateTripUpdates();
 
                 // Test
-                // testData("trip_updates.pb");
+                //testData("trip_updates.pb");
                 
                 System.exit(0);
             }
@@ -43,7 +43,7 @@ public class Main {
                 ndf.writeDisturbanceFile();
                 
                 // Test
-                // testData("service_alerts.pb");
+                //testData("service_alerts.pb");
             }
         };
         Thread thread3 = new Thread() {
@@ -97,7 +97,7 @@ public class Main {
         
         String stationsNMBS = "http://irail.be/stations/NMBS/";
         
-        List<String> stationIds = StationDatabase.getInstance().getAllStationIdsFromGTFSFeed();
+        List<String> stationIds = StationDatabase.getAllStationIdsFromGTFSFeed();
         
         LiveBoardFetcher liveBoardFetcher = new LiveBoardFetcher();
         
@@ -106,8 +106,12 @@ public class Main {
         
         System.out.println("AMOUNT OF CONNECTIONS NMBS: " + liveBoardFetcher.countConnections);
         
-        scrapeTrip.startScrape(liveBoardFetcher.getTrainDelays());
+        // Delayed trains
+        scrapeTrip.startScrape(liveBoardFetcher.getTrainDelays(), false);
         
+        // Canceled trains
+        scrapeTrip.startScrape(liveBoardFetcher.getTrainCanceled(), true);
+
         System.out.println("AMOUNT OF CONNECTIONS IRAIL: " + scrapeTrip.countConnections);
     }
     

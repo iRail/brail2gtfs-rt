@@ -44,7 +44,7 @@ public class LiveBoardFetcher {
     
     private int trainsDelayed =1;
     private int trainsCancelled =1;
-    private Map<String,String> trainDelays = new HashMap();
+    //private Map<String,String> trainDelays = new HashMap();
     private Map<String,String> trainCanceled = new HashMap(); 
     private Map<String,String> totalTrains = new HashMap();
     private Map<String,String> trainDelayed = new HashMap();
@@ -115,15 +115,15 @@ public class LiveBoardFetcher {
                         String newSource = getUrlSource(newLink);
                         if (newSource != null) {
                             sources.put(stationId,newSource);
-                            System.out.println("ONLY 10 SERVICES " 
-                                    + StationDatabase.getInstance().getStationInfo(stationId).getName()
-                                    + " [" + stationId + "]");
+//                            System.out.println("ONLY 10 SERVICES " 
+//                                    + StationDatabase.getStationInfo(stationId).getName()
+//                                    + " [" + stationId + "]");
                         }
                         else {
                             sources.put(stationId,"");
-                            System.out.println("FAILED " 
-                                    + StationDatabase.getInstance().getStationInfo(stationId).getName()
-                                    + " [" + stationId + "]");
+//                            System.out.println("FAILED " 
+//                                    + StationDatabase.getStationInfo(stationId).getName()
+//                                    + " [" + stationId + "]");
                         }
                     }
                 }
@@ -169,26 +169,23 @@ public class LiveBoardFetcher {
                     String trainDelay = train.select(".delay").text().replaceAll("\\+","");
                     totalTrains.put(trainNumber, trainDelay);
                     if (trainDelay.length() > 0) {
-
                         if (trainDelay.equals("0")) {
-
-                        }else{
-                                    try{
-                                      int num = Integer.parseInt(trainDelay);
-                                      trainDelayed.put(trainNumber, "Afgeschaft");
-                                    } catch (NumberFormatException e) {
-                                      // not an integer!
-                                    }
-                               //System.out.println("Current Delay is " + trainDelay + "minutes for train " + trainNumber);
-                              trainDelays.put(trainNumber, trainDelay);                             
+                            // no delay
+                        } else if (trainDelay.equals("Afgeschaft")) {
+                            // System.out.println("Cancelled Train Found " + trainNumber);                     
+                            trainCanceled.put(trainNumber, "Afgeschaft");                          
+                        } else {
+                            try{
+                                int num = Integer.parseInt(trainDelay);
+                                //trainDelays.put(trainNumber, trainDelay);
+                                trainDelayed.put(trainNumber, trainDelay);                             
+                            } catch (NumberFormatException e) {
+                                // not an integer!
+                            }
                         }
                     }
-                     if (trainDelay.equals("Afgeschaft")) {
+                    //System.out.println("Current Delay is " + trainDelay + "minutes for train " + trainNumber);
 
-                         //  System.out.println("Cancelled Train Found " + trainNumber);                     
-                        trainDelays.put(trainNumber, "Afgeschaft");
-                        trainCanceled.put(trainNumber, "Afgeschaft");                                                       
-                    }
     //                if (!trainDelay.equals("Afgeschaft")) {
     //                    trainCachePool.execute(new Runnable() {
     //                        @Override
@@ -205,13 +202,13 @@ public class LiveBoardFetcher {
                 }
             }
         }
-        System.out.println("Trains cancelled " + trainCanceled.size());
+        System.out.println("Trains canceled " + trainCanceled.size());
         System.out.println("Trains delayed " + trainDelayed.size());
-        double percentageOfDelays = 0+ trainDelays.size();
+        double percentageOfDelays = 0+ trainDelayed.size();
         System.out.println("Total number of trains " + totalTrains.size());
         percentageOfDelays = (percentageOfDelays / totalTrains.size()) *100;        
         System.out.println("Percentage of Trains having issues is " +percentageOfDelays);       
-        System.out.println("Finished Reading Trains number of trains having issues is  "+ trainDelays.size() +" ");
+        System.out.println("Finished Reading Trains number of trains having issues is  "+ trainDelayed.size() +" ");
          
         trainCachePool.shutdown();
         try {
@@ -240,6 +237,10 @@ public class LiveBoardFetcher {
         return trainDelayed;
     }
     
+     public Map<String,String> getTrainCanceled() {
+        return trainCanceled;
+    }
+    
     public LiveBoard getLiveBoard(String stationId, String date, String time, int numberOfResults) {
         ArrayList<String> stations = new ArrayList<>();
         stations.add(stationId);
@@ -250,16 +251,16 @@ public class LiveBoardFetcher {
     private LiveBoard parseLiveBoard(String stationId) {
         LiveBoard liveBoard = new LiveBoard();
         List<Service> services = new ArrayList<>();
-        liveBoard.setStationInfo(StationDatabase.getInstance().getStationInfo(stationId));
+        //liveBoard.setStationInfo(StationDatabase.getInstance().getStationInfo(stationId));
         Document doc = Jsoup.parse(sources.get(stationId));
         
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm,dd/MM/yy");
         Calendar time = Calendar.getInstance();
         String[] timeA = null;
         if (doc.select(".qs").isEmpty()) {
-            System.out.println("ERROR IN LIVEBOARD "
-                    + StationDatabase.getInstance().getStationInfo(stationId).getName()
-                    + " [" + stationId + "]");
+//            System.out.println("ERROR IN LIVEBOARD "
+//                    + StationDatabase.getInstance().getStationInfo(stationId).getName()
+//                    + " [" + stationId + "]");
         }
         else {
             Element timeE = doc.select(".qs").get(0);
