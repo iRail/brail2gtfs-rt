@@ -5,62 +5,109 @@
  */
 package com.opentransport.rdfmapper.nmbs.containers;
 
-/**
- *
- * @author timtijssens
- */
 public class NetworkDisturbance {
     
-    private String title;
-    private String description;
-    private String link;
+    private String headerText;
+    private String descriptionText;
+    private String url;
     private String language;
-    private String pubDate;
-    
-    public NetworkDisturbance(String title, String description, String link , String language, String pubDate){
-    this.title = title;
-    this.description = description;
-    this.link=link;
-    this.language=language;
-    this.pubDate=pubDate;      
-    }
-    
-    
+    private long start; // Unix Epoch
+    private long end; // Unix Epoch
+    private int startStationId;
+    private int endStationId;
+    private int impactStationId;
+    private String id;
 
-    /**
-     * @return the title
-     */
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * @return the description
-     */
-    public String getDescription() {
-        return description;
+    public NetworkDisturbance(String headerText, String descriptionText, String url, String language, long start, long end, int startStationId, int endStationId, int impactStationId, String id) {
+        this.headerText = headerText;
+        this.descriptionText = descriptionText;
+        this.url = url;
+        this.language = language;
+        this.start = start;
+        this.end = end;
+        this.startStationId = startStationId;
+        this.endStationId = endStationId;
+        this.impactStationId = impactStationId;
+        this.id = id;
     }
 
-    /**
-     * @return the link
-     */
-    public String getLink() {
-        return link;
+    public String getHeaderText() {
+        return headerText;
     }
 
-    /**
-     * @return the language
-     */
+    public void setHeaderText(String headerText) {
+        this.headerText = headerText;
+    }
+
+    public String getDescriptionText() {
+        return descriptionText;
+    }
+
+    public void setDescriptionText(String descriptionText) {
+        this.descriptionText = descriptionText;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public String getLanguage() {
         return language;
     }
 
-    /**
-     * @return the pubDate
-     */
-    public String getPubDate() {
-        return pubDate;
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public long getStart() {
+        return start;
+    }
+
+    public void setStart(long start) {
+        this.start = start;
+    }
+
+    public long getEnd() {
+        return end;
+    }
+
+    public void setEnd(long end) {
+        this.end = end;
+    }
+
+    public int getStartStationId() {
+        return startStationId;
+    }
+
+    public void setStartStationId(int startStationId) {
+        this.startStationId = startStationId;
+    }
+
+    public int getEndStationId() {
+        return endStationId;
+    }
+
+    public void setEndStationId(int endStationId) {
+        this.endStationId = endStationId;
     }
     
-    
+    public int getImpactStationId() {
+        return impactStationId;
+    }
+
+    public void setImpactStationId(int impactStationId) {
+        this.impactStationId = impactStationId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }    
 }
