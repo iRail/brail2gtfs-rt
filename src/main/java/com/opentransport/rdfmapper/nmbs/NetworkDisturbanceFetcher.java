@@ -140,7 +140,10 @@ public class NetworkDisturbanceFetcher {
             //Setting the Description 
             GtfsRealtime.TranslatedString.Builder translatedDescriptionString = GtfsRealtime.TranslatedString.newBuilder();
             GtfsRealtime.TranslatedString.Translation.Builder translationsDescription = GtfsRealtime.TranslatedString.Translation.newBuilder();
-            translationsDescription.setText(disturbance.getDescriptionText());
+            String htmlDescription = disturbance.getDescriptionText();
+            // Convert HTML to plain text
+            String plainTextDescription = html2plaintext(htmlDescription);
+            translationsDescription.setText(plainTextDescription);
             translationsDescription.setLanguage(lang);
             translatedDescriptionString.addTranslation(0, translationsDescription);
             alert.setDescriptionText(translatedDescriptionString);
@@ -213,6 +216,12 @@ public class NetworkDisturbanceFetcher {
         }
 
         return feedMessage;
+    }
+    
+    private String html2plaintext(String htmlText) {
+        // replace all occurrences of one or more HTML tags with optional
+        // whitespace inbetween with a single space character 
+        return htmlText.replaceAll("(?s)<[^>]*>(\\s*<[^>]*>)*", " ");
     }
 
     public void writeDisturbanceFile() {
