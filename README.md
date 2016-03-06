@@ -1,42 +1,36 @@
 # brail2gtfs-rt
-# GTFS-realtime generator for the NMBS the Belgian Railway company 
+# GTFS-RealTime generator for the Belgian Railway company SNCB/NMBS
 
-Now you can use real-time data for your website, feed reader, or application. We provide our information in the General Transit Feed Specification (GTFS-realtime) format.
+This GTFS-RT generator provides realtime updates (service alerts and trip updates) for the following NMBS [GTFS](https://github.com/iRail/brail2gtfs) dataset:
+http://gtfs.irail.be/nmbs/nmbs-latest.zip
 
-We can’t wait to see what you come up with! Be sure to tell us about your creation.
-
-
-## How Do I Get Started ?
-
-You will be able to access all the data  temporally on the web on irail.gent.be
-
-To run the application at home you will need to have maven and the java jdk installed. 
-You can either use an IDE as netbeans to run the code, 
-How to run it from CLI 
-
-##Requirements
+## Requirements
 
 You should have an unzipped gtfs feed of the Belgium railway unzipped in the root directory. This can be downloaded from http://gtfs.irail.be/nmbs/nmbs-latest.zip
 
-It is recommended to remove from calendar_dates.txt all lines with dates from the past.
+It is recommended to take a subset of calendar dates from calendar_dates.txt. You can do this with following command:
 
+`sed -n 'START_LINENUMBER,END_LINENUMBER' calendar_dates_complete.txt > calendar_dates.txt`
 
+## How Do I Get Started ?
+
+To run the application at home you will need to have Maven and the Java JDK installed. 
+You can either use an IDE (e.g. Netbeans) or CLI:
 ```
 mvn install
 ```
 This will make sure all the dependencies are downloaded.
-And then to run the application
+Run the application with:
 
 ```
 java -jar target/RDFMapperNMBS-1.0-SNAPSHOT-jar-with-dependencies.jar
 ```
 
-All the information is scraped from the NMBS and from iRail
-
+## Note
+Information is scraped from the NMBS [website](belgianrail.be) and iRail [API](api.irail.be).
 
 Refer to the GTFS-realtime specification at https://developers.google.com/transit/gtfs-realtime/ for more
 details on message field type, cardinality, etc. 
 
-## Support or Contact 
-If your run into any bugs or need any kind of support i am willing to help you. 
-You can reach me on twitter @TimTijssens
+=================
+This project is made possible by a collaboration between [Be-Mobile](http://www.be-mobile-international.com/) and [iRail](irail.be) during open Summer of code 2015.
