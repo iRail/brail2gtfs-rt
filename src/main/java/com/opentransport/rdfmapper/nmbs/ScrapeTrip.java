@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
@@ -21,6 +22,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.lang3.time.DateUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -172,12 +174,6 @@ public class ScrapeTrip {
 
             String tripId = tr.getTripIdFromRouteId(routeId, cdr);
             tripDescription.setTripId(tripId);
-            
-            // tripDescription.setScheduleRelationship(GtfsRealtime.TripDescriptor.ScheduleRelationship.SCHEDULED);
-            // if (canceled) {
-                // Can be partially canceled
-                // tripDescription.setScheduleRelationship(GtfsRealtime.TripDescriptor.ScheduleRelationship.CANCELED);
-            // }
 
             //Get Information about stops
             JSONObject rootStop = (JSONObject) json.get("stops");
@@ -188,6 +184,8 @@ public class ScrapeTrip {
             String firstStopName = "";
             String lastStopName = "";
                     
+            boolean wholeTripCanceled = true; // True when all stoptimes since now are canceled
+            
             for (int i = 0; i < stops.size(); i++) {
                 //Information about the stops
                 JSONObject stop = (JSONObject) stops.get(i);
@@ -231,15 +229,27 @@ public class ScrapeTrip {
                     maxDelay = delayInt;
                 }
                 
+                String arrivalTime = (String) stop.get("time");
+                long arrivalTimeUnix = Long.parseLong(arrivalTime);
+                long now = System.currentTimeMillis();
+                java.util.Date time=new java.util.Date((long)arrivalTimeUnix*1000);
+                DateUtils.addSeconds(time, delayInt); // add delay to get realtime arrival time
+                long arrivalTimeMillis = time.getTime();
+                
+                
                 // If stoptime is (partially) canceled
                 String isCanceled = (String) stop.get("canceled");
                 if (!isCanceled.equals("0")) {
                     // Set ScheduleRelationship of stoptime to SKIPPED
                     stopTimeUpdate.setScheduleRelationship(GtfsRealtime.TripUpdate.StopTimeUpdate.ScheduleRelationship.SKIPPED);
+                } else {
+                    // If a current or future stoptime isn't canceled, the whole trip isn't canceled
+                    if (wholeTripCanceled && arrivalTimeMillis >= now) {
+                        wholeTripCanceled = false;
+                    }
                 }
                 
                 stopTimeArrival.setDelay(delayInt);
-                String arrivalTime = (String) stop.get("time");
                 stopTimeArrival.setTime(Long.parseLong(arrivalTime));
                 stopTimeUpdate.setArrival(stopTimeArrival);
                 // iRail API doesn't return departuretimes
@@ -247,6 +257,12 @@ public class ScrapeTrip {
                 //stopTimeUpdate.setDeparture(stopTimeDeparture);
                 tripUpdate.addStopTimeUpdate(stopTimeUpdate);
             }
+            
+            tripDescription.setScheduleRelationship(GtfsRealtime.TripDescriptor.ScheduleRelationship.SCHEDULED);
+            if (wholeTripCanceled) {
+                // Can be partially canceled
+                tripDescription.setScheduleRelationship(GtfsRealtime.TripDescriptor.ScheduleRelationship.CANCELED);
+             }
             
             String route_long_name = firstStopName + " - " + lastStopName;
             vehicleDescription.setLabel(route_long_name);
