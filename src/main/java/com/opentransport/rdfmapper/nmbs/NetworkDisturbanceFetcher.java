@@ -171,25 +171,40 @@ public class NetworkDisturbanceFetcher {
             range.setEnd(disturbance.getEnd());
             alert.addActivePeriod(range);
             
-            // Set EntitySelector
+            // Set EntitySelector for stops
+            String start = "";
+            String end = "";
+            String impact = ""; // from NBMS API
+            
             // Start Station
-//            GtfsRealtime.EntitySelector.Builder startStopSelector = GtfsRealtime.EntitySelector.newBuilder();
-//            if (disturbance.getStartStationId() != -1) {
-//                startStopSelector.setStopId(String.valueOf(disturbance.getStartStationId()));
-//            }
-//            alert.addInformedEntity(startStopSelector);
-//            GtfsRealtime.EntitySelector.Builder endStopSelector = GtfsRealtime.EntitySelector.newBuilder();
-//            // End Station
-//            if (disturbance.getEndStationId()!= -1) {
-//                endStopSelector.setStopId(String.valueOf(disturbance.getEndStationId()));
-//            }
-//            alert.addInformedEntity(endStopSelector);
+            GtfsRealtime.EntitySelector.Builder startStopSelector = GtfsRealtime.EntitySelector.newBuilder();
+            if (disturbance.getStartStationId() != -1) {
+                start = String.valueOf(disturbance.getStartStationId()) + ":0";
+                startStopSelector.setStopId(start);
+            }
+            
+            GtfsRealtime.EntitySelector.Builder endStopSelector = GtfsRealtime.EntitySelector.newBuilder();
+            // End Station
+            if (disturbance.getEndStationId()!= -1) {
+                end = String.valueOf(disturbance.getEndStationId())+ ":0";
+                endStopSelector.setStopId(end);
+            }
+                        
             // Impact Station
             GtfsRealtime.EntitySelector.Builder impactStationSelector = GtfsRealtime.EntitySelector.newBuilder();
             if (disturbance.getImpactStationId()!= -1) {
-                impactStationSelector.setStopId(String.valueOf(disturbance.getImpactStationId()) + ":0");
+                impact = String.valueOf(disturbance.getImpactStationId()) + ":0";
+                impactStationSelector.setStopId(impact);
+                alert.addInformedEntity(impactStationSelector);
             }
-            alert.addInformedEntity(impactStationSelector);
+            
+            // Only add unique stop_ids
+            if (!start.equals(impact) && start != "") {
+                alert.addInformedEntity(startStopSelector);
+            }
+            if (!end.equals(impact) && end != "" && !end.equals(start)) {
+                alert.addInformedEntity(endStopSelector);
+            }            
             
             feedEntity.setAlert(alert);
             feedEntity.setId(disturbance.getId());
