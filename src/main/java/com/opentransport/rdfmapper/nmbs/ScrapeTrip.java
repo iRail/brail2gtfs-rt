@@ -202,7 +202,7 @@ public class ScrapeTrip {
                     String stopId = (String) station.get("id");
                     stopId = stopId.replaceFirst("[^0-9]+", "") + ":";
                     stopId = stopId.substring(2); // remove first '00'
-                    if (stop.get("platform") != "") {
+                    if (stop.get("platform") != "" && stop.get("platform") != "?") {
                         stopId += stop.get("platform");
                     } else {
                         stopId += "0";
@@ -231,10 +231,11 @@ public class ScrapeTrip {
                     maxDelay = delayInt;
                 }
                 
-                // If canceled
+                // If stoptime is (partially) canceled
                 String isCanceled = (String) stop.get("canceled");
                 if (!isCanceled.equals("0")) {
-                    delayInt = 9999;
+                    // Set ScheduleRelationship of stoptime to SKIPPED
+                    stopTimeUpdate.setScheduleRelationship(GtfsRealtime.TripUpdate.StopTimeUpdate.ScheduleRelationship.SKIPPED);
                 }
                 
                 stopTimeArrival.setDelay(delayInt);
