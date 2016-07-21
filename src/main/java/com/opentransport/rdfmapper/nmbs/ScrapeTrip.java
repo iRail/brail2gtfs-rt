@@ -178,7 +178,8 @@ public class ScrapeTrip {
             //Get Information about stops
             JSONObject rootStop = (JSONObject) json.get("stops");
             JSONArray stops = (JSONArray) rootStop.get("stop");
-            String delay = "0";
+            String departureDelay = "0",
+                 arrivalDelay = "0";
             int maxDelay = 0;
             
             String firstStopName = "";
@@ -221,20 +222,37 @@ public class ScrapeTrip {
                     System.out.println(e);
                 }
 
-                // arrival time delay
-                delay = (String) stop.get("delay");
+                // arrival time arrivalDelay
+                arrivalDelay = (String) stop.get("arrivalDelay");
 
-                int delayInt = Integer.parseInt(delay);
-                if (maxDelay < delayInt) {
-                    maxDelay = delayInt;
+                //when arrival delay is the biggest over the trip until now, set this to the max delay of the trip
+                int arrivalDelayInt = Integer.parseInt(arrivalDelay);
+                if (maxDelay < arrivalDelayInt) {
+                    maxDelay = arrivalDelayInt;
                 }
                 
-                String arrivalTime = (String) stop.get("time");
+                String arrivalTime = (String) stop.get("scheduledArrivalTime");
                 long arrivalTimeUnix = Long.parseLong(arrivalTime);
                 long now = System.currentTimeMillis();
-                java.util.Date time=new java.util.Date((long)arrivalTimeUnix*1000);
-                DateUtils.addSeconds(time, delayInt); // add delay to get realtime arrival time
+                java.util.Date time = new java.util.Date((long)arrivalTimeUnix*1000);
+                DateUtils.addSeconds(time, arrivalDelayInt); // add delay to get realtime arrival time
                 long arrivalTimeMillis = time.getTime();
+
+
+                // departure time departureDelay
+                departureDelay = (String) stop.get("departureDelay");
+
+                //when departure delay is the biggest over the trip until now, set this to the max delay of the trip
+                int departureDelayInt = Integer.parseInt(departureDelay);
+                if (maxDelay < departureDelayInt) {
+                    maxDelay = departureDelayInt;
+                }
+                
+                String departureTime = (String) stop.get("scheduledDepartureTime");
+                long departureTimeUnix = Long.parseLong(departureTime);
+                time = new java.util.Date((long)departureTimeUnix*1000);
+                DateUtils.addSeconds(time, departureDelayInt); // add delay to get realtime departure time
+                long departureTimeMillis = time.getTime();
                 
                 
                 // If stoptime is (partially) canceled
@@ -249,12 +267,12 @@ public class ScrapeTrip {
                     }
                 }
                 
-                stopTimeArrival.setDelay(delayInt);
+                stopTimeArrival.setDelay(arrivalDelayInt);
                 stopTimeArrival.setTime(Long.parseLong(arrivalTime));
                 stopTimeUpdate.setArrival(stopTimeArrival);
-                // iRail API doesn't return departuretimes
-                //stopTimeDeparture.setDelay(Integer.parseInt(delay));
-                //stopTimeUpdate.setDeparture(stopTimeDeparture);
+                stopTimeDeparture.setDelay(departureDelayInt);
+                stopTimeDeparture.setTime(Long.parseLong(departureTime));
+                stopTimeUpdate.setDeparture(stopTimeDeparture);
                 tripUpdate.addStopTimeUpdate(stopTimeUpdate);
             }
             
