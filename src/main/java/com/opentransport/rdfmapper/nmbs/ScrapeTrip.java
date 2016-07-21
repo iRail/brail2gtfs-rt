@@ -72,7 +72,7 @@ public class ScrapeTrip {
             if (f.exists() && !f.isDirectory()) {
                 GtfsRealtime.FeedEntity.Builder feedEntity = parseJson(i, "./delays/" + trainName + ".json", canceled, trainName);
                 feedMessage.addEntity(i, feedEntity);
-                // System.out.println(trainName + " has been processed");
+                System.out.println(trainName + " has been processed");
                 i++;
             } else {
                 errorWriter.writeError("File Not Found " + "./delays/" + trainName + ".json");
@@ -140,7 +140,7 @@ public class ScrapeTrip {
         GtfsRealtime.TripDescriptor.Builder tripDescription = GtfsRealtime.TripDescriptor.newBuilder();
         GtfsRealtime.TripUpdate.StopTimeUpdate.Builder stopTimeUpdate = GtfsRealtime.TripUpdate.StopTimeUpdate.newBuilder();
 
-        //Each StopTime Update contains StopTimeEvents witht the stop Arrival and Departure Time 
+        //Each StopTime Update contains StopTimeEvents with the stop Arrival and Departure Time 
         GtfsRealtime.TripUpdate.StopTimeEvent.Builder stopTimeArrival = GtfsRealtime.TripUpdate.StopTimeEvent.newBuilder();
         GtfsRealtime.TripUpdate.StopTimeEvent.Builder stopTimeDeparture = GtfsRealtime.TripUpdate.StopTimeEvent.newBuilder();
 
@@ -200,7 +200,7 @@ public class ScrapeTrip {
                     String stopId = (String) station.get("id");
                     stopId = stopId.replaceFirst("[^0-9]+", "") + ":";
                     stopId = stopId.substring(2); // remove first '00'
-                    if (stop.get("platform") != "" && stop.get("platform") != "?") {
+                    if (!stop.get("platform").equals("") && !stop.get("platform").equals("?")) {
                         stopId += stop.get("platform");
                     } else {
                         stopId += "0";
