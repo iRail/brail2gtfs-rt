@@ -250,7 +250,7 @@ public class ScrapeTrip {
                 }
                 
                 stopTimeArrival.setDelay(delayInt);
-                stopTimeArrival.setTime(Long.parseLong(arrivalTime));
+                stopTimeArrival.setTime(arrivalTimeMillis);
                 stopTimeUpdate.setArrival(stopTimeArrival);
                 // iRail API doesn't return departuretimes
                 //stopTimeDeparture.setDelay(Integer.parseInt(delay));
