@@ -178,7 +178,8 @@ public class ScrapeTrip {
             //Get Information about stops
             JSONObject rootStop = (JSONObject) json.get("stops");
             JSONArray stops = (JSONArray) rootStop.get("stop");
-            String delay = "0";
+            String arrivalDelay = "0";
+            String departureDelay = "0";
             int maxDelay = 0;
             
             String firstStopName = "";
@@ -221,20 +222,33 @@ public class ScrapeTrip {
                     System.out.println(e);
                 }
 
-                // arrival time delay
-                delay = (String) stop.get("delay");
-
-                int delayInt = Integer.parseInt(delay);
-                if (maxDelay < delayInt) {
-                    maxDelay = delayInt;
+                // delays
+                arrivalDelay = (String) stop.get("arrivalDelay");
+                departureDelay = (String) stop.get("departureDelay");
+                
+                int arrivalDelayInt = Integer.parseInt(arrivalDelay);
+                int departureDelayInt = Integer.parseInt(departureDelay);
+                
+                if (maxDelay < arrivalDelayInt) {
+                    maxDelay = arrivalDelayInt;
+                }
+                if (maxDelay < departureDelayInt) {
+                    maxDelay = departureDelayInt;
                 }
                 
-                String arrivalTime = (String) stop.get("time");
-                long arrivalTimeUnix = Long.parseLong(arrivalTime);
                 long now = System.currentTimeMillis();
-                java.util.Date time=new java.util.Date((long)arrivalTimeUnix*1000);
-                // add delay to get realtime arrival time
-                long arrivalTimeMillis = (DateUtils.addSeconds(time, delayInt)).getTime(); 
+
+                //Calculate arrival times
+                long scheduledArrivalTimeUnixSeconds = Long.parseLong((String) stop.get("scheduledArrivalTime"));
+                java.util.Date scheduledArrivalTime = new java.util.Date((long)scheduledArrivalTimeUnixSeconds*1000);
+                // add arrivalDelay to get real arrival time
+                long arrivalTimeMillis = (DateUtils.addSeconds(scheduledArrivalTime, arrivalDelayInt)).getTime(); 
+
+                //Calculate departure times
+                long scheduledDepartureTimeUnixSeconds = Long.parseLong((String) stop.get("scheduledDepartureTime"));
+                java.util.Date scheduledDepartureTime = new java.util.Date((long)scheduledDepartureTimeUnixSeconds*1000);
+                // add departureDelay to get real departure time
+                long departureTimeMillis = (DateUtils.addSeconds(scheduledDepartureTime, departureDelayInt)).getTime(); 
                 
                 // If stoptime is (partially) canceled
                 String isCanceled = (String) stop.get("canceled");
@@ -247,13 +261,17 @@ public class ScrapeTrip {
                         wholeTripCanceled = false;
                     }
                 }
-                
-                stopTimeArrival.setDelay(delayInt);
+
+                // Set Arrival in the object
+                stopTimeArrival.setDelay(arrivalDelayInt);
+                //    setTime takes parameter in seconds
                 stopTimeArrival.setTime(arrivalTimeMillis/1000);
                 stopTimeUpdate.setArrival(stopTimeArrival);
-                // iRail API doesn't return departuretimes
-                //stopTimeDeparture.setDelay(Integer.parseInt(delay));
-                //stopTimeUpdate.setDeparture(stopTimeDeparture);
+                // Do the same for departure
+                stopTimeDeparture.setDelay(Integer.parseInt(departureDelay));
+                //    setTime takes parameter in seconds
+                stopTimeDeparture.setTime(departureTimeMillis/1000);
+                stopTimeUpdate.setDeparture(stopTimeDeparture);
                 tripUpdate.addStopTimeUpdate(stopTimeUpdate);
             }
             
