@@ -233,9 +233,8 @@ public class ScrapeTrip {
                 long arrivalTimeUnix = Long.parseLong(arrivalTime);
                 long now = System.currentTimeMillis();
                 java.util.Date time=new java.util.Date((long)arrivalTimeUnix*1000);
-                DateUtils.addSeconds(time, delayInt); // add delay to get realtime arrival time
-                long arrivalTimeMillis = time.getTime();
-                
+                // add delay to get realtime arrival time
+                long arrivalTimeMillis = (DateUtils.addSeconds(time, delayInt)).getTime(); 
                 
                 // If stoptime is (partially) canceled
                 String isCanceled = (String) stop.get("canceled");
@@ -250,7 +249,7 @@ public class ScrapeTrip {
                 }
                 
                 stopTimeArrival.setDelay(delayInt);
-                stopTimeArrival.setTime(arrivalTimeMillis);
+                stopTimeArrival.setTime(arrivalTimeMillis/1000);
                 stopTimeUpdate.setArrival(stopTimeArrival);
                 // iRail API doesn't return departuretimes
                 //stopTimeDeparture.setDelay(Integer.parseInt(delay));
