@@ -279,7 +279,7 @@ public class ScrapeTrip {
             if (wholeTripCanceled) {
                 // Can be partially canceled
                 tripDescription.setScheduleRelationship(GtfsRealtime.TripDescriptor.ScheduleRelationship.CANCELED);
-             }
+            }
             
             String route_long_name = firstStopName + " - " + lastStopName;
             vehicleDescription.setLabel(route_long_name);
