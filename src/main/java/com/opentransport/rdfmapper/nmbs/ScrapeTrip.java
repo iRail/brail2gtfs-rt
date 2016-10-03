@@ -113,7 +113,7 @@ public class ScrapeTrip {
         while (iterator.hasNext()) {
             Map.Entry mapEntry = (Map.Entry) iterator.next();
             trainName = returnCorrectTrainFormat((String) mapEntry.getKey());
-            url = "http://api.irail.be/vehicle/?id=BE.NMBS." + trainName + "&format=json";
+            url = "https://api.irail.be/vehicle/?id=BE.NMBS." + trainName + "&format=json";
             System.out.println("HTTP GET - " + url);
             countConnections++;
             pool.submit(new DownloadDelayedTrains(trainName, url));
