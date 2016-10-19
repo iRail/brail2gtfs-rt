@@ -8,9 +8,19 @@ http://gtfs.irail.be/nmbs/nmbs-latest.zip
 
 You should have an unzipped gtfs feed of the Belgium railway unzipped in the root directory. This can be downloaded from http://gtfs.irail.be/nmbs/nmbs-latest.zip
 
-It is recommended to take a subset of calendar dates from calendar_dates.txt. You can do this with following command:
+Calendar_dates.txt must be ordered by date. You can use following command to do this:
 
-`sed -n 'START_LINENUMBER,END_LINENUMBER' calendar_dates_complete.txt > calendar_dates.txt`
+```bash
+mv calendar_dates.txt calendar_dates_total.txt
+sort --field-separator=',' -k2 -k1 -k3 calendar_dates_total.txt > calendar_dates_sorted.txt
+```
+
+It is recommended to take a subset of calendar dates from calendar_dates.txt. 
+This subset should start from now to +/- 3 months in the future. 
+You can do this with following command:
+
+`sed -n 'START_LINENUMBER,END_LINENUMBER' calendar_dates_sorted.txt > calendar_dates.txt`
+
 
 ## How Do I Get Started ?
 
