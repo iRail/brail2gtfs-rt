@@ -18,6 +18,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
+import javax.net.ssl.HttpsURLConnection;
 
 /**
  *
@@ -49,7 +50,8 @@ public class DownloadDelayedTrains implements Runnable {
     private void downloadDelayedTrains(String url, String fileName) throws MalformedURLException, IOException {
         // System.out.println("Writing " + fileName);
         URL link = new URL(url);
-        InputStream in = new BufferedInputStream(link.openStream());
+        HttpsURLConnection con = (HttpsURLConnection)link.openConnection();
+        InputStream in = con.getInputStream();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         byte[] buf = new byte[1024];
         int n = 0;
